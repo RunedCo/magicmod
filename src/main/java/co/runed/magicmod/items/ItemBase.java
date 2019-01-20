@@ -1,9 +1,12 @@
 package co.runed.magicmod.items;
 
 import co.runed.brace.IRegisterable;
+import co.runed.magicmod.MagicMod;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BucketItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.text.StringTextComponent;
@@ -21,18 +24,19 @@ public class ItemBase extends Item implements IRegisterable {
         this.setRegistryName("test_item");
     }
 
-    @Environment(EnvType.SERVER)
     public ActionResult useOnBlock(ItemUsageContext context) {
-        //if(!context.isPlayerSneaking()) {
+        if(context.getWorld().isClient) {
             World world = context.getWorld();
             BlockState state = world.getBlockState(context.getPos());
+            PlayerEntity player = context.getPlayer();
 
             context.getPlayer().addChatMessage(new TranslatableTextComponent(state.getBlock().getTranslationKey()), true);
+            //player.inventory.setInvStack(0, MagicMod.MANA_BUCKET.getDefaultStack());
 
             return ActionResult.SUCCESS;
-        //}
+        }
 
-        //return ActionResult.PASS;
+        return ActionResult.PASS;
     }
 
     @Override

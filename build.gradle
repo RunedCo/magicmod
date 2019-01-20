@@ -8,13 +8,17 @@ targetCompatibility = 1.8
 archivesBaseName = "magicmod"
 version = "1.0.0"
 
+def minecraftVersion = "19w03c"
+def yarnVersion = "1"
+def loaderVersion = "0.3.2.96"
+
 minecraft {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w03c"
-	mappings "net.fabricmc:yarn:19w03c.1"
-	modCompile "net.fabricmc:fabric-loader:0.3.3.98"
+	minecraft "com.mojang:minecraft:${minecraftVersion}"
+	mappings "net.fabricmc:yarn:${minecraftVersion}.${yarnVersion}"
+	modCompile "net.fabricmc:fabric-loader:${loaderVersion}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modCompile "net.fabricmc:fabric:0.1.4.77"

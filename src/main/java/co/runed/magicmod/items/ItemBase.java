@@ -21,7 +21,7 @@ public class ItemBase extends Item implements IRegisterable {
     public ItemBase(Settings itemSettings) {
         super(itemSettings);
 
-        this.setRegistryName("test_item");
+        this.setRegistryName("spell_book");
     }
 
     public ActionResult useOnBlock(ItemUsageContext context) {

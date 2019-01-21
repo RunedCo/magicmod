@@ -1,5 +1,6 @@
 package co.runed.magicmod;
 
+import co.runed.magicmod.blocks.MagicBlocks;
 import co.runed.magicmod.items.MagicItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -13,6 +14,7 @@ public class MagicMod implements ModInitializer {
 	public void onInitialize() {
 		RegistryUtil.setIdentifier(MagicMod.ID);
 
+		MagicBlocks.registerAll();
 		MagicItems.registerAll();
 	}
 }

@@ -3,7 +3,10 @@
   "package": "co.runed.magicmod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ExampleMixin"
+    "ExampleMixin",
+    "BlockEntityRendererMixin",
+    "LecternBlockEntityRendererMixin",
+    "LecternBlockEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

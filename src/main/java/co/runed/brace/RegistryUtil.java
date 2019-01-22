@@ -12,7 +12,11 @@ public class RegistryUtil {
     }
 
     public static <T> T register(Registry<? super T> registry, IRegisterable registerable) {
-        return Registry.register(registry, identifier + ":" + registerable.getRegistryName(), (T)registerable);
+        return RegistryUtil.register(registry, identifier, registerable.getRegistryName(), (T)registerable);
+    }
+
+    public static <T> T register(Registry<? super T> registry, String namespace, String id, T obj) {
+        return Registry.register(registry, namespace + ":" + id, obj);
     }
 
     public static BaseItem registerItem(BaseItem baseItem) {

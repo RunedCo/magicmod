@@ -1,0 +1,53 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "minecraft:block/oak_log",
+		"1": "magicmod:block/magic_ore",
+		"particle": "magicmod:block/magic_ore"
+	},
+	"elements": [
+		{
+			"name": "wand_stick",
+			"from": [8, 0, 8],
+			"to": [9, 12, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"east": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"south": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"west": {"uv": [0, 0, 1, 12], "texture": "#0"},
+				"up": {"uv": [0, 0, 1, 1], "texture": "#0"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#0"}
+			}
+		},
+		{
+			"name": "wand_cap",
+			"from": [7.875, 12, 7.875],
+			"to": [9.125, 13, 9.125],
+			"faces": {
+				"north": {"uv": [8, 8, 9, 9], "texture": "#1"},
+				"east": {"uv": [8, 8, 9, 9], "texture": "#1"},
+				"south": {"uv": [8, 8, 9, 9], "texture": "#1"},
+				"west": {"uv": [8, 8, 9, 9], "texture": "#1"},
+				"up": {"uv": [8, 8, 9, 9], "texture": "#1"},
+				"down": {"uv": [8, 8, 9, 9], "texture": "#1"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 6.75, 1.5]
+		},
+		"firstperson_righthand": {
+			"rotation": [12, 45, 0],
+			"translation": [0.75, 4.5, 1]
+		},
+		"gui": {
+			"rotation": [5, 45, -45],
+			"translation": [0, 1.5, 0],
+			"scale": [1.2, 1.2, 1.2]
+		},
+		"fixed": {
+			"scale": [0, 0, 0]
+		}
+	}
+}

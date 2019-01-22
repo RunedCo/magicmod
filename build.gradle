@@ -9,7 +9,7 @@ archivesBaseName = "magicmod"
 version = "1.0.0"
 
 def minecraftVersion = "19w03c"
-def yarnVersion = "1"
+def yarnMapping = "4"
 def loaderVersion = "0.3.2.96"
 
 minecraft {
@@ -17,7 +17,7 @@ minecraft {
 
 dependencies {
 	minecraft "com.mojang:minecraft:${minecraftVersion}"
-	mappings "net.fabricmc:yarn:${minecraftVersion}.${yarnVersion}"
+	mappings "net.fabricmc:yarn:${minecraftVersion}.${yarnMapping}"
 	modCompile "net.fabricmc:fabric-loader:${loaderVersion}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.

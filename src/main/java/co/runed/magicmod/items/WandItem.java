@@ -27,6 +27,11 @@ public class WandItem extends BaseItem {
     }
 
     @Override
+    public boolean isEffectiveOn(BlockState state) {
+        return true;
+    }
+
+    @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) return ActionResult.PASS;
 
@@ -54,20 +59,21 @@ public class WandItem extends BaseItem {
 
         BlockState breakState = world.getBlockState(this.currentBlock);
 
-        /* if (breakState.calcBlockBreakingDelta(player, world, this.currentBlock) >= 1.0F) {
+        this.currentBreakingProgress = breakState.calcBlockBreakingDelta(player, world, this.currentBlock);
+        if (this.currentBreakingProgress >= 1.0F) {
             world.breakBlock(this.currentBlock, true);
+            if (this.currentBlock.equals(this.startPos)) this.startPos = null;
+            this.genVein(world, this.currentBlock);
             this.currentBlock = null;
-
-            if(this.currentBlock.equals(this.startPos)) this.startPos = null;
         } else {
-            this.currentBreakingProgress = 0.0F;
+            //this.currentBreakingProgress = 0.0F;
             world.setBlockBreakingProgress(player.getEntityId(), this.currentBlock, (int)(this.currentBreakingProgress * 10.0F) - 1);
-        } */
+        }
 
-        context.getWorld().breakBlock(this.currentBlock, true);
-        if (this.currentBlock.equals(this.startPos)) this.startPos = null;
-        this.genVein(world, this.currentBlock);
-        this.currentBlock = null;
+//        context.getWorld().breakBlock(this.currentBlock, true);
+//        if (this.currentBlock.equals(this.startPos)) this.startPos = null;
+//        this.genVein(world, this.currentBlock);
+//        this.currentBlock = null;
 
         return ActionResult.PASS;
     }
@@ -85,7 +91,10 @@ public class WandItem extends BaseItem {
 
                         Block block = world.getBlockState(offsetPos).getBlock();
 
-                        if (!offsetPos.equals(this.startPos) && block.equals(this.veinBlock) && !this.blocksToBreak.contains(offsetPos)) {
+                        if (!offsetPos.equals(this.startPos) &&
+                                block.equals(this.veinBlock) &&
+                                !this.blocksToBreak.contains(offsetPos) &&
+                                this.startPos.distanceTo(offsetPos) <= 6.0D) {
                             //System.out.println(block.getTranslationKey() + " " + offsetPos);
 
                             blocks.add(offsetPos);

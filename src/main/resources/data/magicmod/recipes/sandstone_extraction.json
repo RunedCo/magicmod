@@ -1,0 +1,11 @@
+{
+  "type": "magicmod:extraction",
+  "input": {
+    "item": "minecraft:sandstone"
+  },
+  "output": "minecraft:sand",
+  "drops": {
+    "item": "minecraft:sand",
+    "count": 3
+  }
+}

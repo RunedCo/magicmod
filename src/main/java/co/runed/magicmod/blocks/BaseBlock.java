@@ -12,10 +12,6 @@ public class BaseBlock extends Block implements IRegisterable {
         super(blockSettings);
     }
 
-    public BlockItem getItem() {
-        return new BlockItem(this, new Item.Settings());
-    }
-
     @Override
     public String getRegistryName() {
         return this.registryName;

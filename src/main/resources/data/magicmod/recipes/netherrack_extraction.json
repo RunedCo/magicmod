@@ -1,7 +1,8 @@
 {
   "type": "magicmod:extraction",
-  "ingredient": {
+  "input": {
     "tag": "magicmod:extracts_to_netherrack"
   },
-  "result": "minecraft:netherrack"
+  "output": "minecraft:netherrack",
+  "mana_multiplier": 1
 }

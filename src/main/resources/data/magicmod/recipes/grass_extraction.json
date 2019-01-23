@@ -1,0 +1,11 @@
+{
+  "type": "magicmod:extraction",
+  "input": {
+    "item": "minecraft:grass_block"
+  },
+  "output": "minecraft:dirt",
+  "drops": {
+    "item": "minecraft:grass",
+    "loot_table": true
+  }
+}

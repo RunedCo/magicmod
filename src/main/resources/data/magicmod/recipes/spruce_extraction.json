@@ -1,11 +1,12 @@
 {
   "type": "magicmod:extraction",
   "input": {
-    "tag": "magicmod:extracts_to_stone_drops"
+    "item": "minecraft:spruce_log"
   },
-  "output": "minecraft:stone",
+  "output": "minecraft:stripped_spruce_log",
   "drops": {
     "item": "minecraft:stick",
     "count": 2
-  }
+  },
+  "mana_multiplier": 1
 }

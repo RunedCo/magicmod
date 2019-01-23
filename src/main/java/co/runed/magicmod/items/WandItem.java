@@ -1,13 +1,30 @@
 package co.runed.magicmod.items;
 
+import co.runed.magicmod.recipes.MagicRecipeType;
+import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.InventoryProvider;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
+import net.minecraft.item.block.BlockItem;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.recipe.RecipeManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.InventoryUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.loot.context.LootContext;
+import net.minecraft.world.loot.context.Parameter;
+import net.minecraft.world.loot.context.Parameters;
 
 import java.util.*;
 
@@ -15,15 +32,7 @@ public class WandItem extends BaseItem {
     private BlockPos startPos;
     private Block veinBlock;
     private List<BlockPos> blocksToBreak = new ArrayList<>();
-
-    private float currentBreakingProgress = 0.0f;
     private BlockPos currentBlock;
-
-
-    //TODO: rename temp variables
-    private int field_14000;
-    private int field_14009;
-    private int field_14010;
 
     public WandItem() {
         super(new Item.Settings().stackSize(1));
@@ -45,6 +54,22 @@ public class WandItem extends BaseItem {
         BlockState blockState = world.getBlockState(context.getPos());
         Block block = blockState.getBlock();
 
+        //TODO: cache recipes
+        ExtractionRecipe recipe = null;
+        for (Recipe r : world.getRecipeManager().values()) {
+            if(r.getType() == MagicRecipeType.EXTRACTION) {
+                ExtractionRecipe exr = (ExtractionRecipe)r;
+
+                if(exr.matches(block)) {
+                    recipe = exr;
+
+                    break;
+                }
+            }
+        }
+
+        if(recipe == null) return ActionResult.PASS;
+
         if (block != this.veinBlock || this.startPos == null || !this.startPos.equals(context.getPos())) {
             blocksToBreak.clear();
             this.veinBlock = block;
@@ -62,33 +87,38 @@ public class WandItem extends BaseItem {
             }
         }
 
-        //BlockState breakState = world.getBlockState(this.currentBlock);
-        //int int_4;
+        BlockItem blockItem = (BlockItem) recipe.getOutputBlock().getItem();
+        BlockState breakState = world.getBlockState(this.currentBlock);
 
-        //player.interactionManager.tryBreakBlock(this.currentBlock);
+        if(recipe.shouldUseLootDrops()) {
+            BlockItem bi = (BlockItem)recipe.getDrops().getItem();
 
-//        context.getWorld().breakBlock(this.currentBlock, true);
-//        if (this.currentBlock.equals(this.startPos)) this.startPos = null;
-//        this.generateVein(world, this.currentBlock);
-//        this.currentBlock = null;
+            breakState = bi.getBlock().getDefaultState();
+        }
 
-        /* int int_1 = this.field_14000 - this.field_14010;
-        this.currentBreakingProgress = breakState.calcBlockBreakingDelta(player, world, this.currentBlock) * (float) (int_1 + 1);
-        int_4 = (int) (this.currentBreakingProgress * 10.0F);
-        if (int_4 != this.field_14009) {
-            world.setBlockBreakingProgress(player.getEntityId(), this.currentBlock, int_4);
-            this.field_14009 = int_4;
-        } */
-
-        //player.interactionManager.interactBlock(player, )
+        if(recipe.getDrops() == ItemStack.EMPTY || recipe.shouldUseLootDrops()) {
+            LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld)world))
+                    .setRandom(world.random)
+                    .put(Parameters.POSITION, this.currentBlock)
+                    .put(Parameters.TOOL, player.getActiveItem())
+                    .put(Parameters.THIS_ENTITY, player)
+                    .putNullable(Parameters.BLOCK_ENTITY, world.getBlockEntity(this.currentBlock));
 
 
-        //if (this.currentBreakingProgress >= 1.0F) {
-            world.breakBlock(this.currentBlock, true);
-            if (this.currentBlock.equals(this.startPos)) this.startPos = null;
-            this.generateVein(world, this.currentBlock);
-            this.currentBlock = null;
-        //}
+            for (ItemStack stack : breakState.getDroppedStacks(lootContextBuilder)) {
+                player.inventory.insertStack(stack);
+            }
+        } else {
+            player.inventory.insertStack(recipe.getDrops());
+        }
+
+        blockState.getBlock().onStacksDropped(blockState, world, this.currentBlock, player.getActiveItem());
+
+        world.setBlockState(this.currentBlock, blockItem.getBlock().getDefaultState());
+
+        if (this.currentBlock.equals(this.startPos)) this.startPos = null;
+        this.generateVein(world, this.currentBlock);
+        this.currentBlock = null;
 
         return ActionResult.PASS;
     }

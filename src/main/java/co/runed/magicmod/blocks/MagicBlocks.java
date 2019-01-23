@@ -2,11 +2,12 @@ package co.runed.magicmod.blocks;
 
 import co.runed.brace.registry.RegistryUtil;
 import co.runed.magicmod.blocks.ore.MagicOre;
+import net.minecraft.block.Blocks;
 
 public class MagicBlocks {
-    public static MagicOre MAGIC_ORE = new MagicOre();
+    public static MagicOre MAGIC_ORE;
 
     public static void registerAll() {
-        RegistryUtil.registerBlock(MAGIC_ORE);
+        MAGIC_ORE = RegistryUtil.registerBlock(new MagicOre());
     }
 }

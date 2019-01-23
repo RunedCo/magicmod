@@ -1,9 +1,12 @@
-package co.runed.magicmod.api.recipes.extraction;
+package co.runed.magicmod.recipes.extraction;
 
-import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
+import co.runed.magicmod.recipes.MagicRecipeSerializer;
+import co.runed.magicmod.recipes.MagicRecipeType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.block.Block;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
@@ -13,20 +16,22 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
 public class ExtractionRecipe implements Recipe<Inventory> {
-    protected final RecipeType<?> type;
     protected final Identifier id;
     protected final String group;
     protected final Ingredient input;
-    protected final ItemStack output;
-    protected final int manaCost;
+    protected final Block output;
+    protected final ItemStack drops;
+    protected final boolean lootDrops;
+    protected final int manaMultiplier;
 
-    public ExtractionRecipe(RecipeType<?> recipeType_1, Identifier identifier_1, String string_1, Ingredient ingredient_1, ItemStack itemStack_1, float float_1, int int_1) {
-        this.type = recipeType_1;
+    public ExtractionRecipe(Identifier identifier_1, String string_1, Ingredient ingredient_1, Block outputBlock, ItemStack drops, boolean lootDrops, int int_1) {
         this.id = identifier_1;
         this.group = string_1;
         this.input = ingredient_1;
-        this.output = itemStack_1;
-        this.manaCost = int_1;
+        this.output = outputBlock;
+        this.drops = drops;
+        this.manaMultiplier = int_1;
+        this.lootDrops = lootDrops;
     }
 
     @Override
@@ -34,9 +39,17 @@ public class ExtractionRecipe implements Recipe<Inventory> {
         return this.input.matches(inventory_1.getInvStack(0));
     }
 
+    public boolean matches(Item item) {
+        return this.input.matches(item.getDefaultStack());
+    }
+
+    public boolean matches(Block block) {
+        return this.input.matches(block.getItem().getDefaultStack());
+    }
+
     @Override
     public ItemStack craft(Inventory inventory_1) {
-        return this.output.copy();
+        return this.output.getItem().getDefaultStack();
     }
 
     @Environment(EnvType.CLIENT)
@@ -46,6 +59,18 @@ public class ExtractionRecipe implements Recipe<Inventory> {
 
     @Override
     public ItemStack getOutput() {
+        return this.output.getItem().getDefaultStack();
+    }
+
+    public boolean shouldUseLootDrops() {
+        return this.lootDrops;
+    }
+
+    public ItemStack getDrops() {
+        return this.drops.copy();
+    }
+
+    public Block getOutputBlock() {
         return this.output;
     }
 
@@ -70,6 +95,6 @@ public class ExtractionRecipe implements Recipe<Inventory> {
     }
 
     public RecipeType<?> getType() {
-        return this.type;
+        return MagicRecipeType.EXTRACTION;
     }
 }

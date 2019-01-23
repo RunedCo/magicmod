@@ -22,9 +22,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.InventoryUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.loot.context.LootContext;
-import net.minecraft.world.loot.context.Parameter;
-import net.minecraft.world.loot.context.Parameters;
+import net.minecraft.world.loot.context.*;
 
 import java.util.*;
 
@@ -99,11 +97,18 @@ public class WandItem extends BaseItem {
         if(recipe.getDrops() == ItemStack.EMPTY || recipe.shouldUseLootDrops()) {
             LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld)world))
                     .setRandom(world.random)
+                    .put(Parameters.BLOCK_STATE, breakState)
                     .put(Parameters.POSITION, this.currentBlock)
                     .put(Parameters.TOOL, player.getActiveItem())
                     .put(Parameters.THIS_ENTITY, player)
                     .putNullable(Parameters.BLOCK_ENTITY, world.getBlockEntity(this.currentBlock));
 
+
+            //TODO: finish and tidy
+            LootContextType lct = LootContextTypes.BLOCK;
+            world.getServer().getLootManager()
+                    .getSupplier(new Identifier("minecraft:blocks/dirt"))
+                    .drop(lootContextBuilder.build(lct), player.inventory::insertStack);
 
             for (ItemStack stack : breakState.getDroppedStacks(lootContextBuilder)) {
                 player.inventory.insertStack(stack);

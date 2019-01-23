@@ -6,6 +6,7 @@
   "output": "minecraft:dirt",
   "drops": {
     "item": "minecraft:grass",
-    "loot_table": true
+    "count": 2,
+    "loot": "minecraft:blocks/grass"
   }
 }

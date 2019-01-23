@@ -3,9 +3,5 @@
   "input": {
     "tag": "magicmod:extracts_to_stone_drops"
   },
-  "output": "minecraft:stone",
-  "drops": {
-    "item": "minecraft:stick",
-    "count": 2
-  }
+  "output": "minecraft:stone"
 }

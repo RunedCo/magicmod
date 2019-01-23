@@ -15,32 +15,30 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+import java.util.stream.Stream;
+
 public class ExtractionRecipe implements Recipe<Inventory> {
     protected final Identifier id;
     protected final String group;
     protected final Ingredient input;
     protected final Block output;
     protected final ItemStack drops;
-    protected final boolean lootDrops;
+    protected final String lootTable;
     protected final int manaMultiplier;
 
-    public ExtractionRecipe(Identifier identifier_1, String string_1, Ingredient ingredient_1, Block outputBlock, ItemStack drops, boolean lootDrops, int int_1) {
+    public ExtractionRecipe(Identifier identifier_1, String string_1, Ingredient ingredient_1, Block outputBlock, ItemStack drops, String loot, int int_1) {
         this.id = identifier_1;
         this.group = string_1;
         this.input = ingredient_1;
         this.output = outputBlock;
         this.drops = drops;
         this.manaMultiplier = int_1;
-        this.lootDrops = lootDrops;
+        this.lootTable = loot;
     }
 
     @Override
     public boolean matches(Inventory inventory_1, World world_1) {
         return this.input.matches(inventory_1.getInvStack(0));
-    }
-
-    public boolean matches(Item item) {
-        return this.input.matches(item.getDefaultStack());
     }
 
     public boolean matches(Block block) {
@@ -63,11 +61,15 @@ public class ExtractionRecipe implements Recipe<Inventory> {
     }
 
     public boolean shouldUseLootDrops() {
-        return this.lootDrops;
+        return this.lootTable != null;
     }
 
     public ItemStack getDrops() {
         return this.drops.copy();
+    }
+
+    public String getLootTable() {
+        return this.lootTable;
     }
 
     public Block getOutputBlock() {

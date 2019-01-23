@@ -43,6 +43,7 @@ public class WandItem extends BaseItem {
         return true;
     }
 
+    //TODO: move to spell classes (spell manager, spell, and components?)
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) return ActionResult.PASS;
@@ -68,6 +69,7 @@ public class WandItem extends BaseItem {
 
         if(recipe == null) return ActionResult.PASS;
 
+        // vein component (should return blockPos)
         if (block != this.veinBlock || this.startPos == null || !this.startPos.equals(context.getPos())) {
             blocksToBreak.clear();
             this.veinBlock = block;
@@ -95,7 +97,7 @@ public class WandItem extends BaseItem {
         }
 
         if(recipe.getDrops() == ItemStack.EMPTY || recipe.shouldUseLootDrops()) {
-            LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld)world))
+            LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld) world))
                     .setRandom(world.random)
                     .put(Parameters.BLOCK_STATE, breakState)
                     .put(Parameters.POSITION, this.currentBlock)
@@ -107,18 +109,19 @@ public class WandItem extends BaseItem {
             //TODO: finish and tidy
             LootContextType lct = LootContextTypes.BLOCK;
             world.getServer().getLootManager()
-                    .getSupplier(new Identifier("minecraft:blocks/dirt"))
+                    .getSupplier(new Identifier(recipe.getLootTable()))
                     .drop(lootContextBuilder.build(lct), player.inventory::insertStack);
 
             for (ItemStack stack : breakState.getDroppedStacks(lootContextBuilder)) {
                 player.inventory.insertStack(stack);
             }
-        } else {
-            player.inventory.insertStack(recipe.getDrops());
         }
+
+        player.inventory.insertStack(recipe.getDrops());
 
         blockState.getBlock().onStacksDropped(blockState, world, this.currentBlock, player.getActiveItem());
 
+        world.breakBlock(this.currentBlock, false);
         world.setBlockState(this.currentBlock, blockItem.getBlock().getDefaultState());
 
         if (this.currentBlock.equals(this.startPos)) this.startPos = null;

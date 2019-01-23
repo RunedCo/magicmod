@@ -1,25 +1,18 @@
 package co.runed.magicmod.items;
 
-import co.runed.magicmod.recipes.MagicRecipeType;
-import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
+import co.runed.magicmod.api.recipes.MagicRecipeType;
+import co.runed.magicmod.api.recipes.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.InventoryProvider;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
-import net.minecraft.item.Items;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeFinder;
-import net.minecraft.recipe.RecipeManager;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.InventoryUtil;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.loot.context.*;

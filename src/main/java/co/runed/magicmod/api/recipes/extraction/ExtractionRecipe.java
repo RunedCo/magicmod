@@ -1,12 +1,11 @@
-package co.runed.magicmod.recipes.extraction;
+package co.runed.magicmod.api.recipes.extraction;
 
-import co.runed.magicmod.recipes.MagicRecipeSerializer;
-import co.runed.magicmod.recipes.MagicRecipeType;
+import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
+import co.runed.magicmod.api.recipes.MagicRecipeType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
@@ -14,8 +13,6 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
-
-import java.util.stream.Stream;
 
 public class ExtractionRecipe implements Recipe<Inventory> {
     protected final Identifier id;

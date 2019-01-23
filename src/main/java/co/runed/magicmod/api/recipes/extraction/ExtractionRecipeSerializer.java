@@ -1,4 +1,4 @@
-package co.runed.magicmod.recipes.extraction;
+package co.runed.magicmod.api.recipes.extraction;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

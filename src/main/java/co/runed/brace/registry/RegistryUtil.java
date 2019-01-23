@@ -5,37 +5,57 @@ import co.runed.magicmod.items.BaseItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.block.BlockItem;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.registry.Registry;
 
 public class RegistryUtil {
-    private static String identifier = "minecraft";
+    private String namespace;
 
-    public static void setIdentifier(String id) {
-        identifier = id;
+    public RegistryUtil(String namespace) {
+        this.namespace = namespace;
     }
 
-    public static <T> T register(Registry<? super T> registry, IRegisterable registerable) {
-        return RegistryUtil.register(registry, identifier, registerable.getRegistryName(), (T)registerable);
+    public void setNamespace(String id) {
+        this.namespace = id;
     }
 
-    public static <T> T register(Registry<? super T> registry, String id, T obj) {
-        return Registry.register(registry, identifier + ":" + id, obj);
+    public String getNamespace() {
+        return this.namespace;
     }
 
-    public static <T> T register(Registry<? super T> registry, String namespace, String id, T obj) {
+    public <T> T register(Registry<? super T> registry, IRegisterable registerable) {
+        return this.register(registry, this.namespace, registerable.getRegistryName(), (T)registerable);
+    }
+
+    public <T> T register(Registry<? super T> registry, String id, T obj) {
+        return Registry.register(registry, this.namespace + ":" + id, obj);
+    }
+
+    public <T> T register(Registry<? super T> registry, String namespace, String id, T obj) {
         return Registry.register(registry, namespace + ":" + id, obj);
     }
 
-    public static <T extends Item> T registerItem(BaseItem baseItem) {
-        return RegistryUtil.register(Registry.ITEM, baseItem);
+    public <T extends Item> T registerItem(BaseItem baseItem) {
+        return this.register(Registry.ITEM, baseItem);
     }
 
-    public static <T extends Block> T registerBlock(BaseBlock baseBlock) {
-        return RegistryUtil.register(Registry.BLOCK, baseBlock);
+    public <T extends Block> T registerBlock(BaseBlock baseBlock) {
+        return this.register(Registry.BLOCK, baseBlock);
     }
 
-    public static BlockItem registerBlockItem(BaseBlock block) {
+    public BlockItem registerBlockItem(BaseBlock block) {
         BlockItem blockItem = new BlockItem(block, new Item.Settings());
-        return RegistryUtil.register(Registry.ITEM, block.getRegistryName(), blockItem);
+        return this.register(Registry.ITEM, block.getRegistryName(), blockItem);
     }
+
+    public <S extends RecipeSerializer<T>, T extends Recipe<?>> S registerRecipeSerializer(String id, S recipeSerializer_1) {
+        return RecipeSerializer.register(this.namespace + ":" + id, recipeSerializer_1);
+    }
+
+    public <T extends Recipe<?>> RecipeType<T> registerRecipeType(String id) {
+        return RecipeType.register(this.namespace + ":" + id);
+    }
+
 }

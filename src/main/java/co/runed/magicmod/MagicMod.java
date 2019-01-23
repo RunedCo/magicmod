@@ -12,10 +12,10 @@ public class MagicMod implements ModInitializer {
 	public final static String ID = "magicmod";
 	public final static String VERSION = "";
 
+	public final static RegistryUtil REGISTRY_UTIL = new RegistryUtil(ID);
+
 	@Override
 	public void onInitialize() {
-		RegistryUtil.setIdentifier(MagicMod.ID);
-
 		MagicBlocks.registerAll();
 		MagicItems.registerAll();
 		MagicRecipes.registerAll();

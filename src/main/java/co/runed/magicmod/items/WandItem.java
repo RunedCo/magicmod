@@ -15,9 +15,14 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.loot.context.*;
+import net.minecraft.world.loot.context.LootContext;
+import net.minecraft.world.loot.context.LootContextType;
+import net.minecraft.world.loot.context.LootContextTypes;
+import net.minecraft.world.loot.context.Parameters;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class WandItem extends BaseItem {
     private BlockPos startPos;

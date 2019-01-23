@@ -1,7 +1,7 @@
 package co.runed.magicmod.spells;
 
 import co.runed.brace.registry.IRegisterable;
-import co.runed.magicmod.api.ISpell;
+import co.runed.magicmod.api.spell.ISpell;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 

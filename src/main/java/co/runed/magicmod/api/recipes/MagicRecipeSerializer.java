@@ -1,8 +1,8 @@
 package co.runed.magicmod.api.recipes;
 
-import co.runed.magicmod.api.recipes.extraction.ExtractionRecipe;
-import co.runed.magicmod.api.recipes.extraction.ExtractionRecipeSerializer;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
 
 public class MagicRecipeSerializer {
-    public static ExtractionRecipeSerializer<ExtractionRecipe> EXTRACTION;
+    public static RecipeSerializer<Recipe<?>> EXTRACTION;
 }

@@ -1,7 +1,7 @@
 package co.runed.magicmod.items;
 
 import co.runed.magicmod.api.recipes.MagicRecipeType;
-import co.runed.magicmod.api.recipes.extraction.ExtractionRecipe;
+import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;

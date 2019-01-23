@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.recipes.extraction;
+package co.runed.magicmod.recipes.extraction;
 
 import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
 import co.runed.magicmod.api.recipes.MagicRecipeType;

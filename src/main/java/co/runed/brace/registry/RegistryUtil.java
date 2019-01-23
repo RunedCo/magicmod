@@ -37,16 +37,16 @@ public class RegistryUtil {
         return Registry.register(registry, namespace + ":" + id, obj);
     }
 
-    public <T extends Item> T registerItem(BaseItem baseItem) {
+    public <T extends Item> T registerItem(IRegisterable baseItem) {
         return this.register(Registry.ITEM, baseItem);
     }
 
-    public <T extends Block> T registerBlock(BaseBlock baseBlock) {
+    public <T extends Block> T registerBlock(IRegisterable baseBlock) {
         return this.register(Registry.BLOCK, baseBlock);
     }
 
-    public BlockItem registerBlockItem(BaseBlock block) {
-        BlockItem blockItem = new BlockItem(block, new Item.Settings());
+    public BlockItem registerBlockItem(IRegisterable block) {
+        BlockItem blockItem = new BlockItem((Block)block, new Item.Settings());
         return this.register(Registry.ITEM, block.getRegistryName(), blockItem);
     }
 

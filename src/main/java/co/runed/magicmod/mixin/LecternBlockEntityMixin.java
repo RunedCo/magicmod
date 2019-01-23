@@ -1,6 +1,6 @@
 package co.runed.magicmod.mixin;
 
-import co.runed.magicmod.items.MagicItems;
+import co.runed.magicmod.api.items.MagicItems;
 import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

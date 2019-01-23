@@ -1,4 +1,4 @@
-package co.runed.magicmod.api;
+package co.runed.magicmod.api.spell;
 
 import net.minecraft.nbt.CompoundTag;
 

@@ -1,4 +1,4 @@
-package co.runed.brace;
+package co.runed.brace.registry;
 
 public interface IRegisterable {
     String getRegistryName();

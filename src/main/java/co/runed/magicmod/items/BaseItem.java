@@ -1,6 +1,6 @@
 package co.runed.magicmod.items;
 
-import co.runed.brace.IRegisterable;
+import co.runed.brace.registry.IRegisterable;
 import net.minecraft.item.Item;
 
 public class BaseItem extends Item implements IRegisterable {

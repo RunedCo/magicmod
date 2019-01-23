@@ -1,8 +1,6 @@
 package co.runed.magicmod.items;
 
-import co.runed.brace.RegistryUtil;
-import net.minecraft.item.Item;
-import net.minecraft.util.registry.Registry;
+import co.runed.brace.registry.RegistryUtil;
 
 public class MagicItems {
     public static SpellbookItem SPELL_BOOK = new SpellbookItem();

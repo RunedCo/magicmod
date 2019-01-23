@@ -1,0 +1,8 @@
+{
+  "type": "magicmod:extraction",
+  "ingredient": {
+    "tag": "magicmod:extracts_to_stone"
+  },
+  "result": "minecraft:stone",
+  "mana_cost": 20
+}

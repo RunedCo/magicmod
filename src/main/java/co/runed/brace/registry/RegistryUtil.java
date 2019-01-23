@@ -1,4 +1,4 @@
-package co.runed.brace;
+package co.runed.brace.registry;
 
 import co.runed.magicmod.blocks.BaseBlock;
 import co.runed.magicmod.items.BaseItem;

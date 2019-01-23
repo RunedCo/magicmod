@@ -1,8 +1,6 @@
 package co.runed.magicmod.blocks;
 
-import co.runed.brace.IRegisterable;
-import co.runed.magicmod.items.BaseItem;
-import com.sun.scenario.Settings;
+import co.runed.brace.registry.IRegisterable;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.block.BlockItem;

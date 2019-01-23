@@ -1,0 +1,7 @@
+{
+  "type": "magicmod:extraction",
+  "ingredient": {
+    "tag": "magicmod:extracts_to_netherrack"
+  },
+  "result": "minecraft:netherrack"
+}

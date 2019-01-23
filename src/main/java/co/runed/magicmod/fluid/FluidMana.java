@@ -1,6 +1,6 @@
 package co.runed.magicmod.fluid;
 
-import co.runed.brace.IRegisterable;
+import co.runed.brace.registry.IRegisterable;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.BlockRenderLayer;
@@ -9,8 +9,6 @@ import net.minecraft.fluid.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.ViewableWorld;

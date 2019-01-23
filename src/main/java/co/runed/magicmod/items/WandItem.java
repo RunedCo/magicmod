@@ -59,6 +59,8 @@ public class WandItem extends BaseItem {
             if(r.getType() == MagicRecipeType.EXTRACTION) {
                 ExtractionRecipe exr = (ExtractionRecipe)r;
 
+                System.out.println(exr.matches(block));
+
                 if(exr.matches(block)) {
                     recipe = exr;
 
@@ -119,7 +121,7 @@ public class WandItem extends BaseItem {
 
         player.inventory.insertStack(recipe.getDrops());
 
-        blockState.getBlock().onStacksDropped(blockState, world, this.currentBlock, player.getActiveItem());
+        blockState.getBlock().onStacksDropped(blockState, world, this.startPos, player.getActiveItem());
 
         world.breakBlock(this.currentBlock, false);
         world.setBlockState(this.currentBlock, blockItem.getBlock().getDefaultState());

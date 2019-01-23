@@ -25,10 +25,10 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
         } else {
             Block outputBlock = (Block)Registry.BLOCK.get(output);
 
-            JsonObject drops = JsonHelper.getObject(jsonObject, "drops");
+            JsonObject drops = JsonHelper.getObject(jsonObject, "drops", new JsonObject());
+            Identifier item = new Identifier(JsonHelper.getString(drops, "item", "null:null"));
 
             int count = JsonHelper.getInt(drops, "count", 1);
-            Identifier item = new Identifier(JsonHelper.getString(drops, "item", "null:null"));
             String loot = JsonHelper.getString(drops, "loot", null);
 
             ItemStack dropsItem = ItemStack.EMPTY;

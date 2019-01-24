@@ -5,12 +5,13 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 import java.util.Iterator;
 
 public class SpellbookItem extends BaseItem {
     public SpellbookItem() {
-        super(new Item.Settings().itemGroup(ItemGroup.TOOLS).stackSize(1));
+        super(new Item.Settings().itemGroup(ItemGroup.TOOLS).stackSize(1).rarity(Rarity.EPIC));
 
         this.setRegistryName("spell_book");
     }

@@ -1,10 +1,12 @@
 package co.runed.magicmod.recipes.extraction;
 
+import co.runed.brace.util.ItemStackUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemProvider;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeSerializer;
@@ -34,7 +36,7 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
             int count = JsonHelper.getInt(drops, "count", 1);
             String loot = JsonHelper.getString(drops, "loot", null);
 
-            ItemStack dropsItem = ItemStack.EMPTY;
+            ItemStack dropsItem = ItemStackUtil.EMPTY;
             if(Registry.ITEM.contains(item)) dropsItem = new ItemStack((ItemProvider)Registry.ITEM.get(item), count);
 
             int manaMultiplier = JsonHelper.getInt(jsonObject, "mana_multiplier", 1);

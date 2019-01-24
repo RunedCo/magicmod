@@ -1,0 +1,10 @@
+{
+  "type": "magicmod:extraction",
+  "input": {
+    "item": "minecraft:iron_ore"
+  },
+  "output": "minecraft:stone",
+  "drops": {
+    "item": "magicmod:iron_dust"
+  }
+}

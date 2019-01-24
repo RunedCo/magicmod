@@ -10,7 +10,7 @@ public class BaseOre extends BaseBlock {
     public static final Settings DEFAULT_SETTINGS = Block.Settings.of(Material.STONE).strength(3.0F, 3.0F);
 
     public BaseOre() {
-        super(FabricBlockSettings.of(Material.STONE).dropsLike(Blocks.STONE).strength(3.0F, 3.0F).build());
+        super(FabricBlockSettings.of(Material.STONE).strength(3.0F, 3.0F).build());
     }
 
     public BaseOre(Block.Settings settings) {

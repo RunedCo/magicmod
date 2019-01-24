@@ -7,6 +7,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.item.Items;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -91,7 +92,9 @@ public class WandItem extends BaseItem {
             breakState = bi.getBlock().getDefaultState();
         }
 
-        if(recipe.getDrops() == ItemStack.EMPTY || recipe.shouldUseLootDrops()) {
+
+
+        if(recipe.getDrops().isEmpty() || recipe.shouldUseLootDrops()) {
             LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld) world))
                     .setRandom(world.random)
                     .put(Parameters.BLOCK_STATE, breakState)
@@ -101,11 +104,14 @@ public class WandItem extends BaseItem {
                     .putNullable(Parameters.BLOCK_ENTITY, world.getBlockEntity(this.currentBlock));
 
 
-            //TODO: finish and tidy
-            LootContextType lct = LootContextTypes.BLOCK;
-            world.getServer().getLootManager()
-                    .getSupplier(new Identifier(recipe.getLootTable()))
-                    .drop(lootContextBuilder.build(lct), player.inventory::insertStack);
+            if(recipe.shouldUseLootDrops()) {
+                //TODO: finish and tidy
+
+                LootContextType lct = LootContextTypes.BLOCK;
+                world.getServer().getLootManager()
+                        .getSupplier(new Identifier(recipe.getLootTable()))
+                        .drop(lootContextBuilder.build(lct), player.inventory::insertStack);
+            }
 
             for (ItemStack stack : breakState.getDroppedStacks(lootContextBuilder)) {
                 player.inventory.insertStack(stack);

@@ -14,6 +14,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+//TODO: Recipe<Block>? Recipe<World>?
 public class ExtractionRecipe implements Recipe<Inventory> {
     protected final Identifier id;
     protected final String group;

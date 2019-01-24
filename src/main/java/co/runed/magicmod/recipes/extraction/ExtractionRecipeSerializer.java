@@ -13,7 +13,10 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 
+
 public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements RecipeSerializer<T> {
+
+    //TODO: split into separate functions
     @Override
     public T read(Identifier identifier, JsonObject jsonObject) {
         String group = JsonHelper.getString(jsonObject, "group", "");

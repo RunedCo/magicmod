@@ -36,13 +36,9 @@ public class WandItem extends BaseItem {
         this.setRegistryName("wand");
     }
 
-    @Override
-    public boolean isEffectiveOn(BlockState state) {
-        return true;
-    }
-
     //TODO: fix item drops without drop tag not working
     //TODO: move to spell classes (spell manager, spell, and components?)
+    //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) return ActionResult.PASS;

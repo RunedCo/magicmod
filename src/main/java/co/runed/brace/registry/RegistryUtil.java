@@ -50,7 +50,7 @@ public class RegistryUtil {
         return this.register(Registry.ITEM, block.getRegistryName(), blockItem);
     }
 
-    public <S extends RecipeSerializer<T>, T extends Recipe<?>> S registerRecipeSerializer(String id, S recipeSerializer_1) {
+    public <S extends RecipeSerializer<Recipe<?>>> S registerRecipeSerializer(String id, S recipeSerializer_1) {
         return RecipeSerializer.register(this.namespace + ":" + id, recipeSerializer_1);
     }
 

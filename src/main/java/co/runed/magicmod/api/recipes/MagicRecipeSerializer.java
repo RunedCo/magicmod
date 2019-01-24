@@ -1,8 +1,11 @@
 package co.runed.magicmod.api.recipes;
 
+import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 
 public class MagicRecipeSerializer {
-    public static RecipeSerializer<Recipe<?>> EXTRACTION;
+    //TODO: fix for api
+    public static RecipeSerializer<Recipe<Inventory>> EXTRACTION;
 }

@@ -41,6 +41,7 @@ public class WandItem extends BaseItem {
         return true;
     }
 
+    //TODO: fix item drops without drop tag not working
     //TODO: move to spell classes (spell manager, spell, and components?)
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -56,8 +57,6 @@ public class WandItem extends BaseItem {
         for (Recipe r : world.getRecipeManager().values()) {
             if(r.getType() == MagicRecipeType.EXTRACTION) {
                 ExtractionRecipe exr = (ExtractionRecipe)r;
-
-                System.out.println(exr.matches(block));
 
                 if(exr.matches(block)) {
                     recipe = exr;

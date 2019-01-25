@@ -1,8 +1,7 @@
 package co.runed.brace;
 
-import com.sun.istack.internal.Nullable;
+import co.runed.brace.util.MathUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -30,17 +29,31 @@ public class Vein {
         this.startPosition = startPos;
         this.blockType = world.getBlockState(startPos).getBlock();
         this.maxDistance = maxDistance;
+
+        this.generateVein(this.startPosition);
+    }
+
+    public Block getBlockType() {
+        return this.blockType;
     }
 
     public BlockPos getStartPosition() {
-        return startPosition;
+        return this.startPosition;
     }
 
     public BlockPos getNext() {
+        System.out.println(this.blocksToBreak.size());
+
+        if(this.blocksToBreak.isEmpty()) {
+            return this.startPosition;
+        }
+
+        this.currentPosition = this.blocksToBreak.remove(0);
+
         return this.currentPosition;
     }
 
-    private void generateVein(BlockPos blockPos) {
+    public void generateVein(BlockPos blockPos) {
         List<BlockPos> blocks = new ArrayList<>();
 
         int[] offsets = {-1, 0, 1};
@@ -56,7 +69,7 @@ public class Vein {
                         if (!offsetPos.equals(this.startPosition) &&
                                 block.equals(this.blockType) &&
                                 !this.blocksToBreak.contains(offsetPos) &&
-                                this.startPosition.distanceTo(offsetPos) <= this.maxDistance) {
+                                MathUtil.maxDistanceAway(this.startPosition, offsetPos) <= this.maxDistance) {
 
                             blocks.add(offsetPos);
                         }

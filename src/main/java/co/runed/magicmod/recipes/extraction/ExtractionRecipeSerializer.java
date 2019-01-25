@@ -4,6 +4,7 @@ import co.runed.brace.util.ItemStackUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -34,7 +35,7 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
             Identifier item = new Identifier(JsonHelper.getString(drops, "item", "null:null"));
 
             int count = JsonHelper.getInt(drops, "count", 1);
-            String loot = JsonHelper.getString(drops, "loot", null);
+            String loot = JsonHelper.getString(drops, "loot", "");
 
             ItemStack dropsItem = ItemStackUtil.EMPTY;
             if(Registry.ITEM.contains(item)) dropsItem = new ItemStack((ItemProvider)Registry.ITEM.get(item), count);
@@ -48,8 +49,8 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
     public T read(Identifier identifier, PacketByteBuf byteBuf) {
         String group = byteBuf.readString(32767);
         Ingredient ingredient = Ingredient.fromPacket(byteBuf);
-        BlockItem outputItem = (BlockItem)byteBuf.readItemStack().getItem();
-        Block output = outputItem.getBlock();
+        BlockItem outputBlockItem = (BlockItem)byteBuf.readItemStack().getItem();
+        Block output = outputBlockItem.getBlock();
         ItemStack drops = byteBuf.readItemStack();
         String lootTable = byteBuf.readString(32767);
         int manaMultiplier = byteBuf.readVarInt();
@@ -60,7 +61,8 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
     public void write(PacketByteBuf byteBuf, ExtractionRecipe extractionRecipe) {
         byteBuf.writeString(extractionRecipe.group);
         extractionRecipe.input.write(byteBuf);
-        byteBuf.writeItemStack(extractionRecipe.output.getItem().getDefaultStack());
+        System.out.println(Registry.BLOCK.getId(extractionRecipe.output));
+        byteBuf.writeItemStack(new ItemStack(extractionRecipe.output.getItem(), 1));
         byteBuf.writeItemStack(extractionRecipe.drops);
         byteBuf.writeString(extractionRecipe.lootTable);
         byteBuf.writeVarInt(extractionRecipe.manaMultiplier);

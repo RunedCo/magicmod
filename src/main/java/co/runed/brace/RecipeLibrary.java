@@ -6,6 +6,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.*;
@@ -41,6 +42,16 @@ public class RecipeLibrary implements ResourceReloadListener {
 
         this.RECIPES.clear();
         this.RECIPE_TYPES.clear();
+    }
+
+    public List<Recipe<?>> getAllOfType(Identifier type) {
+        RecipeType<?> recipeType = Registry.RECIPE_TYPE.get(type);
+
+        if(recipeType == null) {
+            return new ArrayList<>();
+        }
+
+        return this.getAllOfType(recipeType);
     }
 
     public List<Recipe<?>> getAllOfType(RecipeType<?> type) {

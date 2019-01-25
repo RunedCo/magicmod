@@ -1,5 +1,6 @@
 package co.runed.magicmod.recipes.extraction;
 
+import co.runed.brace.util.ItemStackUtil;
 import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
 import co.runed.magicmod.api.recipes.MagicRecipeType;
 import net.fabricmc.api.EnvType;
@@ -40,12 +41,12 @@ public class ExtractionRecipe implements Recipe<Inventory> {
     }
 
     public boolean matches(Block block) {
-        return this.input.matches(block.getItem().getDefaultStack());
+        return this.input.matches(ItemStackUtil.getDefaultStack(block.getItem()));
     }
 
     @Override
     public ItemStack craft(Inventory inventory_1) {
-        return this.output.getItem().getDefaultStack();
+        return ItemStackUtil.getDefaultStack(this.output.getItem());
     }
 
     @Environment(EnvType.CLIENT)
@@ -55,11 +56,11 @@ public class ExtractionRecipe implements Recipe<Inventory> {
 
     @Override
     public ItemStack getOutput() {
-        return this.output.getItem().getDefaultStack();
+        return ItemStackUtil.getDefaultStack(this.output.getItem());
     }
 
     public boolean shouldUseLootDrops() {
-        return this.lootTable != null;
+        return !this.lootTable.isEmpty();
     }
 
     public ItemStack getDrops() {

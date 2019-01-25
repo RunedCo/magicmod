@@ -1,7 +1,5 @@
 package co.runed.brace.registry;
 
-import co.runed.magicmod.blocks.BaseBlock;
-import co.runed.magicmod.items.BaseItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.block.BlockItem;

@@ -1,13 +1,18 @@
 package co.runed.magicmod.api.spell;
 
+import co.runed.brace.INbtSerializable;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.ActionResult;
 
-public interface ISpell {
-    ActionResult useOnBlock(ItemUsageContext context);
+public interface ISpell extends INbtSerializable {
+    boolean run();
 
-    CompoundTag toTag();
+    Spell add(ISpellComponent component);
 
-    void fromTag(CompoundTag tag);
+    <T> Spell addProperty(SpellProperty<T> property, T value);
+
+    <T> T getProperty(SpellProperty<T> property);
+
+    boolean hasProperty(SpellProperty property);
 }

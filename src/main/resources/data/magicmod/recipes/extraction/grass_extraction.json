@@ -5,8 +5,6 @@
   },
   "output": "minecraft:dirt",
   "drops": {
-    "item": "minecraft:grass",
-    "count": 2,
     "loot": "minecraft:blocks/grass"
   }
 }

@@ -1,3 +1,5 @@
+import net.fabricmc.loom.task.RemapJar
+
 plugins {
 	id 'fabric-loom' version '0.2.0-SNAPSHOT'
 }
@@ -31,4 +33,19 @@ dependencies {
 task sourcesJar(type: Jar, dependsOn: classes) {
 	classifier = 'sources'
 	from sourceSets.main.allSource
+}
+
+task apiJar(type: Jar) {
+	classifier = 'api'
+	group = archivesBaseName
+
+	from(sourceSets.main.output) {
+		include "co/runed/magicmod/api/**"
+	}
+}
+
+task remapApiJar(type: RemapJar, dependsOn: tasks.apiJar) {
+	group = archivesBaseName
+
+	jar = apiJar.outputs.files.find()
 }

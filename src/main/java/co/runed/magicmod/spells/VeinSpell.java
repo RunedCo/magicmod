@@ -11,7 +11,6 @@ public abstract class VeinSpell implements ISpell, IRegisterable {
         return "vein_spell";
     }
 
-    @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         return null;
     }

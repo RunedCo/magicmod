@@ -6,6 +6,7 @@ import net.minecraft.item.block.BlockItem;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class RegistryUtil {
@@ -28,11 +29,11 @@ public class RegistryUtil {
     }
 
     public <T> T register(Registry<? super T> registry, String id, T obj) {
-        return Registry.register(registry, this.namespace + ":" + id, obj);
+        return Registry.register(registry, this.createId(id), obj);
     }
 
     public <T> T register(Registry<? super T> registry, String namespace, String id, T obj) {
-        return Registry.register(registry, namespace + ":" + id, obj);
+        return Registry.register(registry, this.createId(namespace, id), obj);
     }
 
     public <T extends Item> T registerItem(IRegisterable baseItem) {
@@ -56,4 +57,15 @@ public class RegistryUtil {
         return RecipeType.register(this.namespace + ":" + id);
     }
 
+    public Identifier createId(String namespace, String id) {
+        return new Identifier(namespace, id);
+    }
+
+    public Identifier createId(String id) {
+        if(id.contains(":")) {
+            return new Identifier(id);
+        }
+
+        return new Identifier(this.namespace, id);
+    }
 }

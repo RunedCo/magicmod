@@ -36,7 +36,10 @@ public class WandItem extends BaseItem {
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
-        Spell spell = new Spell().addProperty(SpellProperty.WORLD, world);
+        Spell spell = new Spell()
+                .addProperty(SpellProperty.WORLD, world)
+                .addProperty(SpellProperty.RANGE, 10.0D)
+                .addProperty(SpellProperty.ENTITY_CASTER, player);
 
         //TODO: shorten
         /* ExtractionRecipe recipe = null;

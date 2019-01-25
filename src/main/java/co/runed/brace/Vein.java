@@ -42,8 +42,6 @@ public class Vein {
     }
 
     public BlockPos getNext() {
-        System.out.println(this.blocksToBreak.size());
-
         if(this.blocksToBreak.isEmpty()) {
             return this.startPosition;
         }

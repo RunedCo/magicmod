@@ -1,5 +1,6 @@
 package co.runed.magicmod;
 
+import co.runed.brace.RecipeLibrary;
 import co.runed.brace.registry.RegistryUtil;
 import co.runed.magicmod.setup.BlockSetup;
 import co.runed.magicmod.setup.ItemSetup;
@@ -11,6 +12,7 @@ public class MagicMod implements ModInitializer {
 	public final static String VERSION = "";
 
 	public final static RegistryUtil REGISTRY_UTIL = new RegistryUtil(ID);
+	public static RecipeLibrary RECIPE_LIBRARY = new RecipeLibrary();
 
 	@Override
 	public void onInitialize() {

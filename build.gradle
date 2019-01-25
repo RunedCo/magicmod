@@ -8,7 +8,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 archivesBaseName = "magicmod"
-version = "1.0.0"
+version = "1.14-SNAPSHOT-1.0.0"
 
 def minecraftVersion = "19w03c"
 def yarnMapping = "4"
@@ -49,3 +49,8 @@ task remapApiJar(type: RemapJar, dependsOn: tasks.apiJar) {
 
 	jar = apiJar.outputs.files.find()
 }
+
+assemble {
+	dependsOn(apiJar)
+}
+

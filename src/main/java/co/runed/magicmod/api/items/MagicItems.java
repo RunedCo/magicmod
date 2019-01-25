@@ -9,6 +9,7 @@ public class MagicItems {
     public static Item WAND;
 
     // RESOURCES
+    //TODO: magical equivalent to dusts?
     public static Item IRON_DUST;
     public static Item GOLD_DUST;
 

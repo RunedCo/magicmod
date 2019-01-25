@@ -1,5 +1,6 @@
 package co.runed.magicmod.items;
 
+import co.runed.brace.Vein;
 import co.runed.magicmod.api.recipes.MagicRecipeType;
 import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
@@ -28,8 +29,9 @@ import java.util.List;
 public class WandItem extends BaseItem {
     private BlockPos startPos;
     private Block veinBlock;
-    private List<BlockPos> blocksToBreak = new ArrayList<>();
     private BlockPos currentBlock;
+
+    private Vein vein;
 
     public WandItem() {
         super(new Item.Settings().stackSize(1));
@@ -86,13 +88,11 @@ public class WandItem extends BaseItem {
         BlockItem blockItem = (BlockItem) recipe.getOutputBlock().getItem();
         BlockState breakState = world.getBlockState(this.currentBlock);
 
-        if(recipe.shouldUseLootDrops()) {
+        /* if(recipe.shouldUseLootDrops()) {
             BlockItem bi = (BlockItem)recipe.getDrops().getItem();
 
             breakState = bi.getBlock().getDefaultState();
-        }
-
-
+        } */
 
         if(recipe.getDrops().isEmpty() || recipe.shouldUseLootDrops()) {
             LootContext.Builder lootContextBuilder = (new LootContext.Builder((ServerWorld) world))
@@ -132,36 +132,7 @@ public class WandItem extends BaseItem {
         return ActionResult.PASS;
     }
 
-    private void generateVein(World world, BlockPos blockPos) {
-        List<BlockPos> blocks = new ArrayList<>();
 
-        int[] dimRange = {-1, 0, 1};
-
-        for (int dx : dimRange) {
-            for (int dy : dimRange) {
-                for (int dz : dimRange) {
-                    if ((dx != 0) || (dy != 0) || (dz != 0)) {
-                        BlockPos offsetPos = new BlockPos(blockPos.getX() + dx, blockPos.getY() + dy, blockPos.getZ() + dz);
-
-                        Block block = world.getBlockState(offsetPos).getBlock();
-
-                        if (!offsetPos.equals(this.startPos) &&
-                                block.equals(this.veinBlock) &&
-                                !this.blocksToBreak.contains(offsetPos) &&
-                                this.startPos.distanceTo(offsetPos) <= 6.0D) {
-                            //System.out.println(block.getTranslationKey() + " " + offsetPos);
-
-                            blocks.add(offsetPos);
-                        }
-                    }
-                }
-            }
-        }
-
-        Collections.shuffle(blocks);
-
-        this.blocksToBreak.addAll(blocks);
-    }
 }
 
 /* if (blockState.getBlock() == this.veinBlock && !this.blocksToBreak.contains(offsetPos)) {

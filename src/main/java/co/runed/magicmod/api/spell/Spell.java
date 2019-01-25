@@ -3,7 +3,10 @@ package co.runed.magicmod.api.spell;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Spell implements ISpell {
     private List<ISpellComponent> components = new ArrayList<>();

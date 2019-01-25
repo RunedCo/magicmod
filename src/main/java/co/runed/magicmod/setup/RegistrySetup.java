@@ -2,8 +2,6 @@ package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.registry.MagicRegistry;
-import co.runed.magicmod.api.spell.SpellProperty;
-import net.minecraft.block.Blocks;
 import net.minecraft.util.registry.DefaultMappedRegistry;
 import net.minecraft.util.registry.Registry;
 

@@ -3,7 +3,6 @@ package co.runed.magicmod.setup;
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.SpellProperty;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 

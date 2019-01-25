@@ -9,7 +9,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 
 public class RecipeLibrary implements ResourceReloadListener {
     public final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();

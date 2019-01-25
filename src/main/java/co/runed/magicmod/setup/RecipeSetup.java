@@ -4,7 +4,6 @@ import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
 import co.runed.magicmod.api.recipes.MagicRecipeType;
 import co.runed.magicmod.recipes.extraction.ExtractionRecipeSerializer;
-import net.minecraft.recipe.RecipeSerializer;
 
 public class RecipeSetup {
     public static void init() {

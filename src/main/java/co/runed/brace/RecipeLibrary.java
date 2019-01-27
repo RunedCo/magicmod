@@ -15,60 +15,60 @@ import java.util.HashMap;
 import java.util.List;
 
 public class RecipeLibrary implements ResourceReloadListener {
-    public final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
-    private final HashMap<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
-    private RecipeManager recipeManager;
-    private World world;
+    public static final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
+    private static final HashMap<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
+    private static RecipeManager recipeManager;
+    private static World world;
 
-    public void setup(World world) {
-        this.clear();
+    public static void setup(World world) {
+        clear();
 
-        this.world = world;
-        this.recipeManager = world.getRecipeManager();
+        world = world;
+        recipeManager = world.getRecipeManager();
 
-        Collection<Recipe<?>> recipes = this.recipeManager.values();
+        Collection<Recipe<?>> recipes = recipeManager.values();
 
         for (Recipe<?> recipe : recipes) {
             RecipeType<?> recipeType = recipe.getType();
 
-            if(!this.RECIPES.containsKey(recipeType)) {
-                this.RECIPES.put(recipeType, new ArrayList<>());
+            if(!RECIPES.containsKey(recipeType)) {
+                RECIPES.put(recipeType, new ArrayList<>());
             }
 
-            this.RECIPES.get(recipeType).add(recipe);
+            RECIPES.get(recipeType).add(recipe);
         }
     }
 
-    public void clear() {
-        this.world = null;
-        this.recipeManager = null;
+    public static void clear() {
+        world = null;
+        recipeManager = null;
 
-        this.RECIPES.clear();
-        this.RECIPE_TYPES.clear();
+        RECIPES.clear();
+        RECIPE_TYPES.clear();
     }
 
-    public List<Recipe<?>> getAllOfType(Identifier type) {
+    public static List<Recipe<?>> getAllOfType(Identifier type) {
         RecipeType<?> recipeType = Registry.RECIPE_TYPE.get(type);
 
         if(recipeType == null) {
             return new ArrayList<>();
         }
 
-        return this.getAllOfType(recipeType);
+        return getAllOfType(recipeType);
     }
 
-    public List<Recipe<?>> getAllOfType(RecipeType<?> type) {
-        if(!this.RECIPES.containsKey(type) || !this.isSetup()) return new ArrayList<>();
+    public static List<Recipe<?>> getAllOfType(RecipeType<?> type) {
+        if(!RECIPES.containsKey(type) || !isSetup()) return new ArrayList<>();
 
-        return this.RECIPES.get(type);
+        return RECIPES.get(type);
     }
 
-    public boolean isSetup() {
-        return this.recipeManager == null || this.world == null;
+    public static boolean isSetup() {
+        return recipeManager == null || world == null;
     }
 
     @Override
     public void onResourceReload(ResourceManager var1) {
-        this.setup(this.world);
+        setup(world);
     }
 }

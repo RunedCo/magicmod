@@ -3,11 +3,13 @@ package co.runed.magicmod.api.spell;
 import co.runed.brace.INbtSerializable;
 
 public interface ISpell extends INbtSerializable {
+    ISpell build();
+
     boolean run();
 
-    Spell add(ISpellComponent component);
+    ISpell add(ISpellComponent component);
 
-    <T> Spell addProperty(SpellProperty<T> property, T value);
+    <T> ISpell addProperty(SpellProperty<T> property, T value);
 
     <T> T getProperty(SpellProperty<T> property);
 

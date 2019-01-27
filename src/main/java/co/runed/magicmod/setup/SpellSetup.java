@@ -17,11 +17,13 @@ public class SpellSetup {
         SpellProperty.ENTITY_CASTER = registerSpellProperty("entity_caster");
         SpellProperty.ENTITY_TARGET = registerSpellProperty("entity_target");
         SpellProperty.RANGE = registerSpellProperty("range");
+        SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions");
+        SpellProperty.START_POSITION = registerSpellProperty("start_position");
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public static <T> SpellProperty<T> registerSpellProperty(String id) {
         Identifier identifier = MagicMod.REGISTRY_UTIL.createId(id);
-        return (SpellProperty<T>)MagicMod.REGISTRY_UTIL.register(MagicRegistry.SPELL_PROPERTIES, id, new SpellProperty<World>(identifier));
+        return MagicMod.REGISTRY_UTIL.register(MagicRegistry.SPELL_PROPERTIES, id, new SpellProperty<>(identifier));
     }
 }

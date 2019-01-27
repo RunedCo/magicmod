@@ -3,6 +3,11 @@ package co.runed.magicmod.items;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.components.BreakSpellComponent;
+import co.runed.magicmod.api.spell.components.ExplodeSpellComponent;
+import co.runed.magicmod.api.spell.components.ExtractSpellComponent;
+import co.runed.magicmod.api.spell.components.VeinSpellComponent;
+import co.runed.magicmod.spells.VeinSpell;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
@@ -13,12 +18,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandItem extends BaseItem {
-    private Vein vein;
+    private Spell spell = new Spell();
 
     public WandItem() {
         super(new Item.Settings().stackSize(1));
 
         this.setRegistryName("wand");
+
+        this.spell
+                .addProperty(SpellProperty.RANGE, 10.0D)
+                .add(new VeinSpellComponent())
+                .add(new ExplodeSpellComponent());
     }
 
     //TODO: fix item drops without drop tag not working
@@ -27,18 +37,24 @@ public class WandItem extends BaseItem {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) return ActionResult.PASS;
-        if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getPos(), 3);
+        //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
 
         ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
-        BlockPos position = context.getPos();
+        BlockPos position = context.getBlockPos();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
-        Spell spell = new Spell()
-                .addProperty(SpellProperty.WORLD, world)
-                .addProperty(SpellProperty.RANGE, 10.0D)
-                .addProperty(SpellProperty.ENTITY_CASTER, player);
+        if(!this.spell.isBuilt() || !this.spell.getProperty(SpellProperty.START_POSITION).equals(position)) {
+            this.spell
+                    .setProperty(SpellProperty.WORLD, world)
+                    .setProperty(SpellProperty.START_POSITION, position)
+                    .setProperty(SpellProperty.ENTITY_CASTER, player);
+
+            this.spell.build();
+        }
+
+        this.spell.run();
 
         //TODO: shorten
         /* ExtractionRecipe recipe = null;
@@ -53,7 +69,7 @@ public class WandItem extends BaseItem {
 
         if (recipe == null) return ActionResult.FAILURE; */
 
-        BlockPos currentPosition = vein.getNext();
+        /* BlockPos currentPosition = vein.getNext();
 
         if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
             this.vein = new Vein(world, position, 3);

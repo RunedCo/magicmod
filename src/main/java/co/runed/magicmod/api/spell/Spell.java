@@ -61,6 +61,8 @@ public class Spell implements ISpell {
     @SuppressWarnings("unchecked")
     @Override
     public <T> T getProperty(SpellProperty<T> property) {
+        if(!this.hasProperty(property)) return property.getDefault();
+
         Object value = this.properties.get(property);
 
         return (T) value;

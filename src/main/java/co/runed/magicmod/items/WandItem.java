@@ -3,10 +3,7 @@ package co.runed.magicmod.items;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.components.BreakSpellComponent;
-import co.runed.magicmod.api.spell.components.ExplodeSpellComponent;
-import co.runed.magicmod.api.spell.components.ExtractSpellComponent;
-import co.runed.magicmod.api.spell.components.VeinSpellComponent;
+import co.runed.magicmod.api.spell.components.*;
 import co.runed.magicmod.spells.VeinSpell;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -28,7 +25,7 @@ public class WandItem extends BaseItem {
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellComponent())
-                .add(new ExplodeSpellComponent());
+                .add(new FireSpellComponent());
     }
 
     //TODO: fix item drops without drop tag not working

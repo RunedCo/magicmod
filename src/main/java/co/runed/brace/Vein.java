@@ -25,7 +25,7 @@ public class Vein {
         this(world, startPos, 16.0D);
     }
 
-    public Vein(World world, BlockPos startPos, double maxDistance) {
+    public Vein(World world, BlockPos startPos,  double maxDistance) {
         this.world = world;
         this.startPosition = startPos;
         this.blockType = world.getBlockState(startPos).getBlock();
@@ -91,18 +91,29 @@ public class Vein {
     }
 
     public List<BlockPos> generateFullVein(BlockPos startPos) {
-        List<BlockPos> fromStart = this.generateVein(startPos);
+        List<BlockPos> list = new ArrayList<>();
 
-        for (BlockPos pos : fromStart) {
-            List<BlockPos> positions = this.generateFullVein(pos);
+        list.add(startPos);
+        list.addAll(this.iterateFullVein(startPos, null));
 
-            for (BlockPos position : positions) {
-                if(!fromStart.contains(position)) {
-                    fromStart.add(position);
-                }
+        return list;
+    }
+
+    private List<BlockPos> iterateFullVein(BlockPos position, List<BlockPos> list) {
+        List<BlockPos> iterated = list !=  null ? list : new ArrayList<>();
+        List<BlockPos> newP = this.generateVein(position);
+        //iterated.addAll(newP);
+
+        for (BlockPos pos : newP) {
+            if(!iterated.contains(pos)) {
+                iterated.add(pos);
+
+                System.out.println(MathUtil.maxDistanceAway(pos, startPosition) > this.maxDistance);
+
+                this.iterateFullVein(pos, iterated);
             }
         }
 
-        return fromStart;
+        return iterated;
     }
 }

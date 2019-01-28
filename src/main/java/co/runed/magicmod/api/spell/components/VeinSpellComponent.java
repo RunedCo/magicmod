@@ -19,10 +19,11 @@ public class VeinSpellComponent implements ISpellComponent {
     public boolean create(ISpell spell) {
         BlockPos startPosition = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
+        Double range = spell.getProperty(SpellProperty.RANGE);
 
         System.out.println("BUILD " + startPosition);
 
-        this.vein = new Vein(world, startPosition);
+        this.vein = new Vein(world, startPosition, range);
 
         return true;
     }

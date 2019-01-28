@@ -10,7 +10,7 @@ public class SpellProperty<T> {
     public static SpellProperty<World> WORLD;
     public static SpellProperty<Double> SPEED;
     public static SpellProperty<Entity> ENTITY_CASTER;
-    public static SpellProperty<Entity> ENTITY_TARGET;
+    public static SpellProperty<Entity[]> ENTITY_TARGETS;
     public static SpellProperty<Double> RANGE;
     public static SpellProperty<Float> EXPLOSION_STRENGTH;
     public static SpellProperty<BlockPos[]> BLOCK_POSITIONS;

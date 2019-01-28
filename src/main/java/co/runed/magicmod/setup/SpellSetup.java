@@ -15,7 +15,7 @@ public class SpellSetup {
         SpellProperty.WORLD = registerSpellProperty("world");
         SpellProperty.SPEED = registerSpellProperty("speed", 1.0D);
         SpellProperty.ENTITY_CASTER = registerSpellProperty("entity_caster");
-        SpellProperty.ENTITY_TARGET = registerSpellProperty("entity_target");
+        SpellProperty.ENTITY_TARGETS = registerSpellProperty("entity_targets");
         SpellProperty.RANGE = registerSpellProperty("range", 4.0D);
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
         SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions");

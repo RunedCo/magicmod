@@ -25,7 +25,7 @@ public class WandItem extends BaseItem {
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellComponent())
-                .add(new FireSpellComponent());
+                .add(new BreakSpellComponent());
     }
 
     //TODO: fix item drops without drop tag not working

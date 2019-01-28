@@ -1,6 +1,7 @@
 package co.runed.brace;
 
 import co.runed.brace.util.MathUtil;
+import com.sun.istack.internal.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -51,7 +52,7 @@ public class Vein {
         return this.currentPosition;
     }
 
-    public void generateVein(BlockPos blockPos) {
+    public List<BlockPos> generateVein(BlockPos blockPos) {
         List<BlockPos> blocks = new ArrayList<>();
 
         int[] offsets = {-1, 0, 1};
@@ -78,6 +79,30 @@ public class Vein {
 
         Collections.shuffle(blocks);
 
-        this.blocksToBreak.addAll(blocks);
+        return blocks;
+    }
+
+    public List<BlockPos> generateVeinAndAdd(BlockPos pos) {
+        List<BlockPos> vein = this.generateVein(pos);
+
+        this.blocksToBreak.addAll(vein);
+
+        return vein;
+    }
+
+    public List<BlockPos> generateFullVein(BlockPos startPos) {
+        List<BlockPos> fromStart = this.generateVein(startPos);
+
+        for (BlockPos pos : fromStart) {
+            List<BlockPos> positions = this.generateFullVein(pos);
+
+            for (BlockPos position : positions) {
+                if(!fromStart.contains(position)) {
+                    fromStart.add(position);
+                }
+            }
+        }
+
+        return fromStart;
     }
 }

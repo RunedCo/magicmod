@@ -3,7 +3,11 @@ package co.runed.brace;
 import net.minecraft.nbt.CompoundTag;
 
 public interface INbtSerializable {
-    CompoundTag toTag();
+    default CompoundTag toTag() {
+        return new CompoundTag();
+    }
 
-    void fromTag(CompoundTag tag);
+    default void fromTag(CompoundTag tag) {
+
+    }
 }

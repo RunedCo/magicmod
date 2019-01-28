@@ -17,9 +17,10 @@ public class ExplodeSpellComponent implements ISpellComponent {
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
         BlockPos[] positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        float explosionStrength = spell.getProperty(SpellProperty.EXPLOSION_STRENGTH);
 
         for (BlockPos pos : positions) {
-            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 5, true);
+            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), explosionStrength, true);
         }
 
         return true;

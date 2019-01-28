@@ -6,7 +6,9 @@ import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,6 +31,7 @@ public class VeinSpellComponent implements ISpellComponent {
     public boolean run(ISpell spell) {
         BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
+        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
@@ -39,20 +42,12 @@ public class VeinSpellComponent implements ISpellComponent {
             currentPosition = vein.getNext();
         } */
 
+        player.addChatMessage(new StringTextComponent("" + vein.generateFullVein(position).size()), true);
+
         spell.addProperty(SpellProperty.BLOCK_POSITIONS, new BlockPos[]{ currentPosition });
 
-        this.vein.generateVein(currentPosition);
+        this.vein.generateVeinAndAdd(currentPosition);
 
         return true;
-    }
-
-    @Override
-    public CompoundTag toTag() {
-        return null;
-    }
-
-    @Override
-    public void fromTag(CompoundTag tag) {
-
     }
 }

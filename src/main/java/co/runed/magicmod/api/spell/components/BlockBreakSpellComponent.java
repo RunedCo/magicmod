@@ -7,7 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BreakSpellComponent implements ISpellComponent {
+public class BlockBreakSpellComponent implements ISpellComponent {
     @Override
     public boolean create(ISpell spell) {
         return true;

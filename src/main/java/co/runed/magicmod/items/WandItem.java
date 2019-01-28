@@ -2,7 +2,8 @@ package co.runed.magicmod.items;
 
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.components.*;
+import co.runed.magicmod.api.spell.components.BlockBreakSpellComponent;
+import co.runed.magicmod.api.spell.components.VeinSpellComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;

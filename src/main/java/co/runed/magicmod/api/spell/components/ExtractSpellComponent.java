@@ -1,7 +1,6 @@
 package co.runed.magicmod.api.spell.components;
 
 import co.runed.brace.RecipeLibrary;
-import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.recipes.MagicRecipeType;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;

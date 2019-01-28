@@ -5,7 +5,6 @@ import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.SpellProperty;
 import com.sun.istack.internal.Nullable;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.World;
 
 public class SpellSetup {
     public static void init() {
@@ -20,7 +19,7 @@ public class SpellSetup {
         SpellProperty.RANGE = registerSpellProperty("range", 4.0D);
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
         SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions");
-        SpellProperty.START_POSITION = registerSpellProperty("start_position");
+        SpellProperty.INITIAL_BLOCK_POSITION = registerSpellProperty("initial_block_position");
     }
 
     //@SuppressWarnings("unchecked")

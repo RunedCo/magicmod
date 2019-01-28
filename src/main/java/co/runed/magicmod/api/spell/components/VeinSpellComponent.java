@@ -7,7 +7,6 @@ import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,7 +16,7 @@ public class VeinSpellComponent implements ISpellComponent {
 
     @Override
     public boolean create(ISpell spell) {
-        BlockPos startPosition = spell.getProperty(SpellProperty.START_POSITION);
+        BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
 
@@ -30,7 +29,7 @@ public class VeinSpellComponent implements ISpellComponent {
 
     @Override
     public boolean run(ISpell spell) {
-        BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
+        BlockPos position = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
         BlockState blockState = world.getBlockState(position);

@@ -40,10 +40,10 @@ public class WandItem extends BaseItem {
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
-        if(!this.spell.isBuilt() || !this.spell.getProperty(SpellProperty.START_POSITION).equals(position)) {
+        if(!this.spell.isBuilt() || !this.spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION).equals(position)) {
             this.spell
                     .setProperty(SpellProperty.WORLD, world)
-                    .setProperty(SpellProperty.START_POSITION, position)
+                    .setProperty(SpellProperty.INITIAL_BLOCK_POSITION, position)
                     .setProperty(SpellProperty.ENTITY_CASTER, player);
 
             this.spell.build();

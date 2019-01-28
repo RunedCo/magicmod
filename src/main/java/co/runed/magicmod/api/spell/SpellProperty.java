@@ -14,7 +14,7 @@ public class SpellProperty<T> {
     public static SpellProperty<Double> RANGE;
     public static SpellProperty<Float> EXPLOSION_STRENGTH;
     public static SpellProperty<BlockPos[]> BLOCK_POSITIONS;
-    public static SpellProperty<BlockPos> START_POSITION;
+    public static SpellProperty<BlockPos> INITIAL_BLOCK_POSITION;
 
     private Identifier identifier;
     private T defaultValue;

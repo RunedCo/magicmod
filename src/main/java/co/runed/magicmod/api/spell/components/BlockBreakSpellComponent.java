@@ -41,14 +41,14 @@ public class BlockBreakSpellComponent implements ISpellComponent {
 
             //if(!world.canPlayerModifyAt(player, pos)) return false;
 
-            if(breakingPos != null && !breakingPos.equals(pos)) continue;
+            if(breakingPos != null && !breakingPos.equals(pos)) return false;
 
             this.currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.DIAMOND);
 
             world.setBlockBreakingProgress(player.getEntityId(), pos, (int)(this.currentBreakProgress * 10.0f));
             spe.networkHandler.sendPacket(new BlockBreakingProgressClientPacket(player.getEntityId(), pos, (int)(this.currentBreakProgress * 10.0f)));
 
-            if(this.currentBreakProgress < 1f) { continue; }
+            if(this.currentBreakProgress < 1f) { return false; }
 
             this.currentBreakProgress = 0.0f;
 

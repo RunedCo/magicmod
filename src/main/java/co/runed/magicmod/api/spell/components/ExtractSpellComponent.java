@@ -1,5 +1,6 @@
 package co.runed.magicmod.api.spell.components;
 
+import co.runed.brace.LootUtil;
 import co.runed.brace.RecipeLibrary;
 import co.runed.magicmod.api.recipes.MagicRecipeType;
 import co.runed.magicmod.api.spell.ISpell;
@@ -41,19 +42,9 @@ public class ExtractSpellComponent implements ISpellComponent {
 
             if(recipe == null) continue;
 
-            world.breakBlock(pos, true);
+            world.breakBlock(pos, false);
         }
 
         return true;
-    }
-
-    @Override
-    public CompoundTag toTag() {
-        return null;
-    }
-
-    @Override
-    public void fromTag(CompoundTag tag) {
-
     }
 }

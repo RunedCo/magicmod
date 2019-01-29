@@ -27,14 +27,4 @@ public class ExplodeSpellComponent implements ISpellComponent {
 
         return true;
     }
-
-    @Override
-    public CompoundTag toTag() {
-        return null;
-    }
-
-    @Override
-    public void fromTag(CompoundTag tag) {
-
-    }
 }

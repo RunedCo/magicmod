@@ -3,6 +3,7 @@ package co.runed.magicmod.items;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.api.spell.components.BlockBreakSpellComponent;
+import co.runed.magicmod.api.spell.components.BlockDropsToInventoryComponent;
 import co.runed.magicmod.api.spell.components.VeinSpellComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -24,6 +25,7 @@ public class WandItem extends BaseItem {
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellComponent())
+                .add(new BlockDropsToInventoryComponent())
                 .add(new BlockBreakSpellComponent());
     }
 

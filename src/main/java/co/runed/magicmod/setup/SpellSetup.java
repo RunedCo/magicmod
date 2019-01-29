@@ -22,6 +22,7 @@ public class SpellSetup {
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
         SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
         SpellProperty.INITIAL_BLOCK_POSITION = registerSpellProperty("initial_block_position");
+        SpellProperty.ADD_DROPS_TO_INVENTORY = registerSpellProperty("add_drops_to_inventory", false);
     }
 
     //@SuppressWarnings("unchecked")

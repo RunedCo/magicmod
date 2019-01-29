@@ -3,7 +3,7 @@ package co.runed.magicmod.api.spell;
 import co.runed.brace.INbtSerializable;
 
 //TODO: add tiers
-public interface ISpellComponent extends INbtSerializable {
+public interface ISpellComponent {
 
     boolean create(ISpell spell);
 

@@ -1,5 +1,6 @@
 package co.runed.magicmod.api.spell.components;
 
+import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
@@ -11,7 +12,7 @@ import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class VeinSpellComponent implements ISpellComponent {
+public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
     private Vein vein;
 
     @Override
@@ -19,8 +20,6 @@ public class VeinSpellComponent implements ISpellComponent {
         BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
-
-        System.out.println("BUILD " + startPosition);
 
         this.vein = new Vein(world, startPosition, range);
 

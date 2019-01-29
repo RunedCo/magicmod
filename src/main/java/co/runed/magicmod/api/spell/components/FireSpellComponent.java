@@ -37,14 +37,4 @@ public class FireSpellComponent implements ISpellComponent {
 
         return true;
     }
-
-    @Override
-    public CompoundTag toTag() {
-        return null;
-    }
-
-    @Override
-    public void fromTag(CompoundTag tag) {
-
-    }
 }

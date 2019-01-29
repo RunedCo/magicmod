@@ -11,6 +11,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 //TODO: fix glitchy fire
 public class FireSpellComponent implements ISpellComponent {
     @Override
@@ -21,7 +23,7 @@ public class FireSpellComponent implements ISpellComponent {
     @Override
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
-        BlockPos[] positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
 
         for (BlockPos pos : positions) {
             BlockPos aboveBlock = pos.offset(Direction.UP).add(0, 1, 0);

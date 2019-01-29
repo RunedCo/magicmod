@@ -7,6 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class ExplodeSpellComponent implements ISpellComponent {
     @Override
     public boolean create(ISpell spell) {
@@ -16,7 +18,7 @@ public class ExplodeSpellComponent implements ISpellComponent {
     @Override
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
-        BlockPos[] positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
         float explosionStrength = spell.getProperty(SpellProperty.EXPLOSION_STRENGTH);
 
         for (BlockPos pos : positions) {

@@ -6,7 +6,8 @@
     "ExampleMixin",
     "BlockEntityRendererMixin",
     "LecternBlockEntityRendererMixin",
-    "LecternBlockEntityMixin"
+    "LecternBlockEntityMixin",
+    "FallingBlockEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

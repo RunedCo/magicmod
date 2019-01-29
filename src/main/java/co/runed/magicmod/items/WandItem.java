@@ -8,6 +8,7 @@ import co.runed.magicmod.api.spell.components.TestSpellComponent;
 import co.runed.magicmod.api.spell.components.VeinSpellComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
@@ -41,10 +42,10 @@ public class WandItem extends BaseItem {
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().isClient()) {
-            return ActionResult.PASS;
-        }
+        if (context.getWorld().isClient()) return ActionResult.FAILURE;
         //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
+
+        //System.out.println(context.getWorld());
 
         PlayerEntity player = context.getPlayer();
         BlockPos position = context.getBlockPos();
@@ -52,9 +53,10 @@ public class WandItem extends BaseItem {
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
+        this.spell.setProperty(SpellProperty.WORLD, world);
+
         if(!this.spell.isBuilt() || !this.spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION).equals(position)) {
             this.spell
-                    .setProperty(SpellProperty.WORLD, world)
                     .setProperty(SpellProperty.INITIAL_BLOCK_POSITION, position)
                     .setProperty(SpellProperty.ENTITY_CASTER, player);
 

@@ -13,9 +13,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
     private Vein vein;
+    private BlockPos currentPosition;
 
     @Override
     public boolean create(ISpell spell) {
@@ -35,8 +37,13 @@ public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
         PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
+        List<BlockPos> posList = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
 
-        BlockPos currentPosition = vein.getNext();
+        if(!posList.isEmpty() && posList.contains(this.currentPosition)) {
+            return true;
+        }
+
+        currentPosition = vein.getNext();
 
         if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
             this.vein = new Vein(world, position, 3);
@@ -44,8 +51,6 @@ public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
         }
 
         player.addChatMessage(new StringTextComponent("" + vein.generateFullVein(position).size()), true);
-
-        BlockPos[] positions = {};
 
         spell.addProperty(SpellProperty.BLOCK_POSITIONS, Arrays.asList(currentPosition));
 

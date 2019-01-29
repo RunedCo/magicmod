@@ -9,6 +9,7 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class Vein {
     private World world;
@@ -21,6 +22,8 @@ public class Vein {
 
     private List<BlockPos> blocksToBreak = new ArrayList<>();
 
+    private Random rand;
+
     public Vein(World world, BlockPos startPos) {
         this(world, startPos, 16.0D);
     }
@@ -30,8 +33,9 @@ public class Vein {
         this.startPosition = startPos;
         this.blockType = world.getBlockState(startPos).getBlock();
         this.maxDistance = maxDistance;
+        this.rand = new Random(startPosition.asLong());
 
-        this.generateVein(this.startPosition);
+        this.generateVeinAndAdd(this.startPosition);
     }
 
     public Block getBlockType() {
@@ -77,7 +81,7 @@ public class Vein {
             }
         }
 
-        Collections.shuffle(blocks);
+        Collections.shuffle(blocks, this.rand);
 
         return blocks;
     }

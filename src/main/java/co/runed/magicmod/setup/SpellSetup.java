@@ -6,6 +6,8 @@ import co.runed.magicmod.api.spell.SpellProperty;
 import com.sun.istack.internal.Nullable;
 import net.minecraft.util.Identifier;
 
+import java.util.ArrayList;
+
 public class SpellSetup {
     public static void init() {
         SpellSetup.setupSpellProperties();
@@ -15,10 +17,10 @@ public class SpellSetup {
         SpellProperty.WORLD = registerSpellProperty("world");
         SpellProperty.SPEED = registerSpellProperty("speed", 1.0D);
         SpellProperty.ENTITY_CASTER = registerSpellProperty("entity_caster");
-        SpellProperty.ENTITY_TARGETS = registerSpellProperty("entity_targets");
+        SpellProperty.ENTITY_TARGETS = registerSpellProperty("entity_targets", new ArrayList<>());
         SpellProperty.RANGE = registerSpellProperty("range", 4.0D);
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
-        SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions");
+        SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
         SpellProperty.INITIAL_BLOCK_POSITION = registerSpellProperty("initial_block_position");
     }
 

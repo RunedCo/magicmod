@@ -44,7 +44,9 @@ public class VeinSpellComponent implements ISpellComponent {
 
         player.addChatMessage(new StringTextComponent("" + vein.generateFullVein(position).size()), true);
 
-        spell.addProperty(SpellProperty.BLOCK_POSITIONS, new BlockPos[]{ currentPosition });
+        BlockPos[] positions = {};
+
+        spell.addProperty(SpellProperty.BLOCK_POSITIONS, vein.generateFullVein(position));
 
         this.vein.generateVeinAndAdd(currentPosition);
 

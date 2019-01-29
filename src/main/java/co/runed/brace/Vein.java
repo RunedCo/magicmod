@@ -1,6 +1,7 @@
 package co.runed.brace;
 
 import co.runed.brace.util.MathUtil;
+import com.sun.istack.internal.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -98,21 +99,18 @@ public class Vein {
         return list;
     }
 
-    private List<BlockPos> iterateFullVein(BlockPos position, List<BlockPos> list) {
-        List<BlockPos> iterated = list !=  null ? list : new ArrayList<>();
-        List<BlockPos> newP = this.generateVein(position);
-        //iterated.addAll(newP);
+    private List<BlockPos> iterateFullVein(BlockPos position, @Nullable List<BlockPos> list) {
+        List<BlockPos> previousPositions = list !=  null ? list : new ArrayList<>();
+        List<BlockPos> generatedPositions = this.generateVein(position);
 
-        for (BlockPos pos : newP) {
-            if(!iterated.contains(pos)) {
-                iterated.add(pos);
+        for (BlockPos pos : generatedPositions) {
+            if(!previousPositions.contains(pos)) {
+                previousPositions.add(pos);
 
-                System.out.println(MathUtil.maxDistanceAway(pos, startPosition) > this.maxDistance);
-
-                this.iterateFullVein(pos, iterated);
+                this.iterateFullVein(pos, previousPositions);
             }
         }
 
-        return iterated;
+        return previousPositions;
     }
 }

@@ -1,19 +1,22 @@
 package co.runed.magicmod.api.spell;
 
 import com.sun.istack.internal.Nullable;
+import jdk.nashorn.internal.ir.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.List;
+
 public class SpellProperty<T> {
     public static SpellProperty<World> WORLD;
     public static SpellProperty<Double> SPEED;
     public static SpellProperty<Entity> ENTITY_CASTER;
-    public static SpellProperty<Entity[]> ENTITY_TARGETS;
+    public static SpellProperty<List<Entity>> ENTITY_TARGETS;
     public static SpellProperty<Double> RANGE;
     public static SpellProperty<Float> EXPLOSION_STRENGTH;
-    public static SpellProperty<BlockPos[]> BLOCK_POSITIONS;
+    public static SpellProperty<List<BlockPos>> BLOCK_POSITIONS;
     public static SpellProperty<BlockPos> INITIAL_BLOCK_POSITION;
 
     private Identifier identifier;

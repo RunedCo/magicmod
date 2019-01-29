@@ -10,7 +10,8 @@
     "FallingBlockEntityRendererMixin",
     "DoorBlockMixin",
     "ChestBlockMixin",
-    "TallPlantBlockMixin"
+    "TallPlantBlockMixin",
+    "BedBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

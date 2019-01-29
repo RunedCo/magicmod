@@ -4,9 +4,11 @@ import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.api.spell.components.BlockBreakSpellComponent;
 import co.runed.magicmod.api.spell.components.BlockDropsToInventoryComponent;
+import co.runed.magicmod.api.spell.components.TestSpellComponent;
 import co.runed.magicmod.api.spell.components.VeinSpellComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -25,8 +27,13 @@ public class WandItem extends BaseItem {
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellComponent())
-                .add(new BlockDropsToInventoryComponent())
+                //.add(new BlockDropsToInventoryComponent())
                 .add(new BlockBreakSpellComponent());
+    }
+
+    @Override
+    public boolean isEffectiveOn(BlockState blockState_1) {
+        return true;
     }
 
     //TODO: fix item drops without drop tag not working
@@ -34,10 +41,12 @@ public class WandItem extends BaseItem {
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().isClient()) return ActionResult.PASS;
+        if (context.getWorld().isClient()) {
+            return ActionResult.PASS;
+        }
         //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
 
-        ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
+        PlayerEntity player = context.getPlayer();
         BlockPos position = context.getBlockPos();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(position);

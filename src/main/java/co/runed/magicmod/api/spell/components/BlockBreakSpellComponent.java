@@ -1,19 +1,25 @@
 package co.runed.magicmod.api.spell.components;
 
 import co.runed.brace.LootUtil;
+import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BlockBreakSpellComponent implements ISpellComponent {
+    public float currentBreakProgress = 0.0f;
+    public BlockPos breakingPos;
+
     @Override
     public boolean create(ISpell spell) {
         return true;
@@ -28,7 +34,19 @@ public class BlockBreakSpellComponent implements ISpellComponent {
         for (BlockPos pos : positions) {
             boolean dropItems = true;
 
-            if(!world.canPlayerModifyAt(player, pos)) return false;
+            //if(!world.canPlayerModifyAt(player, pos)) return false;
+
+            /*if(breakingPos != null && !breakingPos.equals(pos)) continue;
+
+            this.currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.DIAMOND);
+
+            world.setBlockBreakingProgress(player.getEntityId(), pos, (int)(this.currentBreakProgress * 10.0f));
+
+            if(this.currentBreakProgress < 1f) { continue; }
+
+            this.currentBreakProgress = 0.0f;
+
+            if(world.isClient) continue; */
 
             if(spell.getProperty(SpellProperty.ADD_DROPS_TO_INVENTORY)) {
                 dropItems = false;
@@ -42,8 +60,10 @@ public class BlockBreakSpellComponent implements ISpellComponent {
                 }
             }
 
-            world.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+            world.breakBlock(pos, true);
         }
+
+        //spell.addProperty(SpellProperty.BLOCK_POSITIONS, new ArrayList<>());
 
         return true;
     }

@@ -12,6 +12,8 @@ import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Arrays;
+
 public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
     private Vein vein;
 
@@ -36,16 +38,16 @@ public class VeinSpellComponent implements ISpellComponent, INbtSerializable {
 
         BlockPos currentPosition = vein.getNext();
 
-        /* if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
+        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
             this.vein = new Vein(world, position, 3);
             currentPosition = vein.getNext();
-        } */
+        }
 
         player.addChatMessage(new StringTextComponent("" + vein.generateFullVein(position).size()), true);
 
         BlockPos[] positions = {};
 
-        spell.addProperty(SpellProperty.BLOCK_POSITIONS, vein.generateFullVein(position));
+        spell.addProperty(SpellProperty.BLOCK_POSITIONS, Arrays.asList(currentPosition));
 
         this.vein.generateVeinAndAdd(currentPosition);
 

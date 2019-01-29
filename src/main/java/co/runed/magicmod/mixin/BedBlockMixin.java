@@ -19,10 +19,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ChestBlock.class)
-public class ChestBlockMixin {
+@Mixin(BedBlock.class)
+public class BedBlockMixin {
     @Inject(method = "getOutlineShape", at = @At(value = "RETURN"), cancellable = true)
     public void onGetOutlineShape(BlockState blockState, BlockView blockView, BlockPos blockPos, VerticalEntityPosition verticalEntityPosition, CallbackInfoReturnable<VoxelShape> ci) {
-        ci.setReturnValue(OutlineRender.getLongBlockOutline(ci.getReturnValue(), blockState, blockView, blockPos, blockState.get(ChestBlock.FACING).rotateYCounterclockwise()));
+        ci.setReturnValue(OutlineRender.getLongBlockOutline(ci.getReturnValue(), blockState, blockView, blockPos, blockState.get(BedBlock.FACING)));
     }
 }

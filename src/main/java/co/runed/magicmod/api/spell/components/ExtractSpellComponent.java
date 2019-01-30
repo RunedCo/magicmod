@@ -1,14 +1,12 @@
 package co.runed.magicmod.api.spell.components;
 
-import co.runed.brace.LootUtil;
 import co.runed.brace.RecipeLibrary;
-import co.runed.magicmod.api.recipes.MagicRecipeType;
+import co.runed.magicmod.api.recipe.MagicRecipeType;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.recipes.extraction.ExtractionRecipe;
+import co.runed.magicmod.recipe.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

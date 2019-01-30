@@ -1,8 +1,8 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.blocks.MagicBlocks;
-import co.runed.magicmod.blocks.ore.MagicOre;
+import co.runed.magicmod.api.block.MagicBlocks;
+import co.runed.magicmod.block.ore.MagicOre;
 
 public class BlockSetup {
     public static void init() {

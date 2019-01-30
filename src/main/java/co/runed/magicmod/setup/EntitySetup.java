@@ -3,6 +3,7 @@ package co.runed.magicmod.setup;
 import co.runed.magicmod.api.entity.MagicEntityType;
 import co.runed.magicmod.client.render.entity.TestEntityRenderer;
 import co.runed.magicmod.entity.TestEntity;
+import co.runed.magicmod.network.packet.MagicEntitySpawnClientPacket;
 import net.fabricmc.fabric.client.render.EntityRendererRegistry;
 import net.fabricmc.fabric.entity.EntityTrackingRegistry;
 import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
@@ -19,12 +20,6 @@ public class EntitySetup {
     public static void init() {
         //TODO: ADD REGISTRY UTIL FOR THIS
         MagicEntityType.TEST = Registry.register(Registry.ENTITY_TYPE, "magicmod:test", FabricEntityTypeBuilder.create(TestEntity.class, TestEntity::new).trackable(64, 1, true).build());
-
-        registerEntitySpawnPacket(MagicEntityType.TEST);
-    }
-
-    public static void registerEntitySpawnPacket(EntityType type) {
-        EntityTrackingRegistry.INSTANCE.registerSpawnPacketProvider(type, entity -> new EntitySpawnClientPacket(entity, Registry.ENTITY_TYPE.getRawId(type)));
     }
 
 

@@ -3,7 +3,6 @@
   "package": "co.runed.magicmod.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "ExampleMixin",
     "BlockEntityRendererMixin",
     "LecternBlockEntityRendererMixin",
     "LecternBlockEntityMixin",

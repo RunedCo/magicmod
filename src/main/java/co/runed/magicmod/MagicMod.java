@@ -2,6 +2,7 @@ package co.runed.magicmod;
 
 import co.runed.brace.registry.RegistryUtil;
 import co.runed.magicmod.setup.*;
+import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.ModInitializer;
 
 public class MagicMod implements ModInitializer {
@@ -19,7 +20,6 @@ public class MagicMod implements ModInitializer {
 		ItemSetup.init();
 		RecipeSetup.init();
 		SpellSetup.init();
-
-
+		EntitySetup.init();
 	}
 }

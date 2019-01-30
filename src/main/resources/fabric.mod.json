@@ -1,11 +1,12 @@
 {
   "id": "magicmod",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Magic Mod",
+  "description": "Jono's Magic Testing",
   "version": "1.0.0",
   "side": "universal",
   "initializers": [
-    "co.runed.magicmod.MagicMod"
+    "co.runed.magicmod.MagicMod",
+    "co.runed.magicmod.client.ClientInitTest"
   ],
   "requires": {
     "fabric": "*"

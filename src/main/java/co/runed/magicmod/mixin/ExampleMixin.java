@@ -1,15 +1,24 @@
 package co.runed.magicmod.mixin;
 
+import co.runed.magicmod.entity.TestEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayNetworkHandler;
+import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(MinecraftClient.class)
+
+@Mixin(ClientPlayNetworkHandler.class)
 public class ExampleMixin {
-	@Inject(at = @At("HEAD"), method = "init()V")
-	private void init(CallbackInfo info) {
-		System.out.println("This line is printed by an example mod mixin!");
+	@ModifyConstant(method = "onEntitySpawn", constant = @Constant(nullValue = true))
+	private Entity onEntitySpawn(Entity entity) {
+		System.out.println(entity);
+
+		if(entity == null) {
+			return new TestEntity(MinecraftClient.getInstance().world);
+		}
+
+		return entity;
 	}
 }

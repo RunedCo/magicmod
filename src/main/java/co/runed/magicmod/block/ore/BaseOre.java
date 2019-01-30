@@ -1,6 +1,6 @@
-package co.runed.magicmod.blocks.ore;
+package co.runed.magicmod.block.ore;
 
-import co.runed.magicmod.blocks.BaseBlock;
+import co.runed.magicmod.block.BaseBlock;
 import net.fabricmc.fabric.block.FabricBlockSettings;
 import net.minecraft.block.Block;
 import net.minecraft.block.Material;

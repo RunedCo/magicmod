@@ -1,4 +1,4 @@
-package co.runed.magicmod.blocks;
+package co.runed.magicmod.block;
 
 import co.runed.brace.registry.IRegisterable;
 import net.minecraft.block.Block;

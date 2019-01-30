@@ -1,12 +1,12 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.blocks.MagicBlocks;
-import co.runed.magicmod.api.items.MagicItems;
-import co.runed.magicmod.blocks.BaseBlock;
-import co.runed.magicmod.items.BaseItem;
-import co.runed.magicmod.items.SpellbookItem;
-import co.runed.magicmod.items.WandItem;
+import co.runed.magicmod.api.block.MagicBlocks;
+import co.runed.magicmod.api.item.MagicItems;
+import co.runed.magicmod.block.BaseBlock;
+import co.runed.magicmod.item.BaseItem;
+import co.runed.magicmod.item.SpellbookItem;
+import co.runed.magicmod.item.WandItem;
 import net.minecraft.item.Item;
 
 public class ItemSetup {

@@ -1,4 +1,4 @@
-package co.runed.magicmod.items;
+package co.runed.magicmod.item;
 
 import co.runed.brace.registry.IRegisterable;
 import net.minecraft.item.Item;

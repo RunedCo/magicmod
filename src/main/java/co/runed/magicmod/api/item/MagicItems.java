@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.items;
+package co.runed.magicmod.api.item;
 
 import net.minecraft.item.Item;
 

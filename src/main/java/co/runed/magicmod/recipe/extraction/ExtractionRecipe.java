@@ -1,8 +1,8 @@
-package co.runed.magicmod.recipes.extraction;
+package co.runed.magicmod.recipe.extraction;
 
 import co.runed.brace.util.ItemStackUtil;
-import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
-import co.runed.magicmod.api.recipes.MagicRecipeType;
+import co.runed.magicmod.api.recipe.MagicRecipeSerializer;
+import co.runed.magicmod.api.recipe.MagicRecipeType;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.block.Block;

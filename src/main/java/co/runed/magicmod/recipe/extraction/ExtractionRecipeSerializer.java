@@ -1,4 +1,4 @@
-package co.runed.magicmod.recipes.extraction;
+package co.runed.magicmod.recipe.extraction;
 
 import co.runed.brace.util.ItemStackUtil;
 import com.google.gson.JsonElement;

@@ -1,4 +1,4 @@
-package co.runed.magicmod.items;
+package co.runed.magicmod.item;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;

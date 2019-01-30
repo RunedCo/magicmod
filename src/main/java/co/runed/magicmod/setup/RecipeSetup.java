@@ -1,9 +1,9 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.recipes.MagicRecipeSerializer;
-import co.runed.magicmod.api.recipes.MagicRecipeType;
-import co.runed.magicmod.recipes.extraction.ExtractionRecipeSerializer;
+import co.runed.magicmod.api.recipe.MagicRecipeSerializer;
+import co.runed.magicmod.api.recipe.MagicRecipeType;
+import co.runed.magicmod.recipe.extraction.ExtractionRecipeSerializer;
 
 public class RecipeSetup {
     public static void init() {

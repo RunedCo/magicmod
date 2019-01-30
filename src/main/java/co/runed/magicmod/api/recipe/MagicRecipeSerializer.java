@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.recipes;
+package co.runed.magicmod.api.recipe;
 
 import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Recipe;

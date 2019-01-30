@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.blocks;
+package co.runed.magicmod.api.block;
 
 import net.minecraft.block.Block;
 

@@ -2,15 +2,14 @@ package co.runed.magicmod.items;
 
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.components.BlockBreakSpellComponent;
-import co.runed.magicmod.api.spell.components.BlockDropsToInventoryComponent;
-import co.runed.magicmod.api.spell.components.TestSpellComponent;
-import co.runed.magicmod.api.spell.components.VeinSpellComponent;
+import co.runed.magicmod.api.spell.components.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
@@ -27,9 +26,10 @@ public class WandItem extends BaseItem {
 
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
-                .add(new VeinSpellComponent())
+                //.add(new VeinSpellComponent())
                 //.add(new BlockDropsToInventoryComponent())
-                .add(new BlockBreakSpellComponent());
+                //.add(new BlockBreakSpellComponent());
+                .add(new SpawnEntitySpellComponent());
     }
 
     @Override
@@ -154,6 +154,11 @@ public class WandItem extends BaseItem {
         this.currentBlock = null;
 */
         return ActionResult.PASS;
+    }
+
+    @Override
+    public void onItemStopUsing(ItemStack itemStack_1, World world_1, LivingEntity livingEntity_1, int int_1) {
+        System.out.println("test");
     }
 
 

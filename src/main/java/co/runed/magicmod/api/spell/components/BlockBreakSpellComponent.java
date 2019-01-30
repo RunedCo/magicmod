@@ -5,29 +5,30 @@ import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
-import net.minecraft.block.Blocks;
 import net.minecraft.client.network.packet.BlockBreakingProgressClientPacket;
-import net.minecraft.client.network.packet.BlockUpdateClientPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BlockBreakSpellComponent implements ISpellComponent {
-    public float currentBreakProgress = 0.0f;
-    public BlockPos breakingPos;
+    private Map<BlockPos, Float> currentProgressMap = new HashMap<>();
 
     @Override
     public boolean create(ISpell spell) {
+        this.currentProgressMap = new HashMap<>();
+
         return true;
     }
 
+    //TODO: split functionality
     @Override
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
@@ -36,21 +37,25 @@ public class BlockBreakSpellComponent implements ISpellComponent {
 
         ServerPlayerEntity spe = (ServerPlayerEntity)player;
 
+        //TODO: get breaking progress to work with multiple blockpos
         for (BlockPos pos : positions) {
             boolean dropItems = true;
 
-            //if(!world.canPlayerModifyAt(player, pos)) return false;
+            if(!currentProgressMap.containsKey(pos)) continue;
 
-            if(breakingPos != null && !breakingPos.equals(pos)) return false;
+            float currentBreakProgress = currentProgressMap.get(pos);
 
-            this.currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.DIAMOND);
+            currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.DIAMOND);
 
-            world.setBlockBreakingProgress(player.getEntityId(), pos, (int)(this.currentBreakProgress * 10.0f));
-            spe.networkHandler.sendPacket(new BlockBreakingProgressClientPacket(player.getEntityId(), pos, (int)(this.currentBreakProgress * 10.0f)));
+            world.setBlockBreakingProgress(player.getEntityId(), pos, (int)(currentBreakProgress * 10.0f));
+            spe.networkHandler.sendPacket(new BlockBreakingProgressClientPacket(player.getEntityId(), pos, (int)(currentBreakProgress * 10.0f)));
 
-            if(this.currentBreakProgress < 1f) { return false; }
+            if(currentBreakProgress < 1f) { continue; }
 
-            this.currentBreakProgress = 0.0f;
+            this.currentProgressMap.put(pos, currentBreakProgress);
+
+            positions.remove(pos);
+            spell.addProperty(SpellProperty.BLOCK_POSITIONS, positions);
 
             if(spell.getProperty(SpellProperty.ADD_DROPS_TO_INVENTORY)) {
                 dropItems = false;
@@ -59,7 +64,7 @@ public class BlockBreakSpellComponent implements ISpellComponent {
 
                 for (ItemStack item : items) {
                     if(!player.inventory.insertStack(item)) {
-                        return false;
+                        continue;
                     }
                 }
             }

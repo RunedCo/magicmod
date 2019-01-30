@@ -17,7 +17,9 @@ public class Spell implements ISpell {
     @Override
     public Spell build() {
         for (ISpellComponent component : components) {
-            component.create(this);
+            boolean success = component.create(this);
+
+            if(!success) return this;
         }
 
         this.built = true;

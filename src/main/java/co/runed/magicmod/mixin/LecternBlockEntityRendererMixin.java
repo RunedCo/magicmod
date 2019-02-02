@@ -1,6 +1,7 @@
 package co.runed.magicmod.mixin;
 
 import co.runed.magicmod.MagicMod;
+import co.runed.magicmod.api.item.MagicItems;
 import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.client.render.block.entity.LecternBlockEntityRenderer;
 import net.minecraft.util.Identifier;
@@ -16,6 +17,8 @@ public class LecternBlockEntityRendererMixin extends BlockEntityRendererMixin {
 
     @Inject(method = "method_17582", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/block/entity/LecternBlockEntityRenderer;bindTexture(Lnet/minecraft/util/Identifier;)V", shift = At.Shift.AFTER))
     public void onMethod_17582(LecternBlockEntity lecternBlockEntity_1, double double_1, double double_2, double double_3, float float_1, int int_1, CallbackInfo ci) {
-        this.bindTexture(MAGIC_BOOK_TEXTURE);
+        if(lecternBlockEntity_1.getBook().getItem().equals(MagicItems.SPELL_BOOK)) {
+            this.bindTexture(MAGIC_BOOK_TEXTURE);
+        }
     }
 }

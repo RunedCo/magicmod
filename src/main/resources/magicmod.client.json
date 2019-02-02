@@ -10,7 +10,10 @@
     "DoorBlockMixin",
     "ChestBlockMixin",
     "TallPlantBlockMixin",
-    "BedBlockMixin"
+    "BedBlockMixin",
+    "TallSeagrassBlockMixin",
+    "PaintingEntityRendererMixin",
+    "ItemFrameEntityRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

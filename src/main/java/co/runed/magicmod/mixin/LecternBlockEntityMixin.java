@@ -7,16 +7,20 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LecternBlockEntity.class)
 public abstract class LecternBlockEntityMixin {
     @Shadow
-    ItemStack field_17388;
+    ItemStack book;
 
-    public boolean method_17522() {
-        Item item_1 = this.field_17388.getItem();
-        boolean bool = (item_1 == Items.WRITABLE_BOOK || item_1 == Items.WRITTEN_BOOK || item_1 == MagicItems.SPELL_BOOK);
+    @Inject(method = "hasBook", at = @At(value = "RETURN"))
+    public void onHasBook(CallbackInfoReturnable<Boolean> ci) {
+        Item item_1 = this.book.getItem();
+        boolean bool = item_1 == MagicItems.SPELL_BOOK;
 
-        return bool;
+        ci.setReturnValue(ci.getReturnValue() || bool);
     }
 }

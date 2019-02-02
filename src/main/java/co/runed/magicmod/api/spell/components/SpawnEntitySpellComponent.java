@@ -3,6 +3,7 @@ package co.runed.magicmod.api.spell.components;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.entity.TestEntity;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.passive.PigEntity;
@@ -28,7 +29,7 @@ public class SpawnEntitySpellComponent implements ISpellComponent {
         PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
         double range = spell.getProperty(SpellProperty.RANGE);
 
-        ItemEntity entity = new ItemEntity(world);
+        TestEntity entity = new TestEntity(world);
 
         Vec3d vec = new Vec3d(player.x, player.y, player.z).add(0, player.getEyeHeight(), 0);
         Vec3d look = this.getVectorForRotation(player.pitch, player.yaw);
@@ -39,10 +40,10 @@ public class SpawnEntitySpellComponent implements ISpellComponent {
         HitResult result = world.rayTrace(new RayTraceContext(vec, end, RayTraceContext.ShapeType.OUTLINE, RayTraceContext.FluidHandling.NONE, player));
 
         entity.setPosition(result.getPos().x, result.getPos().y + 3, result.getPos().z);
-        entity.setStack(new ItemStack(Items.FIRE_CHARGE));
+        //entity.setStack(new ItemStack(Items.FIRE_CHARGE));
 
-        entity.setPickupDelayInfinite();
-        entity.setUnaffectedByGravity(true);
+        //entity.setPickupDelayInfinite();
+        //entity.setUnaffectedByGravity(true);
         world.spawnEntity(entity);
 
         return true;

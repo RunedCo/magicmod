@@ -1,12 +1,8 @@
 package co.runed.magicmod.client.render.entity;
 
-import co.runed.magicmod.entity.TestEntity;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.sortme.Living;
 import net.minecraft.util.Identifier;
 
 public class TestEntityRenderer<T extends Entity> extends EntityRenderer<T> {

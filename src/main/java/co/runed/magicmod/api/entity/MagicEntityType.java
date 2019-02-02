@@ -5,5 +5,5 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 
 public class MagicEntityType {
-    public static EntityType<TestEntity> TEST;
+    public static EntityType<? extends Entity> TEST;
 }

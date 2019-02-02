@@ -11,8 +11,8 @@ archivesBaseName = "magicmod"
 version = "1.14-SNAPSHOT-1.0.0"
 
 def minecraftVersion = "19w05a"
-def yarnMapping = "4"
-def loaderVersion = "0.3.4.104"
+def yarnMapping = "6"
+def loaderVersion = "0.3.5.106"
 
 minecraft {
 }
@@ -23,7 +23,7 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:${loaderVersion}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
-	modCompile "net.fabricmc:fabric:0.1.5.86"
+	modCompile "net.fabricmc:fabric:0.1.5.88"
 	modCompile "prospector.modmenu:ModMenu:1.0.0-12"
 }
 

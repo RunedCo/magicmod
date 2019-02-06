@@ -12,7 +12,9 @@ import net.minecraft.util.registry.Registry;
 public class EntitySetup {
     public static void init() {
         //TODO: ADD REGISTRY UTIL FOR THIS
-        MagicEntityType.TEST = Registry.register(Registry.ENTITY_TYPE, "magicmod:test", FabricEntityTypeBuilder.create(EntityCategory.MISC, TestEntity::new).trackable(64, 1, true).build());
+        MagicEntityType.TEST = Registry.register(Registry.ENTITY_TYPE, "magicmod:test", FabricEntityTypeBuilder.create(EntityCategory.MISC, TestEntity::new).build());
+
+        EntityTrackingRegistry.INSTANCE.register(MagicEntityType.TEST, 64, 1, true);
 
     }
 

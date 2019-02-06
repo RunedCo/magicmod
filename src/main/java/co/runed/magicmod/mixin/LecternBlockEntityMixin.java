@@ -16,7 +16,7 @@ public abstract class LecternBlockEntityMixin {
     @Shadow
     ItemStack book;
 
-    @Inject(method = "hasBook", at = @At(value = "RETURN"))
+    @Inject(method = "hasBook", at = @At(value = "RETURN"), cancellable = true)
     public void onHasBook(CallbackInfoReturnable<Boolean> ci) {
         Item item_1 = this.book.getItem();
         boolean bool = item_1 == MagicItems.SPELL_BOOK;

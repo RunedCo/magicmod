@@ -8,9 +8,11 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.parts.EntityPart;
+import net.minecraft.network.NetworkThreadUtils;
 import net.minecraft.network.Packet;
 import net.minecraft.network.listener.ClientPlayPacketListener;
 import net.minecraft.util.PacketByteBuf;
+import net.minecraft.util.ThreadTaskQueue;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.registry.Registry;
@@ -179,9 +181,15 @@ public class SymbolEntitySpawnClientPacket implements Packet<ClientPlayPacketLis
         this.entityData = int_1;
     }
 
+    @Environment(EnvType.CLIENT)
+    public ClientWorld getWorld() {
+        return MinecraftClient.getInstance().world;
+    }
     @Override
     public void apply(ClientPlayPacketListener clientPlayPacketListener_1) {
-        ClientWorld world = MinecraftClient.getInstance().world;
+        NetworkThreadUtils.forceMainThread(this, clientPlayPacketListener_1, MinecraftClient.getInstance());
+
+        ClientWorld world = this.getWorld();
 
         double x = this.getX();
         double y = this.getY();

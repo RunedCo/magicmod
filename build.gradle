@@ -11,7 +11,7 @@ archivesBaseName = "magicmod"
 version = "1.14-SNAPSHOT-1.0.0"
 
 def minecraftVersion = "19w05a"
-def yarnMapping = "6"
+def yarnMapping = "10"
 def loaderVersion = "0.3.5.106"
 
 minecraft {

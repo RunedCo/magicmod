@@ -24,7 +24,7 @@ public class FallingBlockEntityRendererMixin {
             BlockPos pos = fallingBlockEntity_1.getFallingBlockPos();
             Entity cameraEntity = MinecraftClient.getInstance().getCameraEntity();
 
-            OutlineRender.renderVoxelShapeOutline(state.getOutlineShape(world, pos, VerticalEntityPosition.fromEntity(cameraEntity)), x, y, z);
+            OutlineRender.renderVoxelShapeOutline(state.getOutlineShape(world, pos, VerticalEntityPosition.fromEntity(cameraEntity)), x - 0.5, y, z - 0.5);
         }
     }
 }

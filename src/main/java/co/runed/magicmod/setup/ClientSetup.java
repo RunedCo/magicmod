@@ -15,11 +15,5 @@ import net.minecraft.util.registry.Registry;
 public class ClientSetup {
     public static void init() {
         EntityRendererRegistry.INSTANCE.register(TestEntity.class, (manager, context) -> new TestEntityRenderer(manager));
-
-        //registerEntitySpawnPacket(MagicEntityType.TEST);
-    }
-
-    public static void registerEntitySpawnPacket(EntityType type) {
-        //EntityTrackingRegistry.INSTANCE.registerSpawnPacketProvider(type, entity -> new SymbolEntitySpawnClientPacket(entity, Registry.ENTITY_TYPE.getRawId(type)));
     }
 }

@@ -5,7 +5,7 @@ import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellComponent;
 import co.runed.magicmod.api.spell.SpellProperty;
-import net.minecraft.client.network.packet.BlockBreakingProgressClientPacket;
+import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterials;
@@ -48,7 +48,7 @@ public class BlockBreakSpellComponent implements ISpellComponent {
             currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.DIAMOND);
 
             world.setBlockBreakingProgress(player.getEntityId(), pos, (int)(currentBreakProgress * 10.0f));
-            spe.networkHandler.sendPacket(new BlockBreakingProgressClientPacket(player.getEntityId(), pos, (int)(currentBreakProgress * 10.0f)));
+            spe.networkHandler.sendPacket(new BlockBreakingProgressS2CPacket(player.getEntityId(), pos, (int)(currentBreakProgress * 10.0f)));
 
             if(currentBreakProgress < 1f) { continue; }
 

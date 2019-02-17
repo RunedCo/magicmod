@@ -6,10 +6,7 @@ import co.runed.magicmod.entity.TestEntity;
 import co.runed.magicmod.network.packet.SymbolEntitySpawnClientPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.client.render.EntityRendererRegistry;
-import net.fabricmc.fabric.entity.EntityTrackingRegistry;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.registry.Registry;
+import net.fabricmc.fabric.api.client.render.EntityRendererRegistry;
 
 @Environment(EnvType.CLIENT)
 public class ClientSetup {

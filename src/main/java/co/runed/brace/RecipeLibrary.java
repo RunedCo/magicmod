@@ -6,6 +6,7 @@ import net.minecraft.recipe.RecipeType;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -13,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 public class RecipeLibrary implements ResourceReloadListener {
     public static final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
@@ -68,7 +71,7 @@ public class RecipeLibrary implements ResourceReloadListener {
     }
 
     @Override
-    public void onResourceReload(ResourceManager var1) {
-        setup(world);
+    public CompletableFuture<Void> apply(Helper helper, ResourceManager resourceManager, Profiler profiler, Profiler profiler1, Executor executor, Executor executor1) {
+        return null;
     }
 }

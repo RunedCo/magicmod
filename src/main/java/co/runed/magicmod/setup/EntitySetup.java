@@ -2,8 +2,8 @@ package co.runed.magicmod.setup;
 
 import co.runed.magicmod.api.entity.MagicEntityType;
 import co.runed.magicmod.entity.TestEntity;
-import net.fabricmc.fabric.entity.EntityTrackingRegistry;
-import net.fabricmc.fabric.entity.FabricEntityTypeBuilder;
+import net.fabricmc.fabric.api.entity.EntityTrackingRegistry;
+import net.fabricmc.fabric.api.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCategory;
 import net.minecraft.entity.EntityType;

@@ -2,17 +2,15 @@ package co.runed.magicmod.api.spell.components;
 
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellComponent;
+import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TestSpellComponent implements ISpellComponent {
+public class TestSpellEffect implements ISpellEffect {
     public float currentProgress = 0.0f;
 
     @Override

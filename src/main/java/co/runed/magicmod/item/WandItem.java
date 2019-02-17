@@ -2,7 +2,7 @@ package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.components.*;
+import co.runed.magicmod.api.spell.components.SpawnEntitySpellEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -24,10 +24,10 @@ public class WandItem extends BaseItem {
 
         this.spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
-                //.add(new VeinSpellComponent())
-                //.add(new BlockDropsToInventoryComponent())
-                //.add(new BlockBreakSpellComponent());
-                .add(new SpawnEntitySpellComponent());
+                //.add(new VeinSpellEffect())
+                //.add(new BlockDropsToInventoryEffect())
+                //.add(new BlockBreakSpellEffect());
+                .add(new SpawnEntitySpellEffect());
     }
 
     @Override

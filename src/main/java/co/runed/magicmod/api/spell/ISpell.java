@@ -7,7 +7,7 @@ public interface ISpell extends INbtSerializable {
 
     boolean run();
 
-    ISpell add(ISpellComponent component);
+    ISpell add(ISpellEffect component);
 
     <T> ISpell addProperty(SpellProperty<T> property, T value);
 

@@ -1,9 +1,7 @@
 package co.runed.magicmod.setup;
 
-import co.runed.magicmod.api.entity.MagicEntityType;
 import co.runed.magicmod.client.render.entity.TestEntityRenderer;
 import co.runed.magicmod.entity.TestEntity;
-import co.runed.magicmod.network.packet.SymbolEntitySpawnClientPacket;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.EntityRendererRegistry;

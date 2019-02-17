@@ -4,7 +4,6 @@ import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.item.MagicItems;
 import net.minecraft.block.entity.LecternBlockEntity;
 import net.minecraft.client.render.block.entity.LecternBlockEntityRenderer;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -1,6 +1,7 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
+import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.SpellProperty;
 import com.sun.istack.internal.Nullable;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 
 public class SpellSetup {
     public static void init() {
+        SpellManager.initialize();
+
         SpellSetup.setupSpellProperties();
     }
 

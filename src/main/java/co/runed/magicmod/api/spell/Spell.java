@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Spell implements ISpell {
-    private List<ISpellComponent> components = new ArrayList<>();
+    private List<ISpellEffect> components = new ArrayList<>();
     private Map<SpellProperty, Object> properties = new HashMap<>();
 
     private boolean built = false;
 
     @Override
     public Spell build() {
-        for (ISpellComponent component : components) {
+        for (ISpellEffect component : components) {
             boolean success = component.create(this);
 
             if(!success) return this;
@@ -33,7 +33,7 @@ public class Spell implements ISpell {
 
     @Override
     public boolean run() {
-        for (ISpellComponent component : components) {
+        for (ISpellEffect component : components) {
             boolean success = component.run(this);
 
             if(!success) return false;
@@ -43,7 +43,7 @@ public class Spell implements ISpell {
     }
 
     @Override
-    public Spell add(ISpellComponent component) {
+    public Spell add(ISpellEffect component) {
         this.components.add(component);
 
         return this;

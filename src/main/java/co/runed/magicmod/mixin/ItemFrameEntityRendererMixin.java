@@ -2,9 +2,7 @@ package co.runed.magicmod.mixin;
 
 import co.runed.magicmod.OutlineRender;
 import net.minecraft.client.render.entity.ItemFrameEntityRenderer;
-import net.minecraft.client.render.entity.PaintingEntityRenderer;
 import net.minecraft.entity.decoration.ItemFrameEntity;
-import net.minecraft.entity.decoration.painting.PaintingEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

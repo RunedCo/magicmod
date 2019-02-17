@@ -1,7 +1,6 @@
 package co.runed.magicmod.api.spell;
 
 import com.sun.istack.internal.Nullable;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;

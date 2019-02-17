@@ -3,7 +3,7 @@ package co.runed.magicmod.api.spell.components;
 import co.runed.brace.RecipeLibrary;
 import co.runed.magicmod.api.recipe.MagicRecipeType;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellComponent;
+import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.recipe.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ExtractSpellComponent implements ISpellComponent {
+public class ExtractSpellEffect implements ISpellEffect {
     @Override
     public boolean create(ISpell spell) {
         return true;

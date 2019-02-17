@@ -1,9 +1,7 @@
 package co.runed.magicmod.api.spell;
 
-import co.runed.brace.INbtSerializable;
-
 //TODO: add tiers
-public interface ISpellComponent {
+public interface ISpellEffect {
 
     boolean create(ISpell spell);
 

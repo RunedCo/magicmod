@@ -3,7 +3,7 @@ package co.runed.magicmod.api.spell.components;
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellComponent;
+import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.entity.player.PlayerEntity;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BlockBreakSpellComponent implements ISpellComponent {
+public class BlockBreakSpellEffect implements ISpellEffect {
     private Map<BlockPos, Float> currentProgressMap = new HashMap<>();
 
     @Override

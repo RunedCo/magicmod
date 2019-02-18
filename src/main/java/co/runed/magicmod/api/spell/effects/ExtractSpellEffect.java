@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.spell.components;
+package co.runed.magicmod.api.spell.effects;
 
 import co.runed.brace.RecipeLibrary;
 import co.runed.magicmod.api.recipe.MagicRecipeType;

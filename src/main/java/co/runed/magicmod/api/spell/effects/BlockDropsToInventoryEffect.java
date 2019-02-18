@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.spell.components;
+package co.runed.magicmod.api.spell.effects;
 
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;

@@ -4,9 +4,9 @@ import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.components.BlockBreakSpellEffect;
-import co.runed.magicmod.api.spell.components.BlockDropsToInventoryEffect;
-import co.runed.magicmod.api.spell.components.VeinSpellEffect;
+import co.runed.magicmod.api.spell.effects.BlockBreakSpellEffect;
+import co.runed.magicmod.api.spell.effects.BlockDropsToInventoryEffect;
+import co.runed.magicmod.api.spell.effects.VeinSpellEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -41,7 +41,7 @@ public class WandItem extends BaseItem {
     }
 
     //TODO: fix item drops without drop tag not working
-    //TODO: move to spell classes (spell manager, spell, and components?)
+    //TODO: move to spell classes (spell manager, spell, and effects?)
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {

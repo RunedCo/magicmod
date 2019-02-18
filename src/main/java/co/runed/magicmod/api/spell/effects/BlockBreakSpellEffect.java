@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.spell.components;
+package co.runed.magicmod.api.spell.effects;
 
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;

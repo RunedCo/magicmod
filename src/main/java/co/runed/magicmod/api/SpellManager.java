@@ -1,51 +1,51 @@
 package co.runed.magicmod.api;
 
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.Spell;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SpellManager {
-    private static boolean initialized = false;
+    private static Map<Entity, ISpell> activeSpells = new HashMap<>();
+    private static Map<Entity, List<ISpell>> spellLibraries = new HashMap<>();
 
-    static Map<ServerPlayerEntity, ISpell> spells;
+    public static void init(World world) {
+        //TODO: LOAD SPELL LIBRARIES
 
-    public static void initialize(World world) {
-        spells = new HashMap<>();
-
-        initialized = true;
     }
 
-    public static void setActiveSpell(ServerPlayerEntity player, ISpell spell) {
-        spells.put(player, spell);
+    public static void addSpell(Entity entity, ISpell spell) {
+
     }
 
-    public static ISpell getActiveSpell(ServerPlayerEntity player) {
-        if(!initialized) initialize(null);
+    public static void setActiveSpell(Entity caster, ISpell spell) {
+        activeSpells.put(caster, spell);
+    }
 
-        if(!spells.containsKey(player)) return null;
+    public static ISpell getActiveSpell(Entity caster) {
+        if(!activeSpells.containsKey(caster)) return null;
 
-        ISpell spell = spells.get(player);
+        ISpell spell = activeSpells.get(caster);
 
         return spell;
     }
 
-    public static ISpell buildSpell(ServerPlayerEntity player) {
-        if(!spells.containsKey(player)) return null;
-
-        ISpell spell = spells.get(player);
-
-        return spell.build();
+    public static double getMana(Entity entity) {
+        return 100;
     }
 
-    public static boolean runSpell(ServerPlayerEntity player) {
-        if(!spells.containsKey(player)) return false;
+    public static double getMaxMana(Entity entity) {
+        return 100;
+    }
 
-        ISpell spell = spells.get(player);
+    public static void setMana(Entity entity) {
 
-        return spell.run();
+    }
+
+    public static void setMaxMana(Entity entity) {
+
     }
 }

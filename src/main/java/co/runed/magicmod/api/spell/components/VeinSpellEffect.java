@@ -19,8 +19,6 @@ import java.util.List;
 
 public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
     private Vein vein;
-    private BlockPos currentPosition;
-
     private List<BlockPos> currentPositions;
 
     @Override
@@ -28,11 +26,11 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
         BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
-
-        this.currentPosition = null;
         this.currentPositions = new ArrayList<>();
 
         this.vein = new Vein(world, startPosition, range);
+
+        //new VeinSpellEffect().clone();
 
         return true;
     }
@@ -46,6 +44,7 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
         List<BlockPos> posList = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        Double range = spell.getProperty(SpellProperty.RANGE);
 
         if(!posList.isEmpty() && !Collections.disjoint(posList, currentPositions)) {
             return true;
@@ -62,7 +61,7 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
         }
 
         if(block != this.vein.getBlockType() || currentPositions.isEmpty() || !this.vein.getStartPosition().equals(position)) {
-            this.vein = new Vein(world, position, 100);
+            this.vein = new Vein(world, position, range);
 
             this.run(spell);
         }

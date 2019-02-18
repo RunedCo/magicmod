@@ -3,10 +3,7 @@ package co.runed.magicmod.api.spell.effects;
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.item.MagicToolMaterials;
-import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
-import co.runed.magicmod.api.spell.ItemTarget;
-import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.*;
 import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
@@ -18,7 +15,7 @@ import net.minecraft.world.World;
 import javax.tools.Tool;
 import java.util.*;
 
-public class BlockBreakSpellEffect implements ISpellEffect {
+public class BlockBreakSpellEffect extends SpellEffect {
     private Map<BlockPos, Float> currentProgress = new HashMap<>();
 
     ToolMaterial material;
@@ -27,13 +24,13 @@ public class BlockBreakSpellEffect implements ISpellEffect {
     public boolean build(ISpell spell) {
         this.currentProgress = new HashMap<>();
 
-        this.material = this.tierToMaterial(spell.getTier());
+        this.material = this.tierToMaterial();
 
         return true;
     }
 
-    private ToolMaterial tierToMaterial(int tier) {
-        switch (tier) {
+    private ToolMaterial tierToMaterial() {
+        switch (this.getTier()) {
             default:
             case 1:
                 return ToolMaterials.DIAMOND;

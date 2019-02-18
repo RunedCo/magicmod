@@ -2,7 +2,6 @@ package co.runed.magicmod.api.spell.components;
 
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;
-import co.runed.magicmod.api.item.MagicToolMaterials;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.ItemTarget;
@@ -60,8 +59,8 @@ public class BlockBreakSpellEffect implements ISpellEffect {
             world.breakBlock(pos, dropTarget == ItemTarget.NONE);
         }
 
-        spell.addProperty(SpellProperty.DROPS, items);
-        spell.addProperty(SpellProperty.BLOCK_POSITIONS, positions);
+        spell.setProperty(SpellProperty.DROPS, items);
+        spell.setProperty(SpellProperty.BLOCK_POSITIONS, positions);
 
         return true;
     }

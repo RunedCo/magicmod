@@ -10,6 +10,7 @@ public class MagicMod implements ModInitializer {
 
 	public final static RegistryUtil REGISTRY_UTIL = new RegistryUtil(ID);
 	//TODO: setup recipe library on connect
+	//TODO: setup
 
 	@Override
 	public void onInitialize() {

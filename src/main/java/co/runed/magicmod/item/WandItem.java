@@ -6,12 +6,10 @@ import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.api.spell.components.BlockBreakSpellEffect;
 import co.runed.magicmod.api.spell.components.BlockDropsToInventoryEffect;
-import co.runed.magicmod.api.spell.components.SpawnEntitySpellEffect;
 import co.runed.magicmod.api.spell.components.VeinSpellEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
@@ -21,7 +19,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class WandItem extends BaseItem {
     public WandItem() {
@@ -32,7 +29,7 @@ public class WandItem extends BaseItem {
         /* spell = new Spell();
 
         spell
-                .addProperty(SpellProperty.RANGE, 10.0D)
+                .setProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellEffect())
                 .add(new BlockDropsToInventoryEffect())
                 .add(new BlockBreakSpellEffect()); */
@@ -63,7 +60,7 @@ public class WandItem extends BaseItem {
 
         if (spell == null) {
             spell = new Spell()
-                    .addProperty(SpellProperty.RANGE, 10.0D)
+                    .setProperty(SpellProperty.RANGE, 10.0D)
                     .add(new VeinSpellEffect())
                     .add(new BlockBreakSpellEffect())
                     .add(new BlockDropsToInventoryEffect());

@@ -7,13 +7,10 @@ import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -66,7 +63,7 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
             this.run(spell);
         }
 
-        spell.addProperty(SpellProperty.BLOCK_POSITIONS, currentPositions);
+        spell.setProperty(SpellProperty.BLOCK_POSITIONS, currentPositions);
 
         return true;
     }

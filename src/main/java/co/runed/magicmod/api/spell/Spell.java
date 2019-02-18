@@ -13,6 +13,7 @@ public class Spell implements ISpell {
     private Map<SpellProperty, Object> properties = new HashMap<>();
 
     private boolean built = false;
+    private int tier = 1;
 
     @Override
     public Spell build() {
@@ -51,15 +52,10 @@ public class Spell implements ISpell {
     }
 
     @Override
-    public <T> Spell addProperty(SpellProperty<T> property, T value) {
+    public <T> Spell setProperty(SpellProperty<T> property, T value) {
         this.properties.put(property, value);
 
         return this;
-    }
-
-    @Override
-    public <T> Spell setProperty(SpellProperty<T> property, T value) {
-        return this.addProperty(property, value);
     }
 
     @SuppressWarnings("unchecked")
@@ -84,6 +80,18 @@ public class Spell implements ISpell {
     }
 
     @Override
+    public int getTier() {
+        return this.tier;
+    }
+
+    @Override
+    public ISpell setTier(int tier) {
+        this.tier = tier;
+
+        return this;
+    }
+
+    @Override
     public CompoundTag toTag() {
         return new CompoundTag();
     }
@@ -91,7 +99,5 @@ public class Spell implements ISpell {
     @Override
     public void fromTag(CompoundTag tag) {
         ListTag componentsTag = tag.getList("effects", 10);
-
-
     }
 }

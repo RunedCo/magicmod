@@ -13,7 +13,7 @@ import java.util.List;
 public class BlockDropsToInventoryEffect implements ISpellEffect {
     @Override
     public boolean create(ISpell spell) {
-        spell.addProperty(SpellProperty.ITEM_DROP_TARGET, ItemTarget.CASTER_INVENTORY);
+        spell.setProperty(SpellProperty.ITEM_DROP_TARGET, ItemTarget.CASTER_INVENTORY);
 
         return true;
     }

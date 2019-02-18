@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 
 public class SpawnEntitySpellEffect implements ISpellEffect {
     @Override
-    public boolean create(ISpell spell) {
+    public boolean build(ISpell spell) {
         return true;
     }
 

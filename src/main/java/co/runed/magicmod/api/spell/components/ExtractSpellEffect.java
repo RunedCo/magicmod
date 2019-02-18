@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ExtractSpellEffect implements ISpellEffect {
     @Override
-    public boolean create(ISpell spell) {
+    public boolean build(ISpell spell) {
         return true;
     }
 

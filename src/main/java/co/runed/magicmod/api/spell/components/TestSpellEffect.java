@@ -14,7 +14,7 @@ public class TestSpellEffect implements ISpellEffect {
     public float currentProgress = 0.0f;
 
     @Override
-    public boolean create(ISpell spell) {
+    public boolean build(ISpell spell) {
         return true;
     }
 

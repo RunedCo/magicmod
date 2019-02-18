@@ -15,7 +15,7 @@ import java.util.List;
 //TODO: fix glitchy fire
 public class FireSpellEffect implements ISpellEffect {
     @Override
-    public boolean create(ISpell spell) {
+    public boolean build(ISpell spell) {
         return true;
     }
 

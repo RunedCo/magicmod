@@ -19,7 +19,7 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
     private List<BlockPos> currentPositions;
 
     @Override
-    public boolean create(ISpell spell) {
+    public boolean build(ISpell spell) {
         BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);

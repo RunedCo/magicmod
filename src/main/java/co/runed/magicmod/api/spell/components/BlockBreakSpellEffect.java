@@ -16,11 +16,11 @@ import net.minecraft.world.World;
 import java.util.*;
 
 public class BlockBreakSpellEffect implements ISpellEffect {
-    private Map<BlockPos, Float> currentProgressMap = new HashMap<>();
+    private Map<BlockPos, Float> currentProgress = new HashMap<>();
 
     @Override
-    public boolean create(ISpell spell) {
-        this.currentProgressMap = new HashMap<>();
+    public boolean build(ISpell spell) {
+        this.currentProgress = new HashMap<>();
 
         return true;
     }
@@ -35,18 +35,19 @@ public class BlockBreakSpellEffect implements ISpellEffect {
         List<ItemStack> items = new ArrayList<>();
 
         for (BlockPos pos : spell.getProperty(SpellProperty.BLOCK_POSITIONS)) {
-            if (!currentProgressMap.containsKey(pos)) currentProgressMap.put(pos, 0.0f);
+            if (!this.currentProgress.containsKey(pos)) this.currentProgress.put(pos, 0.0f);
 
-            float currentBreakProgress = currentProgressMap.get(pos);
+            float progress = this.currentProgress.get(pos);
+            int index = positions.indexOf(pos);
 
-            currentBreakProgress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.IRON);
+            progress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.IRON);
 
-            world.setBlockBreakingProgress(player.getEntityId(), pos, (int) (currentBreakProgress * 10.0f));
-            player.networkHandler.sendPacket(new BlockBreakingProgressS2CPacket(player.getEntityId() + 100 + positions.indexOf(pos), pos, (int) (currentBreakProgress * 10.0f)));
+            world.setBlockBreakingProgress(player.getEntityId(), pos, (int) (progress * 10.0f));
+            player.networkHandler.sendPacket(new BlockBreakingProgressS2CPacket(-player.getEntityId() + index, pos, (int) (progress * 10.0f)));
 
-            this.currentProgressMap.put(pos, currentBreakProgress);
+            this.currentProgress.put(pos, progress);
 
-            if (currentBreakProgress < 1f) {
+            if (progress < 1f) {
                 continue;
             }
 

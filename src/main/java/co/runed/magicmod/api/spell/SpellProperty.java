@@ -2,6 +2,7 @@ package co.runed.magicmod.api.spell;
 
 import com.sun.istack.internal.Nullable;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,8 +18,8 @@ public class SpellProperty<T> {
     public static SpellProperty<Float> EXPLOSION_STRENGTH;
     public static SpellProperty<List<BlockPos>> BLOCK_POSITIONS;
     public static SpellProperty<BlockPos> INITIAL_BLOCK_POSITION;
-    public static SpellProperty<Boolean> ADD_DROPS_TO_INVENTORY;
-    public static SpellProperty<Boolean> CLIENT;
+    public static SpellProperty<ItemTarget> ITEM_DROP_TARGET;
+    public static SpellProperty<List<ItemStack>> DROPS;
 
     private Identifier identifier;
     private T defaultValue;

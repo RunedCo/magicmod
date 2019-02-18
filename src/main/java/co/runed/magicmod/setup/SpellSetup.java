@@ -1,8 +1,8 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.registry.MagicRegistry;
+import co.runed.magicmod.api.spell.ItemTarget;
 import co.runed.magicmod.api.spell.SpellProperty;
 import com.sun.istack.internal.Nullable;
 import net.minecraft.util.Identifier;
@@ -11,8 +11,6 @@ import java.util.ArrayList;
 
 public class SpellSetup {
     public static void init() {
-        SpellManager.initialize();
-
         SpellSetup.setupSpellProperties();
     }
 
@@ -25,8 +23,8 @@ public class SpellSetup {
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
         SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
         SpellProperty.INITIAL_BLOCK_POSITION = registerSpellProperty("initial_block_position");
-        SpellProperty.ADD_DROPS_TO_INVENTORY = registerSpellProperty("add_drops_to_inventory", false);
-        SpellProperty.CLIENT = registerSpellProperty("client");
+        SpellProperty.ITEM_DROP_TARGET = registerSpellProperty("item_drop_target", ItemTarget.NONE);
+        SpellProperty.DROPS = registerSpellProperty("client", new ArrayList<>());
     }
 
     //@SuppressWarnings("unchecked")

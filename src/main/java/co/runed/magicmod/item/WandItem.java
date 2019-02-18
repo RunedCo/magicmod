@@ -1,5 +1,7 @@
 package co.runed.magicmod.item;
 
+import co.runed.magicmod.api.SpellManager;
+import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.api.spell.components.BlockBreakSpellEffect;
@@ -18,21 +20,22 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class WandItem extends BaseItem {
-    Spell spell;
+import java.util.ArrayList;
+import java.util.Collections;
 
+public class WandItem extends BaseItem {
     public WandItem() {
         super(new Item.Settings().stackSize(1));
 
         this.setRegistryName("wand");
 
-        spell = new Spell();
+        /* spell = new Spell();
 
         spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
                 .add(new VeinSpellEffect())
                 .add(new BlockDropsToInventoryEffect())
-                .add(new BlockBreakSpellEffect());
+                .add(new BlockBreakSpellEffect()); */
     }
 
     @Override
@@ -45,28 +48,45 @@ public class WandItem extends BaseItem {
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().isClient()) return ActionResult.FAILURE;
+        if (context.getWorld().isClient()) return ActionResult.PASS;
         //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
 
         //System.out.println(context.getWorld());
 
-        ServerPlayerEntity player = (ServerPlayerEntity)context.getPlayer();
+        ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
         BlockPos position = context.getBlockPos();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
-        this.spell.setProperty(SpellProperty.WORLD, world);
+        ISpell spell = SpellManager.getActiveSpell(player);
 
-        if(!this.spell.isBuilt() || !this.spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION).equals(position)) {
-            this.spell
-                    .setProperty(SpellProperty.INITIAL_BLOCK_POSITION, position)
-                    .setProperty(SpellProperty.ENTITY_CASTER, player);
+        if (spell == null) {
+            spell = new Spell()
+                    .addProperty(SpellProperty.RANGE, 10.0D)
+                    .add(new VeinSpellEffect())
+                    .add(new BlockBreakSpellEffect())
+                    .add(new BlockDropsToInventoryEffect());
 
-            this.spell.build();
+            SpellManager.setActiveSpell(player, spell);
+            //return ActionResult.PASS;
         }
 
-        this.spell.run();
+        spell.setProperty(SpellProperty.WORLD, world);
+
+        if (!spell.isBuilt() || !spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION).equals(position)) {
+            ArrayList<BlockPos> posArrayList = new ArrayList<>();
+            posArrayList.add(position);
+
+            spell
+                    .setProperty(SpellProperty.INITIAL_BLOCK_POSITION, position)
+                    .setProperty(SpellProperty.BLOCK_POSITIONS, posArrayList)
+                    .setProperty(SpellProperty.ENTITY_CASTER, player);
+
+            spell.build();
+        }
+
+        spell.run();
 
         //TODO: shorten
         /* ExtractionRecipe recipe = null;
@@ -156,7 +176,7 @@ public class WandItem extends BaseItem {
         this.generateVein(world, this.currentBlock);
         this.currentBlock = null;
 */
-        return ActionResult.PASS;
+        return ActionResult.SUCCESS;
     }
 
     @Override

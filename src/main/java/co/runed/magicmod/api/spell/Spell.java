@@ -27,6 +27,7 @@ public class Spell implements ISpell {
         return this;
     }
 
+    @Override
     public boolean isBuilt() {
         return this.built;
     }
@@ -56,6 +57,7 @@ public class Spell implements ISpell {
         return this;
     }
 
+    @Override
     public <T> Spell setProperty(SpellProperty<T> property, T value) {
         return this.addProperty(property, value);
     }
@@ -88,6 +90,8 @@ public class Spell implements ISpell {
 
     @Override
     public void fromTag(CompoundTag tag) {
-        ListTag componentsTag = tag.getList("components", 10);
+        ListTag componentsTag = tag.getList("effects", 10);
+
+
     }
 }

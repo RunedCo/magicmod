@@ -12,18 +12,25 @@ import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
     private Vein vein;
     private BlockPos currentPosition;
 
+    private List<BlockPos> currentPositions;
+
     @Override
     public boolean create(ISpell spell) {
         BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
+
+        this.currentPosition = null;
+        this.currentPositions = new ArrayList<>();
 
         this.vein = new Vein(world, startPosition, range);
 
@@ -32,29 +39,35 @@ public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
 
     @Override
     public boolean run(ISpell spell) {
+        int concurrentVeins = 1;
+
         BlockPos position = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
-        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
         List<BlockPos> posList = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
 
-        if(!posList.isEmpty() && posList.contains(this.currentPosition)) {
+        if(!posList.isEmpty() && !Collections.disjoint(posList, currentPositions)) {
             return true;
         }
 
-        currentPosition = vein.getNext();
+        currentPositions.clear();
 
-        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
-            this.vein = new Vein(world, position, 3);
-            currentPosition = vein.getNext();
+        for (int i = 0; i < concurrentVeins; i++) {
+            BlockPos pos = vein.getNext();
+
+            this.vein.generateVeinAndAdd(pos);
+
+            currentPositions.add(pos);
         }
 
-        player.addChatMessage(new StringTextComponent("" + vein.generateFullVein(position).size()), true);
+        if(block != this.vein.getBlockType() || currentPositions.isEmpty() || !this.vein.getStartPosition().equals(position)) {
+            this.vein = new Vein(world, position, 100);
 
-        spell.addProperty(SpellProperty.BLOCK_POSITIONS, Arrays.asList(currentPosition));
+            this.run(spell);
+        }
 
-        this.vein.generateVeinAndAdd(currentPosition);
+        spell.addProperty(SpellProperty.BLOCK_POSITIONS, currentPositions);
 
         return true;
     }

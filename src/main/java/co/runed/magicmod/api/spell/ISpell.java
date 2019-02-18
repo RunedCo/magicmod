@@ -13,5 +13,9 @@ public interface ISpell extends INbtSerializable {
 
     <T> T getProperty(SpellProperty<T> property);
 
+    <T> Spell setProperty(SpellProperty<T> property, T value);
+
+    boolean isBuilt();
+
     boolean hasProperty(SpellProperty property);
 }

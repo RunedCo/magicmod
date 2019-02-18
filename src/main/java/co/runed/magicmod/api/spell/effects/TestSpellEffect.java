@@ -3,6 +3,7 @@ package co.runed.magicmod.api.spell.effects;
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +11,7 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TestSpellEffect implements ISpellEffect {
+public class TestSpellEffect extends SpellEffect {
     public float currentProgress = 0.0f;
 
     @Override

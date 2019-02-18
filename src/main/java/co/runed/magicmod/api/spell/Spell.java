@@ -80,18 +80,6 @@ public class Spell implements ISpell {
     }
 
     @Override
-    public int getTier() {
-        return this.tier;
-    }
-
-    @Override
-    public ISpell setTier(int tier) {
-        this.tier = tier;
-
-        return this;
-    }
-
-    @Override
     public CompoundTag toTag() {
         return new CompoundTag();
     }

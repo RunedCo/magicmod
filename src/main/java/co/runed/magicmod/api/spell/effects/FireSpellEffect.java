@@ -2,6 +2,7 @@ package co.runed.magicmod.api.spell.effects;
 
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import java.util.List;
 
 //TODO: fix glitchy fire
-public class FireSpellEffect implements ISpellEffect {
+public class FireSpellEffect extends SpellEffect {
     @Override
     public boolean build(ISpell spell) {
         return true;

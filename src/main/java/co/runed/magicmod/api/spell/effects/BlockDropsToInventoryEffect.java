@@ -1,16 +1,13 @@
 package co.runed.magicmod.api.spell.effects;
 
-import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
-import co.runed.magicmod.api.spell.ItemTarget;
-import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.*;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class BlockDropsToInventoryEffect implements ISpellEffect {
+public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
     public boolean build(ISpell spell) {
         spell.setProperty(SpellProperty.ITEM_DROP_TARGET, ItemTarget.CASTER_INVENTORY);

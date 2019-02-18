@@ -6,4 +6,8 @@ public interface ISpellEffect {
     boolean build(ISpell spell);
 
     boolean run(ISpell spell);
+
+    int getTier();
+
+    ISpellEffect setTier(int tier);
 }

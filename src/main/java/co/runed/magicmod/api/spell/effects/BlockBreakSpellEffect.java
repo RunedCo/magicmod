@@ -2,27 +2,46 @@ package co.runed.magicmod.api.spell.effects;
 
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;
+import co.runed.magicmod.api.item.MagicToolMaterials;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.ItemTarget;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ToolMaterial;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.tools.Tool;
 import java.util.*;
 
 public class BlockBreakSpellEffect implements ISpellEffect {
     private Map<BlockPos, Float> currentProgress = new HashMap<>();
 
+    ToolMaterial material;
+
     @Override
     public boolean build(ISpell spell) {
         this.currentProgress = new HashMap<>();
 
+        this.material = this.tierToMaterial(spell.getTier());
+
         return true;
+    }
+
+    private ToolMaterial tierToMaterial(int tier) {
+        switch (tier) {
+            default:
+            case 1:
+                return ToolMaterials.DIAMOND;
+            case 2:
+                return ToolMaterials.GOLD;
+            case 3:
+                return MagicToolMaterials.INSTANT;
+        }
     }
 
     //TODO: split functionality
@@ -40,7 +59,7 @@ public class BlockBreakSpellEffect implements ISpellEffect {
             float progress = this.currentProgress.get(pos);
             int index = positions.indexOf(pos);
 
-            progress += BlockUtil.calculateBlockBreakDelta(world, pos, ToolMaterials.IRON);
+            progress += BlockUtil.calculateBlockBreakDelta(world, pos, this.material);
 
             world.setBlockBreakingProgress(player.getEntityId(), pos, (int) (progress * 10.0f));
             player.networkHandler.sendPacket(new BlockBreakingProgressS2CPacket(-player.getEntityId() + index, pos, (int) (progress * 10.0f)));

@@ -4,6 +4,7 @@ import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.ISpellEffect;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VeinSpellEffect implements ISpellEffect, INbtSerializable {
+public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
     private Vein vein;
     private List<BlockPos> currentPositions;
 

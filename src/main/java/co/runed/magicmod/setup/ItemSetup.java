@@ -1,5 +1,6 @@
 package co.runed.magicmod.setup;
 
+import co.runed.brace.registry.IRegisterable;
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.block.MagicBlocks;
 import co.runed.magicmod.api.item.MagicItems;
@@ -23,6 +24,7 @@ public class ItemSetup {
 
     public static void registerBlockItems() {
         MagicItems.BLOCK_MAGIC_ORE = MagicMod.REGISTRY_UTIL.registerBlockItem((BaseBlock)MagicBlocks.MAGIC_ORE);
+        MagicItems.DEMON_PORTAL = MagicMod.REGISTRY_UTIL.registerBlockItem((IRegisterable)MagicBlocks.DEMON_PORTAL);
     }
 
     public static void registerResources() {

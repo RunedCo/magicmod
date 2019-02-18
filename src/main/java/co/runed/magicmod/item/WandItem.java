@@ -2,7 +2,10 @@ package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.components.BlockBreakSpellEffect;
+import co.runed.magicmod.api.spell.components.BlockDropsToInventoryEffect;
 import co.runed.magicmod.api.spell.components.SpawnEntitySpellEffect;
+import co.runed.magicmod.api.spell.components.VeinSpellEffect;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.LivingEntity;
@@ -10,24 +13,26 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class WandItem extends BaseItem {
-    private Spell spell = new Spell();
+    Spell spell;
 
     public WandItem() {
         super(new Item.Settings().stackSize(1));
 
         this.setRegistryName("wand");
 
-        this.spell
+        spell = new Spell();
+
+        spell
                 .addProperty(SpellProperty.RANGE, 10.0D)
-                //.add(new VeinSpellEffect())
-                //.add(new BlockDropsToInventoryEffect())
-                //.add(new BlockBreakSpellEffect());
-                .add(new SpawnEntitySpellEffect());
+                .add(new VeinSpellEffect())
+                .add(new BlockDropsToInventoryEffect())
+                .add(new BlockBreakSpellEffect());
     }
 
     @Override
@@ -45,7 +50,7 @@ public class WandItem extends BaseItem {
 
         //System.out.println(context.getWorld());
 
-        PlayerEntity player = context.getPlayer();
+        ServerPlayerEntity player = (ServerPlayerEntity)context.getPlayer();
         BlockPos position = context.getBlockPos();
         World world = context.getWorld();
         BlockState blockState = world.getBlockState(position);

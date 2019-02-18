@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "axis=z": { "model": "magicmod:block/demon_portal_ew" },
+    "axis=x": { "model": "magicmod:block/demon_portal_ns" }
+  }
+}

@@ -6,10 +6,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 
 public class BaseOre extends BaseBlock {
-    public static final Settings DEFAULT_SETTINGS = Block.Settings.of(Material.STONE).strength(3.0F, 3.0F);
+    public static final Settings DEFAULT_SETTINGS = FabricBlockSettings.of(Material.STONE).strength(3.0F, 3.0F).build();
 
     public BaseOre() {
-        super(FabricBlockSettings.of(Material.STONE).strength(3.0F, 3.0F).build());
+        super(DEFAULT_SETTINGS);
     }
 
     public BaseOre(Block.Settings settings) {

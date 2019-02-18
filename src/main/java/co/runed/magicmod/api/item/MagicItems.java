@@ -22,4 +22,6 @@ public class MagicItems {
     public static BlockItem BLOCK_ALTAR;
     public static BlockItem BLOCK_ALTAR_SPIKE;
     public static BlockItem BLOCK_ALTAR_CORE;
+
+    public static BlockItem DEMON_PORTAL;
 }

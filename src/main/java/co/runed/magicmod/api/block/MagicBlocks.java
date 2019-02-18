@@ -4,4 +4,6 @@ import net.minecraft.block.Block;
 
 public class MagicBlocks {
     public static Block MAGIC_ORE;
+
+    public static Block DEMON_PORTAL;
 }

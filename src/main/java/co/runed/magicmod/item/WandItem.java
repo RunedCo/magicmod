@@ -7,8 +7,10 @@ import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.api.spell.effects.BlockBreakSpellEffect;
 import co.runed.magicmod.api.spell.effects.BlockDropsToInventoryEffect;
 import co.runed.magicmod.api.spell.effects.VeinSpellEffect;
+import co.runed.magicmod.client.gui.TestSpellScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -46,7 +48,11 @@ public class WandItem extends BaseItem {
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if (context.getWorld().isClient()) return ActionResult.PASS;
+        if (context.getWorld().isClient()) {
+            MinecraftClient.getInstance().openScreen(new TestSpellScreen());
+
+            return ActionResult.PASS;
+        }
         //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
 
         //System.out.println(context.getWorld());

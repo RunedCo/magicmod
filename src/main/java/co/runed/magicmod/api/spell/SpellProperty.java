@@ -28,7 +28,7 @@ public class SpellProperty<T> {
         this(id, null);
     }
 
-    public SpellProperty(Identifier id, @Nullable T defaultValue) {
+    public SpellProperty(Identifier id, T defaultValue) {
         this.identifier = id;
         this.defaultValue = defaultValue;
     }
@@ -38,7 +38,7 @@ public class SpellProperty<T> {
     }
 
     public String toString() {
-        return "<spellproperty " + this.identifier + ">";
+        return "<SpellProperty " + this.identifier + ">";
     }
 
     public SpellProperty<T> setDefault(T defaultValue) {

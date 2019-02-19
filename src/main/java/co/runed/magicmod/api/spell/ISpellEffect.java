@@ -10,4 +10,6 @@ public interface ISpellEffect {
     int getTier();
 
     ISpellEffect setTier(int tier);
+
+    double getManaCost(ISpell spell);
 }

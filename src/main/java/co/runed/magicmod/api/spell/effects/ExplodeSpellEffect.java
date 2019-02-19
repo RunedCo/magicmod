@@ -27,4 +27,9 @@ public class ExplodeSpellEffect extends SpellEffect {
 
         return true;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        return 0;
+    }
 }

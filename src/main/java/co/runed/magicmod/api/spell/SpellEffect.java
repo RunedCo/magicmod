@@ -14,4 +14,9 @@ public abstract class SpellEffect implements ISpellEffect {
 
         return this;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        return this.getTier() * 10;
+    }
 }

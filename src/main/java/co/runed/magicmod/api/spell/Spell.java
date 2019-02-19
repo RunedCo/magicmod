@@ -14,6 +14,7 @@ public class Spell implements ISpell {
 
     private boolean built = false;
     private int tier = 1;
+    private double manaCost = 0;
 
     @Override
     public Spell build() {
@@ -21,6 +22,8 @@ public class Spell implements ISpell {
             boolean success = component.build(this);
 
             if(!success) return this;
+
+            this.manaCost += component.getManaCost();
         }
 
         this.built = true;
@@ -45,8 +48,8 @@ public class Spell implements ISpell {
     }
 
     @Override
-    public Spell add(ISpellEffect component) {
-        this.components.add(component);
+    public Spell add(ISpellEffect effect) {
+        this.components.add(effect);
 
         return this;
     }
@@ -77,6 +80,11 @@ public class Spell implements ISpell {
     @Override
     public boolean hasProperty(SpellProperty property) {
         return this.properties.containsKey(property);
+    }
+
+    @Override
+    public double getManaCost() {
+        return this.manaCost;
     }
 
     @Override

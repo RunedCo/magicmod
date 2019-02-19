@@ -44,6 +44,11 @@ public class SpawnEntitySpellEffect extends SpellEffect {
         return true;
     }
 
+    @Override
+    public double getManaCost(ISpell spell) {
+        return 0;
+    }
+
 
     protected final Vec3d getVectorForRotation(final float pitch, final float yaw) {
         final float f = MathHelper.cos(-yaw * 0.017453292f - 3.1415927f);

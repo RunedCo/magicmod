@@ -37,4 +37,9 @@ public class FireSpellEffect extends SpellEffect {
 
         return true;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        return 0;
+    }
 }

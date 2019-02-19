@@ -9,11 +9,13 @@ public interface ISpell extends INbtSerializable {
 
     boolean run();
 
-    ISpell add(ISpellEffect component);
+    ISpell add(ISpellEffect effect);
 
     <T> T getProperty(SpellProperty<T> property);
 
     <T> Spell setProperty(SpellProperty<T> property, T value);
 
     boolean hasProperty(SpellProperty property);
+
+    double getManaCost();
 }

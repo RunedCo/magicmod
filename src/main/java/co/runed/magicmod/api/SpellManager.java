@@ -15,6 +15,8 @@ public class SpellManager {
     public static void init(World world) {
         //TODO: LOAD SPELL LIBRARIES
 
+
+
     }
 
     public static void addSpell(Entity entity, ISpell spell) {

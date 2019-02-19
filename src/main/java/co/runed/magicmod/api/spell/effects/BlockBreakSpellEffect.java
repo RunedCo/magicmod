@@ -81,4 +81,12 @@ public class BlockBreakSpellEffect extends SpellEffect {
 
         return true;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        double tierCost = super.getManaCost(spell);
+        double speedCost = spell.getProperty(SpellProperty.SPEED) * 10;
+
+        return tierCost + speedCost;
+    }
 }

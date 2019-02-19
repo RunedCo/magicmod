@@ -68,4 +68,9 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
 
         return true;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        return 0;
+    }
 }

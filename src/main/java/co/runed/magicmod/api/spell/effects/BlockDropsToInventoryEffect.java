@@ -33,4 +33,9 @@ public class BlockDropsToInventoryEffect extends SpellEffect {
         }
         return true;
     }
+
+    @Override
+    public double getManaCost(ISpell spell) {
+        return 10;
+    }
 }

@@ -12,7 +12,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import javax.tools.Tool;
 import java.util.*;
 
 public class BlockBreakSpellEffect extends SpellEffect {
@@ -46,7 +45,7 @@ public class BlockBreakSpellEffect extends SpellEffect {
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
         List<BlockPos> positions = new ArrayList<>(spell.getProperty(SpellProperty.BLOCK_POSITIONS));
-        ServerPlayerEntity player = (ServerPlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
+        ServerPlayerEntity player = (ServerPlayerEntity) spell.getProperty(SpellProperty.CASTER);
 
         List<ItemStack> items = new ArrayList<>();
 
@@ -69,7 +68,7 @@ public class BlockBreakSpellEffect extends SpellEffect {
 
             positions.remove(pos);
 
-            ItemTarget dropTarget = spell.getProperty(SpellProperty.ITEM_DROP_TARGET);
+            ItemTarget dropTarget = spell.getProperty(SpellProperty.DROP_TARGET);
 
             items.addAll(LootUtil.getBlockDropsAt(world, pos, player));
 

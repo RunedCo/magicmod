@@ -10,7 +10,7 @@ import java.util.List;
 public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
     public boolean build(ISpell spell) {
-        spell.setProperty(SpellProperty.ITEM_DROP_TARGET, ItemTarget.CASTER_INVENTORY);
+        spell.setProperty(SpellProperty.DROP_TARGET, ItemTarget.CASTER_INVENTORY);
 
         return true;
     }
@@ -18,7 +18,7 @@ public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
     public boolean run(ISpell spell) {
         List<ItemStack> items = spell.getProperty(SpellProperty.DROPS);
-        PlayerEntity player = (PlayerEntity)spell.getProperty(SpellProperty.ENTITY_CASTER);
+        PlayerEntity player = (PlayerEntity)spell.getProperty(SpellProperty.CASTER);
 
         for (ItemStack item : items) {
             if (!player.inventory.insertStack(item)) {

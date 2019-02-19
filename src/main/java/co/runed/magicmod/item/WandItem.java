@@ -72,14 +72,14 @@ public class WandItem extends BaseItem {
 
         spell.setProperty(SpellProperty.WORLD, world);
 
-        if (!spell.isBuilt() || !spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION).equals(position)) {
+        if (!spell.isBuilt() || !spell.getProperty(SpellProperty.START_POSITION).equals(position)) {
             ArrayList<BlockPos> posArrayList = new ArrayList<>();
             posArrayList.add(position);
 
             spell
-                    .setProperty(SpellProperty.INITIAL_BLOCK_POSITION, position)
+                    .setProperty(SpellProperty.START_POSITION, position)
                     .setProperty(SpellProperty.BLOCK_POSITIONS, posArrayList)
-                    .setProperty(SpellProperty.ENTITY_CASTER, player);
+                    .setProperty(SpellProperty.CASTER, player);
 
             spell.build();
         }

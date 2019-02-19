@@ -17,13 +17,13 @@ public class SpellSetup {
     public static void setupSpellProperties() {
         SpellProperty.WORLD = registerSpellProperty("world");
         SpellProperty.SPEED = registerSpellProperty("speed", 1.0D);
-        SpellProperty.ENTITY_CASTER = registerSpellProperty("entity_caster");
-        SpellProperty.ENTITY_TARGETS = registerSpellProperty("entity_targets", new ArrayList<>());
+        SpellProperty.CASTER = registerSpellProperty("entity_caster");
+        SpellProperty.TARGETS = registerSpellProperty("entity_targets", new ArrayList<>());
         SpellProperty.RANGE = registerSpellProperty("range", 4.0D);
         SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
         SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
-        SpellProperty.INITIAL_BLOCK_POSITION = registerSpellProperty("initial_block_position");
-        SpellProperty.ITEM_DROP_TARGET = registerSpellProperty("item_drop_target", ItemTarget.NONE);
+        SpellProperty.START_POSITION = registerSpellProperty("initial_block_position");
+        SpellProperty.DROP_TARGET = registerSpellProperty("item_drop_target", ItemTarget.NONE);
         SpellProperty.DROPS = registerSpellProperty("client", new ArrayList<>());
     }
 

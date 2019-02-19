@@ -2,7 +2,6 @@ package co.runed.magicmod.api.spell.effects;
 
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.BlockState;
@@ -21,9 +20,9 @@ public class TestSpellEffect extends SpellEffect {
 
     @Override
     public boolean run(ISpell spell) {
-        BlockPos position = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
+        BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
-        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
+        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.CASTER);
         BlockState state = world.getBlockState(position);
 
         System.out.println(ToolMaterials.DIAMOND.getBlockBreakingSpeed());

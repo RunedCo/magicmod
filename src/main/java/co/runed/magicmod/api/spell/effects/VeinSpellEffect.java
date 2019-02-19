@@ -3,7 +3,6 @@ package co.runed.magicmod.api.spell.effects;
 import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
@@ -21,7 +20,7 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
 
     @Override
     public boolean build(ISpell spell) {
-        BlockPos startPosition = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
+        BlockPos startPosition = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
         this.currentPositions = new ArrayList<>();
@@ -37,7 +36,7 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
     public boolean run(ISpell spell) {
         int concurrentVeins = 1;
 
-        BlockPos position = spell.getProperty(SpellProperty.INITIAL_BLOCK_POSITION);
+        BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();

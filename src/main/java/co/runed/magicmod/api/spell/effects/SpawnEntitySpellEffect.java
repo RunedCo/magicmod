@@ -1,7 +1,6 @@
 package co.runed.magicmod.api.spell.effects;
 
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
 import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.entity.TestEntity;
@@ -21,7 +20,7 @@ public class SpawnEntitySpellEffect extends SpellEffect {
     @Override
     public boolean run(ISpell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
-        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.ENTITY_CASTER);
+        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.CASTER);
         double range = spell.getProperty(SpellProperty.RANGE);
 
         TestEntity entity = new TestEntity(world);

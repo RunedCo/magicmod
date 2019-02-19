@@ -18,12 +18,14 @@ public class Spell implements ISpell {
 
     @Override
     public Spell build() {
+        this.manaCost = 0;
+
         for (ISpellEffect component : components) {
             boolean success = component.build(this);
 
             if(!success) return this;
 
-            this.manaCost += component.getManaCost();
+            this.manaCost += component.getManaCost(this);
         }
 
         this.built = true;

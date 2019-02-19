@@ -6,6 +6,7 @@ import co.runed.magicmod.api.block.MagicBlocks;
 import co.runed.magicmod.api.item.MagicItems;
 import co.runed.magicmod.block.BaseBlock;
 import co.runed.magicmod.item.BaseItem;
+import co.runed.magicmod.item.ScrollItem;
 import co.runed.magicmod.item.SpellbookItem;
 import co.runed.magicmod.item.WandItem;
 import net.minecraft.item.Item;
@@ -20,6 +21,7 @@ public class ItemSetup {
     public static void registerSpellItems() {
         MagicItems.SPELL_BOOK = MagicMod.REGISTRY_UTIL.registerItem(new SpellbookItem());
         MagicItems.WAND = MagicMod.REGISTRY_UTIL.registerItem(new WandItem());
+        MagicItems.SCROLL = MagicMod.REGISTRY_UTIL.registerItem(new ScrollItem());
     }
 
     public static void registerBlockItems() {

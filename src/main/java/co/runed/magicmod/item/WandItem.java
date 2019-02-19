@@ -14,6 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -62,7 +63,7 @@ public class WandItem extends BaseItem {
             spell = new Spell()
                     .setProperty(SpellProperty.RANGE, 10.0D)
                     .add(new VeinSpellEffect())
-                    .add(new BlockBreakSpellEffect())
+                    .add(new BlockBreakSpellEffect().setTier(3))
                     .add(new BlockDropsToInventoryEffect());
 
             SpellManager.setActiveSpell(player, spell);
@@ -82,6 +83,8 @@ public class WandItem extends BaseItem {
 
             spell.build();
         }
+
+        player.addChatMessage(new StringTextComponent("Cost: " + spell.getManaCost()), true);
 
         spell.run();
 
@@ -180,7 +183,6 @@ public class WandItem extends BaseItem {
     public void onItemStopUsing(ItemStack itemStack_1, World world_1, LivingEntity livingEntity_1, int int_1) {
         System.out.println("test");
     }
-
 
 }
 

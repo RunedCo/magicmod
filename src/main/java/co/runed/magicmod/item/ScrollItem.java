@@ -9,6 +9,6 @@ public class ScrollItem extends BaseItem {
     public ScrollItem() {
         super(DEFAULT_SETTINGS);
 
-        this.setRegistryName("scroll");
+        this.setRegistryName("spell_scroll");
     }
 }

@@ -45,10 +45,10 @@ public class NodeWidget extends AdvDrawable {
         //renderer..(GL11.GL_LINES);
 //Your code here e.e renderer.addVertex(x,y,z);
 
-        bufferBuilder.begin(GL_LINES, VertexFormats.POSITION);
+        bufferBuilder.begin(GL_LINES, VertexFormats.POSITION_COLOR);
 
-        bufferBuilder.vertex(0, 0, 0).next();
-        bufferBuilder.vertex(100, 100, 0).next();
+        bufferBuilder.vertex(0, 0, 0).color(0, 0, 0, 255).next();
+        bufferBuilder.vertex(499, 455, 0).color(0, 0, 0, 255).next();
 
         Tessellator.getInstance().draw();
 

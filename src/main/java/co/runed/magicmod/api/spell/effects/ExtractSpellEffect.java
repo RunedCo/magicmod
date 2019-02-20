@@ -3,8 +3,7 @@ package co.runed.magicmod.api.spell.effects;
 import co.runed.brace.RecipeLibrary;
 import co.runed.magicmod.api.recipe.MagicRecipeType;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.TieredSpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.recipe.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
@@ -14,7 +13,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ExtractSpellEffect extends SpellEffect {
+public class ExtractSpellEffect extends TieredSpellEffect {
     @Override
     public boolean build(ISpell spell) {
         return true;

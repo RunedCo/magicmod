@@ -1,16 +1,19 @@
 package co.runed.magicmod.client.gui.widget;
 
+import co.runed.brace.gui.AdvDrawable;
 import co.runed.brace.util.ColorUtil;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.Drawable;
-import net.minecraft.client.render.GuiLighting;
+import net.minecraft.client.render.*;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
-import java.util.Iterator;
 
-public class NodeWidget extends Drawable {
+import static org.lwjgl.opengl.GL11.GL_LINES;
+
+public class NodeWidget extends AdvDrawable {
     private TextRenderer textRenderer;
 
     private int backgroundColor;
@@ -28,28 +31,31 @@ public class NodeWidget extends Drawable {
     }
 
     public void render(int x, int y, int width, int height) {
-        GlStateManager.disableRescaleNormal();
+        this.drawBox(x, y, width, height, this.backgroundColor, this.borderColor);
+
         GuiLighting.disable();
-        GlStateManager.disableLighting();
-        GlStateManager.disableDepthTest();
+        this.drawStringCentered(textRenderer,"o", x + (width / 2), y + height - 2, -1);
+        this.drawStringCentered(textRenderer,"o", x + (width / 2), y + - 7, -1);
 
-        this.zOffset = 300.0F;
-        this.drawGradientRect(x - 3, y - 4, x + width + 3, y - 3, this.backgroundColor, this.backgroundColor);
-        this.drawGradientRect(x - 3, y + height + 3, x + width + 3, y + height + 4, this.backgroundColor, this.backgroundColor);
-        this.drawGradientRect(x - 3, y - 3, x + width + 3, y + height + 3, this.backgroundColor, this.backgroundColor);
-        this.drawGradientRect(x - 4, y - 3, x - 3, y + height + 3, this.backgroundColor, this.backgroundColor);
-        this.drawGradientRect(x + width + 3, y - 3, x + width + 4, y + height + 3, this.backgroundColor, this.backgroundColor);
-        this.drawGradientRect(x - 3, y - 3 + 1, x - 3 + 1, y + height + 3 - 1, this.borderColor, this.borderColor);
-        this.drawGradientRect(x + width + 2, y - 3 + 1, x + width + 3, y + height + 3 - 1, this.borderColor, this.borderColor);
-        this.drawGradientRect(x - 3, y - 3, x + width + 3, y - 3 + 1, this.borderColor, this.borderColor);
-        this.drawGradientRect(x - 3, y + height + 2, x + width + 3, y + height + 3, this.borderColor, this.borderColor);
-        this.zOffset = 0.0F;
+        GlStateManager.pushMatrix();
+        GlStateManager.pushTextureAttributes();
 
-        this.drawStringCentered(textRenderer, "Vein I", x + (width / 2), y + 1, -1);
+        BufferBuilder bufferBuilder = Tessellator.getInstance().getBufferBuilder();
 
-        GlStateManager.enableLighting();
-        GlStateManager.enableDepthTest();
-        GuiLighting.enable();
-        GlStateManager.enableRescaleNormal();
+        //renderer..(GL11.GL_LINES);
+//Your code here e.e renderer.addVertex(x,y,z);
+
+        bufferBuilder.begin(GL_LINES, VertexFormats.POSITION);
+
+        bufferBuilder.vertex(0, 0, 0).next();
+        bufferBuilder.vertex(100, 100, 0).next();
+
+        Tessellator.getInstance().draw();
+
+        GlStateManager.popMatrix();
+        GlStateManager.popAttributes();
+
+        this.drawStringCentered(textRenderer, "Vein I", x + (width / 2), y + 2, -1);
+        GuiLighting.disable();
     }
 }

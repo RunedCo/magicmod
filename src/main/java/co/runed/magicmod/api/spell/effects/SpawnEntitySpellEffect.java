@@ -1,7 +1,7 @@
 package co.runed.magicmod.api.spell.effects;
 
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.TieredSpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.entity.TestEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
-public class SpawnEntitySpellEffect extends SpellEffect {
+public class SpawnEntitySpellEffect extends TieredSpellEffect {
     @Override
     public boolean build(ISpell spell) {
         return true;

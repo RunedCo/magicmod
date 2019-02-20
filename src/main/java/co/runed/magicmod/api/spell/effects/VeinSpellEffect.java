@@ -3,7 +3,7 @@ package co.runed.magicmod.api.spell.effects;
 import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.TieredSpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
+public class VeinSpellEffect extends TieredSpellEffect implements INbtSerializable {
     private Vein vein;
     private List<BlockPos> currentPositions;
 

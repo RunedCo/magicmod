@@ -1,15 +1,14 @@
 package co.runed.magicmod.api.spell.effects;
 
 import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.ISpellEffect;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.TieredSpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ExplodeSpellEffect extends SpellEffect {
+public class ExplodeSpellEffect extends TieredSpellEffect {
     @Override
     public boolean build(ISpell spell) {
         return true;

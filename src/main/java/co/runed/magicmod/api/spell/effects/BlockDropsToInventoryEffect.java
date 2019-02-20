@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class BlockDropsToInventoryEffect extends SpellEffect {
+public class BlockDropsToInventoryEffect extends TieredSpellEffect {
     @Override
     public boolean build(ISpell spell) {
         spell.setProperty(SpellProperty.DROP_TARGET, ItemTarget.CASTER_INVENTORY);

@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 
 import java.util.*;
 
-public class BlockBreakSpellEffect extends SpellEffect {
+public class BlockBreakSpellEffect extends TieredSpellEffect {
     private Map<BlockPos, Float> currentProgress = new HashMap<>();
 
     ToolMaterial material;

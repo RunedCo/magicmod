@@ -1,6 +1,6 @@
 package co.runed.magicmod.api.spell;
 
-public abstract class SpellEffect implements ISpellEffect {
+public abstract class TieredSpellEffect implements ISpellEffect {
     private int tier;
 
     @Override
@@ -13,10 +13,5 @@ public abstract class SpellEffect implements ISpellEffect {
         this.tier = tier;
 
         return this;
-    }
-
-    @Override
-    public double getManaCost(ISpell spell) {
-        return this.getTier() * 10;
     }
 }

@@ -1,5 +1,8 @@
 package co.runed.magicmod.api.spell;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //TODO: add tiers
 public interface ISpellEffect {
 
@@ -7,9 +10,17 @@ public interface ISpellEffect {
 
     boolean run(ISpell spell);
 
-    int getTier();
+    default int getTier() {
+        return 1;
+    };
 
     ISpellEffect setTier(int tier);
 
-    double getManaCost(ISpell spell);
+    default double getManaCost(ISpell spell) {
+        return this.getTier() * 10;
+    };
+
+    default List<SpellProperty> getGraphProperties() {
+        return new ArrayList<>();
+    };
 }

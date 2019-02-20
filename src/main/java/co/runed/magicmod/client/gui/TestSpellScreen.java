@@ -22,14 +22,13 @@ public class TestSpellScreen extends Screen {
 
     @Override
     public void draw(int int_1, int int_2, float float_1) {
-        this.drawVerticalLine(100, 100 , 100 , 100);
+        this.drawVerticalLine(0, 1, 200 , -1);
 
         //this.test.addText("test");
 
-        this.test.render(12, 100, 100, 50);
-        this.test.render(10, 90, 104, 10);
-        this.test.render(10, 220, 100, 50);
-
+        this.test.render(11, 100, 70, 30);
+        this.test.render(10, 90, 72, 10);
+        this.test.render(10, 220, 50, 12);
 
         this.drawTooltip("World Spell", 0, 20);
 

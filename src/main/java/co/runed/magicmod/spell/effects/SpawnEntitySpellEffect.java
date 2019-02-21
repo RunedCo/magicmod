@@ -3,7 +3,6 @@ package co.runed.magicmod.spell.effects;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperties;
-import co.runed.magicmod.entity.TestEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.MathHelper;
@@ -23,7 +22,7 @@ public class SpawnEntitySpellEffect extends SpellEffect {
         PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperties.CASTER);
         double range = spell.getProperty(SpellProperties.RANGE);
 
-        TestEntity entity = new TestEntity(world);
+        //TestEntity entity = new TestEntity(world);
 
         Vec3d vec = new Vec3d(player.x, player.y, player.z).add(0, player.getEyeHeight(), 0);
         Vec3d look = this.getVectorForRotation(player.pitch, player.yaw);
@@ -33,12 +32,12 @@ public class SpawnEntitySpellEffect extends SpellEffect {
 
         HitResult result = world.rayTrace(new RayTraceContext(vec, end, RayTraceContext.ShapeType.OUTLINE, RayTraceContext.FluidHandling.NONE, player));
 
-        entity.setPosition(result.getPos().x, result.getPos().y + 3, result.getPos().z);
+        //entity.setPosition(result.getPos().x, result.getPos().y + 3, result.getPos().z);
         //entity.setStack(new ItemStack(Items.FIRE_CHARGE));
 
         //entity.setPickupDelayInfinite();
         //entity.setUnaffectedByGravity(true);
-        world.spawnEntity(entity);
+        //world.spawnEntity(entity);
 
         return true;
     }

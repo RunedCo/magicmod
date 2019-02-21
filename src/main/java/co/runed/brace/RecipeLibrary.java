@@ -17,16 +17,16 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-public class RecipeLibrary implements ResourceReloadListener {
+public class RecipeLibrary {
     public static final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
     private static final HashMap<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
     private static RecipeManager recipeManager;
     private static World world;
 
-    public static void setup(World world) {
+    public static void init(World worldIn) {
         clear();
 
-        world = world;
+        world = worldIn;
         recipeManager = world.getRecipeManager();
 
         Collection<Recipe<?>> recipes = recipeManager.values();
@@ -68,10 +68,5 @@ public class RecipeLibrary implements ResourceReloadListener {
 
     public static boolean isSetup() {
         return recipeManager == null || world == null;
-    }
-
-    @Override
-    public CompletableFuture<Void> apply(Helper helper, ResourceManager resourceManager, Profiler profiler, Profiler profiler1, Executor executor, Executor executor1) {
-        return null;
     }
 }

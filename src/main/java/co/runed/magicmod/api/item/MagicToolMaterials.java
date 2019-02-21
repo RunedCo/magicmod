@@ -2,7 +2,6 @@ package co.runed.magicmod.api.item;
 
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterial;
-import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.util.Lazy;
 
@@ -56,6 +55,6 @@ public enum MagicToolMaterials implements ToolMaterial {
 
     @Override
     public Ingredient getRepairIngredient() {
-        return (Ingredient)this.repairIngredient.get();
+        return this.repairIngredient.get();
     }
 }

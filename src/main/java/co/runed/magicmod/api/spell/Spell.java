@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Spell {
-    private List<SpellEffect> effects = new ArrayList<>();
-    private Map<SpellProperty, Object> properties = new HashMap<>();
+    private final List<SpellEffect> effects = new ArrayList<>();
+    private final Map<SpellProperty, Object> properties = new HashMap<>();
 
     private boolean built = false;
     private double manaCost = 0;

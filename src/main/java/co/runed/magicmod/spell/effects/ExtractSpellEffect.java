@@ -1,10 +1,9 @@
 package co.runed.magicmod.spell.effects;
 
-import co.runed.brace.RecipeLibrary;
+import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.recipe.MagicRecipeType;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffect;
-import co.runed.magicmod.api.spell.SpellProperties;
 import co.runed.magicmod.api.spell.SpellProperties;
 import co.runed.magicmod.recipe.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;
@@ -30,7 +29,7 @@ public class ExtractSpellEffect extends SpellEffect {
 
             ExtractionRecipe recipe = null;
 
-            for (Recipe<?> r : RecipeLibrary.getAllOfType(MagicRecipeType.EXTRACTION)) {
+            for (Recipe<?> r : MagicMod.RECIPE_LIBRARY.getAllOfType(MagicRecipeType.EXTRACTION)) {
                 ExtractionRecipe extractionRecipe = (ExtractionRecipe) r;
                 if (extractionRecipe.matches(block)) {
                     recipe = extractionRecipe;

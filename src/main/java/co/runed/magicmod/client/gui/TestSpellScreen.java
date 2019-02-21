@@ -1,13 +1,11 @@
 package co.runed.magicmod.client.gui;
 
-import co.runed.brace.util.ColorUtil;
 import co.runed.magicmod.client.gui.widget.NodeWidget;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Screen;
-import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
@@ -16,7 +14,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)

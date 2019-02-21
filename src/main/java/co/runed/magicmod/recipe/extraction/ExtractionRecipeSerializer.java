@@ -22,12 +22,12 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
     public T read(Identifier identifier, JsonObject jsonObject) {
         String group = JsonHelper.getString(jsonObject, "group", "");
         JsonElement jsonElement_1 = JsonHelper.hasArray(jsonObject, "input") ? JsonHelper.getArray(jsonObject, "input") : JsonHelper.getObject(jsonObject, "input");
-        Ingredient input = Ingredient.fromJson((JsonElement)jsonElement_1);
+        Ingredient input = Ingredient.fromJson(jsonElement_1);
         Identifier output = new Identifier(JsonHelper.getString(jsonObject, "output"));
         if (!Registry.BLOCK.containsId(output)) {
             throw new IllegalStateException("Block: " + output.toString() + " does not exist");
         } else {
-            Block outputBlock = (Block)Registry.BLOCK.get(output);
+            Block outputBlock = Registry.BLOCK.get(output);
 
             JsonObject drops = JsonHelper.getObject(jsonObject, "drops", new JsonObject());
             Identifier item = new Identifier(JsonHelper.getString(drops, "item", "null:null"));
@@ -36,7 +36,7 @@ public class ExtractionRecipeSerializer<T extends ExtractionRecipe> implements R
             String loot = JsonHelper.getString(drops, "loot", "");
 
             ItemStack dropsItem = ItemStackUtil.EMPTY;
-            if(Registry.ITEM.containsId(item)) dropsItem = new ItemStack((ItemProvider)Registry.ITEM.get(item), count);
+            if(Registry.ITEM.containsId(item)) dropsItem = new ItemStack(Registry.ITEM.get(item), count);
 
             int manaMultiplier = JsonHelper.getInt(jsonObject, "mana_multiplier", 1);
             return (T)new ExtractionRecipe(identifier, group, input, outputBlock, dropsItem, loot, manaMultiplier);

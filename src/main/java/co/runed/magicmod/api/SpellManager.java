@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SpellManager {
-    private static Map<Entity, Spell> activeSpells = new HashMap<>();
+    private static final Map<Entity, Spell> activeSpells = new HashMap<>();
     private static Map<Entity, List<Spell>> spellLibraries = new HashMap<>();
 
     public static void init() {

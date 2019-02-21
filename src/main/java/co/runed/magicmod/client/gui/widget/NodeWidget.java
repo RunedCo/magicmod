@@ -1,21 +1,13 @@
 package co.runed.magicmod.client.gui.widget;
 
 import co.runed.brace.gui.AdvDrawable;
-import co.runed.brace.util.ColorUtil;
-import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.render.*;
 import net.minecraft.client.util.math.Vector3f;
-import org.lwjgl.opengl.GL11;
-
-import java.awt.Color;
-
-import static org.lwjgl.opengl.GL11.GL_LINES;
 
 public class NodeWidget extends AdvDrawable {
-    private TextRenderer textRenderer;
+    private final TextRenderer textRenderer;
 
     private Vector3f position;
 
@@ -25,8 +17,8 @@ public class NodeWidget extends AdvDrawable {
     public int width = 70;
     public int height = 12;
 
-    private int backgroundColor;
-    private int borderColor;
+    private final int backgroundColor;
+    private final int borderColor;
 
     public NodeWidget(int backgroundColor, int borderColor) {
         this.textRenderer = MinecraftClient.getInstance().textRenderer;

@@ -5,7 +5,6 @@ import co.runed.magicmod.api.block.MagicBlocks;
 import co.runed.magicmod.block.DemonPortalBlock;
 import co.runed.magicmod.block.ore.MagicOre;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.sound.BlockSoundGroup;
 

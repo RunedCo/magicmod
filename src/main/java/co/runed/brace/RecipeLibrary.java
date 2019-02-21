@@ -3,10 +3,7 @@ package co.runed.brace;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.profiler.Profiler;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -14,16 +11,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executor;
 
 public class RecipeLibrary {
-    public static final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
-    private static final HashMap<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
-    private static RecipeManager recipeManager;
-    private static World world;
+    public final HashMap<RecipeType<?>, List<Recipe<?>>> RECIPES = new HashMap<>();
+    private final HashMap<Identifier, RecipeType<?>> RECIPE_TYPES = new HashMap<>();
+    private RecipeManager recipeManager;
+    private World world;
 
-    public static void init(World worldIn) {
+    public void init(World worldIn) {
         clear();
 
         world = worldIn;
@@ -34,7 +29,7 @@ public class RecipeLibrary {
         for (Recipe<?> recipe : recipes) {
             RecipeType<?> recipeType = recipe.getType();
 
-            if(!RECIPES.containsKey(recipeType)) {
+            if (!RECIPES.containsKey(recipeType)) {
                 RECIPES.put(recipeType, new ArrayList<>());
             }
 
@@ -42,7 +37,7 @@ public class RecipeLibrary {
         }
     }
 
-    public static void clear() {
+    public void clear() {
         world = null;
         recipeManager = null;
 
@@ -50,23 +45,23 @@ public class RecipeLibrary {
         RECIPE_TYPES.clear();
     }
 
-    public static List<Recipe<?>> getAllOfType(Identifier type) {
+    public List<Recipe<?>> getAllOfType(Identifier type) {
         RecipeType<?> recipeType = Registry.RECIPE_TYPE.get(type);
 
-        if(recipeType == null) {
+        if (recipeType == null) {
             return new ArrayList<>();
         }
 
         return getAllOfType(recipeType);
     }
 
-    public static List<Recipe<?>> getAllOfType(RecipeType<?> type) {
-        if(!RECIPES.containsKey(type) || !isSetup()) return new ArrayList<>();
+    public List<Recipe<?>> getAllOfType(RecipeType<?> type) {
+        if (!RECIPES.containsKey(type) || !isSetup()) return new ArrayList<>();
 
         return RECIPES.get(type);
     }
 
-    public static boolean isSetup() {
+    public boolean isSetup() {
         return recipeManager == null || world == null;
     }
 }

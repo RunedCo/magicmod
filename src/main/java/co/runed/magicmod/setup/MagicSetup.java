@@ -9,10 +9,7 @@ import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
 import co.runed.magicmod.spell.effects.ExtractSpellEffect;
 import co.runed.magicmod.spell.effects.VeinSpellEffect;
 import com.sun.istack.internal.Nullable;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.Event;
 import net.fabricmc.fabric.api.event.server.ServerStartCallback;
-import net.fabricmc.fabric.impl.FabricAPIInitializer;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;

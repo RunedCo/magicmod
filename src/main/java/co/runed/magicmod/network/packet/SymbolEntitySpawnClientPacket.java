@@ -41,7 +41,7 @@ public class SymbolEntitySpawnClientPacket implements Packet<ClientPlayPacketLis
     public SymbolEntitySpawnClientPacket(Entity entity) {
         this.id = entity.getEntityId();
         this.uuid = entity.getUuid();
-        this.entityTypeId = Registry.ENTITY_TYPE.getRawId(entity.getType());;
+        this.entityTypeId = Registry.ENTITY_TYPE.getRawId(entity.getType());
         this.x = entity.x;
         this.y = entity.y;
         this.z = entity.z;
@@ -201,6 +201,6 @@ public class SymbolEntitySpawnClientPacket implements Packet<ClientPlayPacketLis
 
         entity.setEntityId(this.getId());
         entity.setUuid(this.getUuid());
-        world.method_2942(this.getId(), (Entity)entity);
+        world.method_2942(this.getId(), entity);
     }
 }

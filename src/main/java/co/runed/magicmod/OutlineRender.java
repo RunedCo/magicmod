@@ -32,9 +32,7 @@ public class OutlineRender {
 
             EntityHitResult entityHitResult = (EntityHitResult)hitResult;
 
-            if(entityHitResult.getEntity() == entity) {
-                return true;
-            }
+            return entityHitResult.getEntity() == entity;
         }
 
         return false;

@@ -1,13 +1,6 @@
 package co.runed.magicmod.api.spell;
 
-import com.sun.istack.internal.Nullable;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
-import java.util.List;
 
 public class SpellProperty<T> {
     private Identifier identifier;

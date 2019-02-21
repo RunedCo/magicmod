@@ -20,6 +20,6 @@ public class EntitySetup {
 
 
     public static <T extends Entity> EntityType<T> register(String name, FabricEntityTypeBuilder<T> builder) {
-        return Registry.register(Registry.ENTITY_TYPE, (String)name, builder.build());
+        return Registry.register(Registry.ENTITY_TYPE, name, builder.build());
     }
 }

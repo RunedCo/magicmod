@@ -12,17 +12,17 @@ import java.util.List;
 import java.util.Random;
 
 public class Vein {
-    private World world;
-    private BlockPos startPosition;
+    private final World world;
+    private final BlockPos startPosition;
     private BlockPos currentPosition;
 
-    private Block blockType;
+    private final Block blockType;
 
     private double maxDistance = 16.0D;
 
-    private List<BlockPos> blocksToBreak = new ArrayList<>();
+    private final List<BlockPos> blocksToBreak = new ArrayList<>();
 
-    private Random rand;
+    private final Random rand;
 
     public Vein(World world, BlockPos startPos) {
         this(world, startPos, 16.0D);

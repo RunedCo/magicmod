@@ -46,7 +46,7 @@ public class Spell {
     }
 
     public Spell add(SpellEffect effect) {
-        this.effects.add(effect);
+        this.effects.add(effect.create());
 
         return this;
     }

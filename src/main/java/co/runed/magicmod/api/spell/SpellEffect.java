@@ -42,6 +42,8 @@ public class SpellEffect {
     public <T extends SpellEffect> T create() {
         T effect = (T) this.factory.get();
         effect.identifier = this.identifier;
+        effect.factory = this.factory;
+        effect.setTier(this.getTier());
 
         return effect;
     }

@@ -2,6 +2,8 @@ package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.SpellEffects;
 import co.runed.magicmod.api.spell.SpellProperties;
 import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
 import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
@@ -67,12 +69,11 @@ public class WandItem extends BaseItem {
         if (spell == null) {
             spell = new Spell()
                     .setProperty(SpellProperties.RANGE, 10.0D)
-                    .add(new VeinSpellEffect())
-                    .add(new BlockBreakSpellEffect().setTier(3))
-                    .add(new BlockDropsToInventoryEffect());
+                    .add(SpellEffects.VEIN.create())
+                    .add(SpellEffects.BREAK_BLOCK.create().setTier(3))
+                    .add(SpellEffects.ITEM_TO_INVENTORY.create());
 
             SpellManager.setActiveSpell(player, spell);
-            //return ActionResult.PASS;
         }
 
         spell.setProperty(SpellProperties.WORLD, world);

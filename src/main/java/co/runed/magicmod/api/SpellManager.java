@@ -1,5 +1,6 @@
 package co.runed.magicmod.api;
 
+import co.runed.magicmod.api.spell.Spell;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 

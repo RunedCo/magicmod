@@ -2,12 +2,8 @@ package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.spell.Spell;
-import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellEffects;
 import co.runed.magicmod.api.spell.SpellProperties;
-import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
-import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
-import co.runed.magicmod.spell.effects.VeinSpellEffect;
 import co.runed.magicmod.client.gui.TestSpellScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -33,10 +29,10 @@ public class WandItem extends BaseItem {
         /* spell = new Spell();
 
         spell
-                .setProperty(SpellProperties.RANGE, 10.0D)
-                .add(new VeinSpellEffect())
-                .add(new BlockDropsToInventoryEffect())
-                .add(new BlockBreakSpellEffect()); */
+                .putProperty(SpellProperties.RANGE, 10.0D)
+                .putEffect(new VeinSpellEffect())
+                .putEffect(new BlockDropsToInventoryEffect())
+                .putEffect(new BlockBreakSpellEffect()); */
     }
 
     @Override
@@ -45,7 +41,6 @@ public class WandItem extends BaseItem {
     }
 
     //TODO: fix item drops without drop tag not working
-    //TODO: move to spell classes (spell manager, spell, and effects?)
     //TODO: split into separate functions
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
@@ -68,31 +63,34 @@ public class WandItem extends BaseItem {
 
         if (spell == null) {
             spell = new Spell()
-                    .setProperty(SpellProperties.RANGE, 10.0D)
-                    .add(SpellEffects.VEIN.create())
-                    .add(SpellEffects.BREAK_BLOCK.create().setTier(3))
-                    .add(SpellEffects.ITEM_TO_INVENTORY.create());
+                    .setCastType(Spell.CastType.USE_BLOCK)
+                    .putProperty(SpellProperties.RANGE, 10.0D)
+                    .putEffect(SpellEffects.VEIN.create())
+                    .putEffect(SpellEffects.BREAK_BLOCK.create().setTier(3))
+                    .putEffect(SpellEffects.ITEM_TO_INVENTORY.create());
 
             SpellManager.setActiveSpell(player, spell);
         }
 
-        spell.setProperty(SpellProperties.WORLD, world);
+        spell.putProperty(SpellProperties.WORLD, world);
 
         if (!spell.isBuilt() || !spell.getProperty(SpellProperties.START_POSITION).equals(position)) {
             ArrayList<BlockPos> posArrayList = new ArrayList<>();
             posArrayList.add(position);
 
             spell
-                    .setProperty(SpellProperties.START_POSITION, position)
-                    .setProperty(SpellProperties.BLOCK_POSITIONS, posArrayList)
-                    .setProperty(SpellProperties.CASTER, player);
+                    .putProperty(SpellProperties.START_POSITION, position)
+                    .putProperty(SpellProperties.BLOCK_POSITIONS, posArrayList)
+                    .putProperty(SpellProperties.CASTER, player);
 
             spell.build();
         }
 
         player.addChatMessage(new StringTextComponent("Cost: " + spell.getManaCost()), true);
 
-        spell.run();
+        if (spell.getCastType() == Spell.CastType.USE_BLOCK) {
+            spell.run();
+        }
 
         //TODO: shorten
         /* ExtractionRecipe recipe = null;
@@ -184,16 +182,10 @@ public class WandItem extends BaseItem {
 */
         return ActionResult.SUCCESS;
     }
-
-    @Override
-    public void onItemStopUsing(ItemStack itemStack_1, World world_1, LivingEntity livingEntity_1, int int_1) {
-        System.out.println("test");
-    }
-
 }
 
 /* if (blockState.getBlock() == this.veinBlock && !this.blocksToBreak.contains(offsetPos)) {
-                            if (!offsetPos.equals(startPos)) this.blocksToBreak.add(offsetPos);
+                            if (!offsetPos.equals(startPos)) this.blocksToBreak.putEffect(offsetPos);
 
                             Collections.shuffle(this.blocksToBreak);
 

@@ -14,6 +14,17 @@ public class Spell {
 
     private boolean built = false;
     private double manaCost = 0;
+    private CastType castType = CastType.NONE;
+
+    public Spell setCastType(CastType type) {
+        this.castType = type;
+
+        return this;
+    }
+
+    public CastType getCastType() {
+        return this.castType;
+    }
 
     public Spell build() {
         this.manaCost = 0;
@@ -45,13 +56,13 @@ public class Spell {
         return true;
     }
 
-    public Spell add(SpellEffect effect) {
+    public Spell putEffect(SpellEffect effect) {
         this.effects.add(effect.create());
 
         return this;
     }
 
-    public <T> Spell setProperty(SpellProperty<T> property, T value) {
+    public <T> Spell putProperty(SpellProperty<T> property, T value) {
         this.properties.put(property, value);
 
         return this;
@@ -64,12 +75,6 @@ public class Spell {
         Object value = this.properties.get(property);
 
         return (T) value;
-    }
-
-    public <T> T getProperty(SpellProperty<T> property, T defaultValue) {
-        if(!this.hasProperty(property)) return defaultValue;
-
-        return this.getProperty(property);
     }
 
     public boolean hasProperty(SpellProperty property) {
@@ -86,5 +91,14 @@ public class Spell {
 
     public void fromTag(CompoundTag tag) {
         ListTag effectsTag = tag.getList("effects", 10);
+    }
+
+    public enum CastType {
+        NONE,
+        USE_BLOCK,
+        USE,
+        ATTACK,
+        RITUAL,
+        PASSIVE
     }
 }

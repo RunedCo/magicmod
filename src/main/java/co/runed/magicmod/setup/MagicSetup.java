@@ -1,6 +1,7 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
+import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.*;
 import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
@@ -8,6 +9,10 @@ import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
 import co.runed.magicmod.spell.effects.ExtractSpellEffect;
 import co.runed.magicmod.spell.effects.VeinSpellEffect;
 import com.sun.istack.internal.Nullable;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.Event;
+import net.fabricmc.fabric.api.event.server.ServerStartCallback;
+import net.fabricmc.fabric.impl.FabricAPIInitializer;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
@@ -17,6 +22,8 @@ public class MagicSetup {
     public static void init() {
         MagicSetup.setupSpellProperties();
         MagicSetup.setupSpellEffects();
+
+        ServerStartCallback.EVENT.register(server -> SpellManager.init());
     }
 
     public static void setupSpellEffects() {

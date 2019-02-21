@@ -27,8 +27,6 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
 
         this.vein = new Vein(world, startPosition, range);
 
-        //new VeinSpellEffect().clone();
-
         return true;
     }
 
@@ -63,7 +61,7 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
             this.run(spell);
         }
 
-        spell.setProperty(SpellProperties.BLOCK_POSITIONS, currentPositions);
+        spell.putProperty(SpellProperties.BLOCK_POSITIONS, currentPositions);
 
         return true;
     }

@@ -2,7 +2,6 @@ package co.runed.magicmod.api;
 
 import co.runed.magicmod.api.spell.Spell;
 import net.minecraft.entity.Entity;
-import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +11,7 @@ public class SpellManager {
     private static Map<Entity, Spell> activeSpells = new HashMap<>();
     private static Map<Entity, List<Spell>> spellLibraries = new HashMap<>();
 
-    public static void init(World world) {
+    public static void init() {
         //TODO: LOAD SPELL LIBRARIES
 
 

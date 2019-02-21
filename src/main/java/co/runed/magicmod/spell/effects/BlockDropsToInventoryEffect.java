@@ -10,7 +10,7 @@ import java.util.List;
 public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
     public boolean build(Spell spell) {
-        spell.setProperty(SpellProperties.ITEM_TARGET, ItemTarget.CASTER_INVENTORY);
+        spell.putProperty(SpellProperties.ITEM_TARGET, ItemTarget.CASTER_INVENTORY);
 
         return true;
     }

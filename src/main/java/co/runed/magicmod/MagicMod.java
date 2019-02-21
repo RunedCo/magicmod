@@ -1,5 +1,6 @@
 package co.runed.magicmod;
 
+import co.runed.brace.RecipeLibrary;
 import co.runed.brace.registry.RegistryUtil;
 import co.runed.magicmod.setup.*;
 import net.fabricmc.api.ModInitializer;
@@ -9,6 +10,8 @@ public class MagicMod implements ModInitializer {
 	public final static String VERSION = "";
 
 	public final static RegistryUtil REGISTRY_UTIL = new RegistryUtil(ID);
+	public final static RecipeLibrary RECIPE_LIBRARY = new RecipeLibrary();
+
 	//TODO: setup recipe library on connect
 	//TODO: setup
 

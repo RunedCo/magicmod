@@ -81,8 +81,8 @@ public class BlockBreakSpellEffect extends SpellEffect {
             world.breakBlock(pos, dropTarget == ItemTarget.NONE);
         }
 
-        spell.setProperty(SpellProperties.DROPS, items);
-        spell.setProperty(SpellProperties.BLOCK_POSITIONS, positions);
+        spell.putProperty(SpellProperties.DROPS, items);
+        spell.putProperty(SpellProperties.BLOCK_POSITIONS, positions);
 
         return true;
     }

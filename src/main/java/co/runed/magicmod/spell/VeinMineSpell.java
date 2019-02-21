@@ -7,8 +7,8 @@ import co.runed.magicmod.spell.effects.VeinSpellEffect;
 
 public class VeinMineSpell extends Spell {
     public VeinMineSpell(double range) {
-        this.setProperty(SpellProperties.RANGE, range)
-                .add(new VeinSpellEffect())
-                .add(new BlockBreakSpellEffect());
+        this.putProperty(SpellProperties.RANGE, range)
+                .putEffect(new VeinSpellEffect())
+                .putEffect(new BlockBreakSpellEffect());
     }
 }

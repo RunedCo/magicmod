@@ -22,10 +22,9 @@ public class BlockDropsToInventoryEffect extends TieredSpellEffect {
 
         for (ItemStack item : items) {
             if (!player.inventory.insertStack(item)) {
-                ItemEntity itemEntity = new ItemEntity(player.world);
+                ItemEntity itemEntity = new ItemEntity(player.world, player.getPos().getX(), player.getPos().getY(), player.getPos().getZ());
 
                 itemEntity.setStack(item);
-                itemEntity.setPosition(player.getPos().getX(), player.getPos().getY(), player.getPos().getZ());
                 itemEntity.setOwner(player.getUuid());
 
                 player.getEntityWorld().spawnEntity(itemEntity);

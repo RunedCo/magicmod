@@ -1,6 +1,7 @@
 package co.runed.brace.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.Drawable;
 import net.minecraft.client.render.GuiLighting;
 
@@ -26,5 +27,9 @@ public class AdvDrawable extends Drawable {
         GlStateManager.enableDepthTest();
         GuiLighting.enable();
         GlStateManager.enableRescaleNormal();
-    }    
+    }
+
+    public void drawPlainStringCentered(TextRenderer textRenderer_1, String string_1, int int_1, int int_2, int int_3) {
+        textRenderer_1.draw(string_1, (float)(int_1 - textRenderer_1.getStringWidth(string_1) / 2), (float)int_2, int_3);
+    }
 }

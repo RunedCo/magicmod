@@ -4,7 +4,6 @@ import co.runed.brace.util.ItemStackUtil;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.recipe.Ingredient;

@@ -12,7 +12,7 @@ import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.Vector3f;
 import org.lwjgl.opengl.GL11;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

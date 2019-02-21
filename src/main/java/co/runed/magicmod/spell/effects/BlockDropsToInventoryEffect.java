@@ -1,6 +1,9 @@
 package co.runed.magicmod.spell.effects;
 
-import co.runed.magicmod.api.spell.*;
+import co.runed.magicmod.api.spell.ItemTarget;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.SpellProperties;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

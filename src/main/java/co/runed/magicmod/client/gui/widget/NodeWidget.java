@@ -3,7 +3,7 @@ package co.runed.magicmod.client.gui.widget;
 import co.runed.brace.gui.AdvDrawable;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.*;
+import net.minecraft.client.render.GuiLighting;
 import net.minecraft.client.util.math.Vector3f;
 
 public class NodeWidget extends AdvDrawable {

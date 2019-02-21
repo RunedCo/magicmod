@@ -1,6 +1,6 @@
 package co.runed.brace.util;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class ColorUtil {
     public static int convertColorToInt(Color color) {

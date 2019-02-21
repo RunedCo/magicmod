@@ -1,10 +1,16 @@
 package co.runed.magicmod.api.spell;
 
+import net.minecraft.util.Identifier;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class SpellEffect {
     private int tier = 1;
+
+    public Supplier<? extends SpellEffect> factory;
+    public Identifier identifier;
 
     public boolean build(Spell spell) {
         return true;
@@ -33,7 +39,10 @@ public class SpellEffect {
         return new ArrayList<>();
     }
 
-    public SpellEffect create() {
-        return new SpellEffect();
+    public <T extends SpellEffect> T create() {
+        T effect = (T) this.factory.get();
+        effect.identifier = this.identifier;
+
+        return effect;
     }
 }

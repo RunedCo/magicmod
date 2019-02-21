@@ -13,15 +13,15 @@ import java.util.List;
 public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
     public boolean build(Spell spell) {
-        spell.setProperty(SpellProperty.DROP_TARGET, ItemTarget.CASTER_INVENTORY);
+        spell.setProperty(SpellProperties.ITEM_TARGET, ItemTarget.CASTER_INVENTORY);
 
         return true;
     }
 
     @Override
     public boolean run(Spell spell) {
-        List<ItemStack> items = spell.getProperty(SpellProperty.DROPS);
-        PlayerEntity player = (PlayerEntity)spell.getProperty(SpellProperty.CASTER);
+        List<ItemStack> items = spell.getProperty(SpellProperties.DROPS);
+        PlayerEntity player = (PlayerEntity)spell.getProperty(SpellProperties.CASTER);
 
         for (ItemStack item : items) {
             if (!player.inventory.insertStack(item)) {

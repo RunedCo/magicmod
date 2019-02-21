@@ -19,9 +19,9 @@ public class SpawnEntitySpellEffect extends SpellEffect {
 
     @Override
     public boolean run(Spell spell) {
-        World world = spell.getProperty(SpellProperty.WORLD);
-        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.CASTER);
-        double range = spell.getProperty(SpellProperty.RANGE);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperties.CASTER);
+        double range = spell.getProperty(SpellProperties.RANGE);
 
         TestEntity entity = new TestEntity(world);
 

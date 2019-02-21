@@ -49,13 +49,13 @@ public class BlockBreakSpellEffect extends SpellEffect {
     //TODO: split functionality
     @Override
     public boolean run(Spell spell) {
-        World world = spell.getProperty(SpellProperty.WORLD);
-        List<BlockPos> positions = new ArrayList<>(spell.getProperty(SpellProperty.BLOCK_POSITIONS));
-        ServerPlayerEntity player = (ServerPlayerEntity) spell.getProperty(SpellProperty.CASTER);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        List<BlockPos> positions = new ArrayList<>(spell.getProperty(SpellProperties.BLOCK_POSITIONS));
+        ServerPlayerEntity player = (ServerPlayerEntity) spell.getProperty(SpellProperties.CASTER);
 
         List<ItemStack> items = new ArrayList<>();
 
-        for (BlockPos pos : spell.getProperty(SpellProperty.BLOCK_POSITIONS)) {
+        for (BlockPos pos : spell.getProperty(SpellProperties.BLOCK_POSITIONS)) {
             if (!this.currentProgress.containsKey(pos)) this.currentProgress.put(pos, 0.0f);
 
             float progress = this.currentProgress.get(pos);
@@ -74,15 +74,15 @@ public class BlockBreakSpellEffect extends SpellEffect {
 
             positions.remove(pos);
 
-            ItemTarget dropTarget = spell.getProperty(SpellProperty.DROP_TARGET);
+            ItemTarget dropTarget = spell.getProperty(SpellProperties.ITEM_TARGET);
 
             items.addAll(LootUtil.getBlockDropsAt(world, pos, player));
 
             world.breakBlock(pos, dropTarget == ItemTarget.NONE);
         }
 
-        spell.setProperty(SpellProperty.DROPS, items);
-        spell.setProperty(SpellProperty.BLOCK_POSITIONS, positions);
+        spell.setProperty(SpellProperties.DROPS, items);
+        spell.setProperty(SpellProperties.BLOCK_POSITIONS, positions);
 
         return true;
     }
@@ -90,7 +90,7 @@ public class BlockBreakSpellEffect extends SpellEffect {
     @Override
     public double getManaCost(Spell spell) {
         double tierCost = super.getManaCost(spell);
-        double speedCost = spell.getProperty(SpellProperty.SPEED) * 10;
+        double speedCost = spell.getProperty(SpellProperties.SPEED) * 10;
 
         return tierCost + speedCost;
     }

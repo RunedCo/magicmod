@@ -15,16 +15,16 @@ public class MagicSetup {
     }
 
     public static void setupSpellProperties() {
-        SpellProperty.WORLD = registerSpellProperty("world");
-        SpellProperty.SPEED = registerSpellProperty("speed", 1.0D);
-        SpellProperty.CASTER = registerSpellProperty("entity_caster");
-        SpellProperty.TARGETS = registerSpellProperty("entity_targets", new ArrayList<>());
-        SpellProperty.RANGE = registerSpellProperty("range", 4.0D);
-        SpellProperty.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
-        SpellProperty.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
-        SpellProperty.START_POSITION = registerSpellProperty("initial_block_position");
-        SpellProperty.DROP_TARGET = registerSpellProperty("item_drop_target", ItemTarget.NONE);
-        SpellProperty.DROPS = registerSpellProperty("client", new ArrayList<>());
+        SpellProperties.WORLD = registerSpellProperty("world");
+        SpellProperties.SPEED = registerSpellProperty("speed", 1.0D);
+        SpellProperties.CASTER = registerSpellProperty("entity_caster");
+        SpellProperties.TARGETS = registerSpellProperty("entity_targets", new ArrayList<>());
+        SpellProperties.RANGE = registerSpellProperty("range", 4.0D);
+        SpellProperties.EXPLOSION_STRENGTH = registerSpellProperty("explosion_strength", 4.0f);
+        SpellProperties.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
+        SpellProperties.START_POSITION = registerSpellProperty("initial_block_position");
+        SpellProperties.ITEM_TARGET = registerSpellProperty("item_target", ItemTarget.NONE);
+        SpellProperties.DROPS = registerSpellProperty("client", new ArrayList<>());
     }
 
     //@SuppressWarnings("unchecked")

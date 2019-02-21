@@ -21,8 +21,8 @@ public class FireSpellEffect extends SpellEffect {
 
     @Override
     public boolean run(Spell spell) {
-        World world = spell.getProperty(SpellProperty.WORLD);
-        List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        List<BlockPos> positions = spell.getProperty(SpellProperties.BLOCK_POSITIONS);
 
         for (BlockPos pos : positions) {
             BlockPos aboveBlock = pos.offset(Direction.UP).add(0, 1, 0);

@@ -21,8 +21,8 @@ public class ExtractSpellEffect extends SpellEffect {
 
     @Override
     public boolean run(Spell spell) {
-        World world = spell.getProperty(SpellProperty.WORLD);
-        List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        List<BlockPos> positions = spell.getProperty(SpellProperties.BLOCK_POSITIONS);
 
         for (BlockPos pos : positions) {
             Block block = world.getBlockState(pos).getBlock();

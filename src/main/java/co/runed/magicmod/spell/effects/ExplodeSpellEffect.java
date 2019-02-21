@@ -16,9 +16,9 @@ public class ExplodeSpellEffect extends SpellEffect {
 
     @Override
     public boolean run(Spell spell) {
-        World world = spell.getProperty(SpellProperty.WORLD);
-        List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
-        float explosionStrength = spell.getProperty(SpellProperty.EXPLOSION_STRENGTH);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        List<BlockPos> positions = spell.getProperty(SpellProperties.BLOCK_POSITIONS);
+        float explosionStrength = spell.getProperty(SpellProperties.EXPLOSION_STRENGTH);
 
         for (BlockPos pos : positions) {
             world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), explosionStrength, true);

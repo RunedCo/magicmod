@@ -20,9 +20,9 @@ public class TestSpellEffect extends SpellEffect {
 
     @Override
     public boolean run(Spell spell) {
-        BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
-        World world = spell.getProperty(SpellProperty.WORLD);
-        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.CASTER);
+        BlockPos position = spell.getProperty(SpellProperties.START_POSITION);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperties.CASTER);
         BlockState state = world.getBlockState(position);
 
         System.out.println(ToolMaterials.DIAMOND.getBlockBreakingSpeed());

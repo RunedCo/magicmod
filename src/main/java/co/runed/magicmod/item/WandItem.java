@@ -31,7 +31,7 @@ public class WandItem extends BaseItem {
         /* spell = new Spell();
 
         spell
-                .setProperty(SpellProperty.RANGE, 10.0D)
+                .setProperty(SpellProperties.RANGE, 10.0D)
                 .add(new VeinSpellEffect())
                 .add(new BlockDropsToInventoryEffect())
                 .add(new BlockBreakSpellEffect()); */
@@ -66,7 +66,7 @@ public class WandItem extends BaseItem {
 
         if (spell == null) {
             spell = new Spell()
-                    .setProperty(SpellProperty.RANGE, 10.0D)
+                    .setProperty(SpellProperties.RANGE, 10.0D)
                     .add(new VeinSpellEffect())
                     .add(new BlockBreakSpellEffect().setTier(3))
                     .add(new BlockDropsToInventoryEffect());
@@ -75,16 +75,16 @@ public class WandItem extends BaseItem {
             //return ActionResult.PASS;
         }
 
-        spell.setProperty(SpellProperty.WORLD, world);
+        spell.setProperty(SpellProperties.WORLD, world);
 
-        if (!spell.isBuilt() || !spell.getProperty(SpellProperty.START_POSITION).equals(position)) {
+        if (!spell.isBuilt() || !spell.getProperty(SpellProperties.START_POSITION).equals(position)) {
             ArrayList<BlockPos> posArrayList = new ArrayList<>();
             posArrayList.add(position);
 
             spell
-                    .setProperty(SpellProperty.START_POSITION, position)
-                    .setProperty(SpellProperty.BLOCK_POSITIONS, posArrayList)
-                    .setProperty(SpellProperty.CASTER, player);
+                    .setProperty(SpellProperties.START_POSITION, position)
+                    .setProperty(SpellProperties.BLOCK_POSITIONS, posArrayList)
+                    .setProperty(SpellProperties.CASTER, player);
 
             spell.build();
         }

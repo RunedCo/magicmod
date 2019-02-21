@@ -10,17 +10,6 @@ import net.minecraft.world.World;
 import java.util.List;
 
 public class SpellProperty<T> {
-    public static SpellProperty<World> WORLD;
-    public static SpellProperty<Double> SPEED;
-    public static SpellProperty<Entity> CASTER;
-    public static SpellProperty<List<Entity>> TARGETS;
-    public static SpellProperty<Double> RANGE;
-    public static SpellProperty<Float> EXPLOSION_STRENGTH;
-    public static SpellProperty<List<BlockPos>> BLOCK_POSITIONS;
-    public static SpellProperty<BlockPos> START_POSITION;
-    public static SpellProperty<ItemTarget> DROP_TARGET;
-    public static SpellProperty<List<ItemStack>> DROPS;
-
     private Identifier identifier;
     private T defaultValue;
 

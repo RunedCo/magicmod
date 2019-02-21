@@ -20,9 +20,9 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
 
     @Override
     public boolean build(Spell spell) {
-        BlockPos startPosition = spell.getProperty(SpellProperty.START_POSITION);
-        World world = spell.getProperty(SpellProperty.WORLD);
-        Double range = spell.getProperty(SpellProperty.RANGE);
+        BlockPos startPosition = spell.getProperty(SpellProperties.START_POSITION);
+        World world = spell.getProperty(SpellProperties.WORLD);
+        Double range = spell.getProperty(SpellProperties.RANGE);
         this.currentPositions = new ArrayList<>();
 
         this.vein = new Vein(world, startPosition, range);
@@ -36,12 +36,12 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
     public boolean run(Spell spell) {
         int concurrentVeins = 1;
 
-        BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
-        World world = spell.getProperty(SpellProperty.WORLD);
+        BlockPos position = spell.getProperty(SpellProperties.START_POSITION);
+        World world = spell.getProperty(SpellProperties.WORLD);
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
-        List<BlockPos> posList = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
-        Double range = spell.getProperty(SpellProperty.RANGE);
+        List<BlockPos> posList = spell.getProperty(SpellProperties.BLOCK_POSITIONS);
+        Double range = spell.getProperty(SpellProperties.RANGE);
 
         if(!posList.isEmpty() && !Collections.disjoint(posList, currentPositions)) {
             return true;
@@ -63,7 +63,7 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
             this.run(spell);
         }
 
-        spell.setProperty(SpellProperty.BLOCK_POSITIONS, currentPositions);
+        spell.setProperty(SpellProperties.BLOCK_POSITIONS, currentPositions);
 
         return true;
     }

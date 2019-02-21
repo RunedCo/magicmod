@@ -15,6 +15,7 @@ import net.minecraft.client.util.math.Vector3f;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,19 +31,16 @@ public class TestSpellScreen extends Screen {
     //borders: blue: (7, 71, 87) red: (87, 7, 7) orange: (87, 37, 7) purple(47, 7, 87)
 
     public TestSpellScreen() {
-        this.nodes = new LinkedList<>();
+        this.nodes = new ArrayList<>();
 
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
+
+        int a = 0x07572D;
     }
 
     @Override
     public void method_18326(int mouseX, int mouseY, float float_1) {
-
-        //this.test.addText("test");
-
-        GlStateManager.pushMatrix();
-        //GlStateManager.scalef(0.5f, 0.5f, 0.5f);
         for (int i = 0; i < this.nodes.size(); i++) {
             NodeWidget node = this.nodes.get(i);
 
@@ -57,8 +55,6 @@ public class TestSpellScreen extends Screen {
                 this.drawLine(this.nodes.get(i - 1).getBottomConnection(), node.getTopConnection(), 5, -1);
             }
         }
-
-        GlStateManager.popMatrix();
 
         this.drawString(MinecraftClient.getInstance().textRenderer, "x: " + mouseX + " y: " + mouseY, 10, 10, -1);
 

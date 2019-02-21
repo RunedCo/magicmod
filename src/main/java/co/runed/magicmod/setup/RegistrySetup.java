@@ -8,5 +8,6 @@ import net.minecraft.util.registry.SimpleRegistry;
 public class RegistrySetup {
     public static void init() {
         MagicRegistry.SPELL_PROPERTIES = Registry.REGISTRIES.add(MagicMod.REGISTRY_UTIL.createId("spell_properties"), new SimpleRegistry<>());
+        MagicRegistry.SPELL_EFFECTS = Registry.REGISTRIES.add(MagicMod.REGISTRY_UTIL.createId("spell_effects"), new SimpleRegistry<>());
     }
 }

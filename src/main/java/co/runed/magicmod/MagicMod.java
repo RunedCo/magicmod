@@ -19,7 +19,7 @@ public class MagicMod implements ModInitializer {
 		BlockSetup.init();
 		ItemSetup.init();
 		RecipeSetup.init();
-		SpellSetup.init();
+		MagicSetup.init();
 		EntitySetup.init();
 	}
 }

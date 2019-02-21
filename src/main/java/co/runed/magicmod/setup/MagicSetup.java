@@ -9,9 +9,9 @@ import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 
-public class SpellSetup {
+public class MagicSetup {
     public static void init() {
-        SpellSetup.setupSpellProperties();
+        MagicSetup.setupSpellProperties();
     }
 
     public static void setupSpellProperties() {

@@ -32,4 +32,8 @@ public class SpellEffect {
     public List<SpellProperty> getGraphProperties() {
         return new ArrayList<>();
     }
+
+    public SpellEffect create() {
+        return new SpellEffect();
+    }
 }

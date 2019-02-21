@@ -6,6 +6,5 @@ import net.minecraft.util.registry.SimpleRegistry;
 
 public class MagicRegistry {
     public static SimpleRegistry<SpellProperty<?>> SPELL_PROPERTIES;
-    //TODO: implement registry
     public static SimpleRegistry<SpellEffect> SPELL_EFFECTS;
 }

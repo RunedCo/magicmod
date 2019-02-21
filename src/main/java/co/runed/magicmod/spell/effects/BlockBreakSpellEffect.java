@@ -1,9 +1,12 @@
-package co.runed.magicmod.api.spell.effects;
+package co.runed.magicmod.spell.effects;
 
 import co.runed.brace.LootUtil;
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.item.MagicToolMaterials;
-import co.runed.magicmod.api.spell.*;
+import co.runed.magicmod.api.spell.ItemTarget;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;
@@ -12,15 +15,18 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class BlockBreakSpellEffect extends TieredSpellEffect {
+public class BlockBreakSpellEffect extends SpellEffect {
     private Map<BlockPos, Float> currentProgress = new HashMap<>();
 
     ToolMaterial material;
 
     @Override
-    public boolean build(ISpell spell) {
+    public boolean build(Spell spell) {
         this.currentProgress = new HashMap<>();
 
         this.material = this.tierToMaterial();
@@ -42,7 +48,7 @@ public class BlockBreakSpellEffect extends TieredSpellEffect {
 
     //TODO: split functionality
     @Override
-    public boolean run(ISpell spell) {
+    public boolean run(Spell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
         List<BlockPos> positions = new ArrayList<>(spell.getProperty(SpellProperty.BLOCK_POSITIONS));
         ServerPlayerEntity player = (ServerPlayerEntity) spell.getProperty(SpellProperty.CASTER);
@@ -82,7 +88,7 @@ public class BlockBreakSpellEffect extends TieredSpellEffect {
     }
 
     @Override
-    public double getManaCost(ISpell spell) {
+    public double getManaCost(Spell spell) {
         double tierCost = super.getManaCost(spell);
         double speedCost = spell.getProperty(SpellProperty.SPEED) * 10;
 

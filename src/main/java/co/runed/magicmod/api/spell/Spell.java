@@ -8,24 +8,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Spell implements ISpell {
-    private List<ISpellEffect> components = new ArrayList<>();
+public class Spell {
+    private List<SpellEffect> effects = new ArrayList<>();
     private Map<SpellProperty, Object> properties = new HashMap<>();
 
     private boolean built = false;
-    private int tier = 1;
     private double manaCost = 0;
 
-    @Override
     public Spell build() {
         this.manaCost = 0;
 
-        for (ISpellEffect component : components) {
-            boolean success = component.build(this);
+        for (SpellEffect effect : effects) {
+            boolean success = effect.build(this);
 
             if(!success) return this;
 
-            this.manaCost += component.getManaCost(this);
+            this.manaCost += effect.getManaCost(this);
         }
 
         this.built = true;
@@ -33,15 +31,13 @@ public class Spell implements ISpell {
         return this;
     }
 
-    @Override
     public boolean isBuilt() {
         return this.built;
     }
 
-    @Override
     public boolean run() {
-        for (ISpellEffect component : components) {
-            boolean success = component.run(this);
+        for (SpellEffect effect : effects) {
+            boolean success = effect.run(this);
 
             if(!success) return false;
         }
@@ -49,14 +45,12 @@ public class Spell implements ISpell {
         return true;
     }
 
-    @Override
-    public Spell add(ISpellEffect effect) {
-        this.components.add(effect);
+    public Spell add(SpellEffect effect) {
+        this.effects.add(effect);
 
         return this;
     }
 
-    @Override
     public <T> Spell setProperty(SpellProperty<T> property, T value) {
         this.properties.put(property, value);
 
@@ -64,7 +58,6 @@ public class Spell implements ISpell {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
     public <T> T getProperty(SpellProperty<T> property) {
         if(!this.hasProperty(property)) return property.getDefault();
 
@@ -79,23 +72,19 @@ public class Spell implements ISpell {
         return this.getProperty(property);
     }
 
-    @Override
     public boolean hasProperty(SpellProperty property) {
         return this.properties.containsKey(property);
     }
 
-    @Override
     public double getManaCost() {
         return this.manaCost;
     }
 
-    @Override
     public CompoundTag toTag() {
         return new CompoundTag();
     }
 
-    @Override
     public void fromTag(CompoundTag tag) {
-        ListTag componentsTag = tag.getList("effects", 10);
+        ListTag effectsTag = tag.getList("effects", 10);
     }
 }

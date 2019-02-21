@@ -1,9 +1,9 @@
-package co.runed.magicmod.api.spell.effects;
+package co.runed.magicmod.spell.effects;
 
 import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;
-import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.TieredSpellEffect;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class VeinSpellEffect extends TieredSpellEffect implements INbtSerializable {
+public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
     private Vein vein;
     private List<BlockPos> currentPositions;
 
     @Override
-    public boolean build(ISpell spell) {
+    public boolean build(Spell spell) {
         BlockPos startPosition = spell.getProperty(SpellProperty.START_POSITION);
         World world = spell.getProperty(SpellProperty.WORLD);
         Double range = spell.getProperty(SpellProperty.RANGE);
@@ -33,7 +33,7 @@ public class VeinSpellEffect extends TieredSpellEffect implements INbtSerializab
     }
 
     @Override
-    public boolean run(ISpell spell) {
+    public boolean run(Spell spell) {
         int concurrentVeins = 1;
 
         BlockPos position = spell.getProperty(SpellProperty.START_POSITION);
@@ -69,7 +69,7 @@ public class VeinSpellEffect extends TieredSpellEffect implements INbtSerializab
     }
 
     @Override
-    public double getManaCost(ISpell spell) {
+    public double getManaCost(Spell spell) {
         return 0;
     }
 }

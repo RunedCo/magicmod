@@ -1,7 +1,7 @@
-package co.runed.magicmod.api.spell.effects;
+package co.runed.magicmod.spell.effects;
 
-import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.TieredSpellEffect;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import co.runed.magicmod.entity.TestEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -11,14 +11,14 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
-public class SpawnEntitySpellEffect extends TieredSpellEffect {
+public class SpawnEntitySpellEffect extends SpellEffect {
     @Override
-    public boolean build(ISpell spell) {
+    public boolean build(Spell spell) {
         return true;
     }
 
     @Override
-    public boolean run(ISpell spell) {
+    public boolean run(Spell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
         PlayerEntity player = (PlayerEntity) spell.getProperty(SpellProperty.CASTER);
         double range = spell.getProperty(SpellProperty.RANGE);
@@ -44,7 +44,7 @@ public class SpawnEntitySpellEffect extends TieredSpellEffect {
     }
 
     @Override
-    public double getManaCost(ISpell spell) {
+    public double getManaCost(Spell spell) {
         return 0;
     }
 

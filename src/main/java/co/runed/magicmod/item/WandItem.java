@@ -1,12 +1,11 @@
 package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.SpellManager;
-import co.runed.magicmod.api.spell.ISpell;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellProperty;
-import co.runed.magicmod.api.spell.effects.BlockBreakSpellEffect;
-import co.runed.magicmod.api.spell.effects.BlockDropsToInventoryEffect;
-import co.runed.magicmod.api.spell.effects.VeinSpellEffect;
+import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
+import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
+import co.runed.magicmod.spell.effects.VeinSpellEffect;
 import co.runed.magicmod.client.gui.TestSpellScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -63,7 +62,7 @@ public class WandItem extends BaseItem {
         BlockState blockState = world.getBlockState(position);
         Block block = blockState.getBlock();
 
-        ISpell spell = SpellManager.getActiveSpell(player);
+        Spell spell = SpellManager.getActiveSpell(player);
 
         if (spell == null) {
             spell = new Spell()

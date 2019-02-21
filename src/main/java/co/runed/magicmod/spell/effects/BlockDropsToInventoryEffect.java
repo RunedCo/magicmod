@@ -1,22 +1,25 @@
-package co.runed.magicmod.api.spell.effects;
+package co.runed.magicmod.spell.effects;
 
-import co.runed.magicmod.api.spell.*;
+import co.runed.magicmod.api.spell.ItemTarget;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 
 import java.util.List;
 
-public class BlockDropsToInventoryEffect extends TieredSpellEffect {
+public class BlockDropsToInventoryEffect extends SpellEffect {
     @Override
-    public boolean build(ISpell spell) {
+    public boolean build(Spell spell) {
         spell.setProperty(SpellProperty.DROP_TARGET, ItemTarget.CASTER_INVENTORY);
 
         return true;
     }
 
     @Override
-    public boolean run(ISpell spell) {
+    public boolean run(Spell spell) {
         List<ItemStack> items = spell.getProperty(SpellProperty.DROPS);
         PlayerEntity player = (PlayerEntity)spell.getProperty(SpellProperty.CASTER);
 
@@ -34,7 +37,7 @@ public class BlockDropsToInventoryEffect extends TieredSpellEffect {
     }
 
     @Override
-    public double getManaCost(ISpell spell) {
+    public double getManaCost(Spell spell) {
         return 10;
     }
 }

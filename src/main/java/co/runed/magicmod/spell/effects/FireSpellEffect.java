@@ -1,7 +1,7 @@
-package co.runed.magicmod.api.spell.effects;
+package co.runed.magicmod.spell.effects;
 
-import co.runed.magicmod.api.spell.ISpell;
-import co.runed.magicmod.api.spell.TieredSpellEffect;
+import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellEffect;
 import co.runed.magicmod.api.spell.SpellProperty;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 import java.util.List;
 
 //TODO: fix glitchy fire
-public class FireSpellEffect extends TieredSpellEffect {
+public class FireSpellEffect extends SpellEffect {
     @Override
-    public boolean build(ISpell spell) {
+    public boolean build(Spell spell) {
         return true;
     }
 
     @Override
-    public boolean run(ISpell spell) {
+    public boolean run(Spell spell) {
         World world = spell.getProperty(SpellProperty.WORLD);
         List<BlockPos> positions = spell.getProperty(SpellProperty.BLOCK_POSITIONS);
 
@@ -38,7 +38,7 @@ public class FireSpellEffect extends TieredSpellEffect {
     }
 
     @Override
-    public double getManaCost(ISpell spell) {
+    public double getManaCost(Spell spell) {
         return 0;
     }
 }

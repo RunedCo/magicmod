@@ -1,6 +1,5 @@
 package co.runed.magicmod.api;
 
-import co.runed.magicmod.api.spell.ISpell;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 
@@ -9,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SpellManager {
-    private static Map<Entity, ISpell> activeSpells = new HashMap<>();
-    private static Map<Entity, List<ISpell>> spellLibraries = new HashMap<>();
+    private static Map<Entity, Spell> activeSpells = new HashMap<>();
+    private static Map<Entity, List<Spell>> spellLibraries = new HashMap<>();
 
     public static void init(World world) {
         //TODO: LOAD SPELL LIBRARIES
@@ -19,18 +18,18 @@ public class SpellManager {
 
     }
 
-    public static void addSpell(Entity entity, ISpell spell) {
+    public static void addSpell(Entity entity, Spell spell) {
 
     }
 
-    public static void setActiveSpell(Entity caster, ISpell spell) {
+    public static void setActiveSpell(Entity caster, Spell spell) {
         activeSpells.put(caster, spell);
     }
 
-    public static ISpell getActiveSpell(Entity caster) {
+    public static Spell getActiveSpell(Entity caster) {
         if(!activeSpells.containsKey(caster)) return null;
 
-        ISpell spell = activeSpells.get(caster);
+        Spell spell = activeSpells.get(caster);
 
         return spell;
     }

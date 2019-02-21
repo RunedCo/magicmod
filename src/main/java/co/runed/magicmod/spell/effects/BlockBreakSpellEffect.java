@@ -6,7 +6,7 @@ import co.runed.magicmod.api.item.MagicToolMaterials;
 import co.runed.magicmod.api.spell.ItemTarget;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffect;
-import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.SpellProperties;
 import net.minecraft.client.network.packet.BlockBreakingProgressS2CPacket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ToolMaterial;

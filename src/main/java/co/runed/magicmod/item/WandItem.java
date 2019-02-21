@@ -2,7 +2,7 @@ package co.runed.magicmod.item;
 
 import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.spell.Spell;
-import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.SpellProperties;
 import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
 import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
 import co.runed.magicmod.spell.effects.VeinSpellEffect;

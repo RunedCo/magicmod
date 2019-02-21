@@ -3,6 +3,7 @@ package co.runed.magicmod.setup;
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.ItemTarget;
+import co.runed.magicmod.api.spell.SpellProperties;
 import co.runed.magicmod.api.spell.SpellProperty;
 import com.sun.istack.internal.Nullable;
 import net.minecraft.util.Identifier;

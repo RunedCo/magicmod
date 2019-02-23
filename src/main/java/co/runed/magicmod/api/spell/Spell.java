@@ -62,6 +62,14 @@ public class Spell {
         return this;
     }
 
+    public List<SpellEffect> getEffects() {
+        return this.effects;
+    }
+
+    public Map<SpellProperty, Object> getProperties() {
+        return this.properties;
+    }
+
     public <T> Spell putProperty(SpellProperty<T> property, T value) {
         this.properties.put(property, value);
 
@@ -89,8 +97,12 @@ public class Spell {
         return new CompoundTag();
     }
 
-    public void fromTag(CompoundTag tag) {
+    public static Spell fromTag(CompoundTag tag) {
+        Spell spell = new Spell();
+
         ListTag effectsTag = tag.getList("effects", 10);
+
+        return spell;
     }
 
     public enum CastType {

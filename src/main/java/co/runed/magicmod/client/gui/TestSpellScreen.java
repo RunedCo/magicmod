@@ -33,7 +33,7 @@ public class TestSpellScreen extends Screen {
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
 
-        int a = 0x07572D;
+        //int a = 0x07572D;
     }
 
     @Override
@@ -42,9 +42,6 @@ public class TestSpellScreen extends Screen {
             NodeWidget node = this.nodes.get(i);
 
             node.setPosition(50 + (10 * i), (i + 1) * 60);
-            //if(i == 1) {
-            //    node.setPosition(mouseX, mouseY);
-            //}
 
             node.render();
 
@@ -52,14 +49,6 @@ public class TestSpellScreen extends Screen {
                 this.drawLine(this.nodes.get(i - 1).getBottomConnection(), node.getTopConnection(), 5, -1);
             }
         }
-
-        this.drawString(MinecraftClient.getInstance().textRenderer, "x: " + mouseX + " y: " + mouseY, 10, 10, -1);
-
-        //new OptionSliderWidget().render(int_1, int_2, float_1);
-
-        //this.zOffset = 200;
-        //this.drawLine(new Vector3f(45.5f, 132, 0), new Vector3f(45.5f, 220 - 2, 0), 5, -1);
-        //this.zOffset = 0;
     }
 
     public void drawLine(Vector3f startPos, Vector3f endPos, int lineWidth, int color) {

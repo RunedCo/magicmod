@@ -37,11 +37,11 @@ public class VeinBlockArea extends BlockArea {
         return this.blockType;
     }
 
-    public BlockPos getStart() {
+    public BlockPos getStartPosition() {
         return this.startPosition;
     }
 
-    public BlockPos getNext() {
+    public BlockPos next() {
         if(this.blockPositionList.isEmpty()) {
             return this.startPosition;
         }

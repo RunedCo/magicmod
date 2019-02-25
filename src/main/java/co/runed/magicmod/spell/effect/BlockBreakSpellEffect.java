@@ -1,7 +1,7 @@
 package co.runed.magicmod.spell.effect;
 
-import co.runed.brace.util.LootUtil;
 import co.runed.brace.util.BlockUtil;
+import co.runed.brace.util.LootUtil;
 import co.runed.magicmod.api.item.MagicToolMaterials;
 import co.runed.magicmod.api.spell.ItemTarget;
 import co.runed.magicmod.api.spell.Spell;

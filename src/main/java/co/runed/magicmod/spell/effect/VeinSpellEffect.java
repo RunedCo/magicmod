@@ -48,14 +48,14 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
         currentPositions.clear();
 
         for (int i = 0; i < concurrentVeins; i++) {
-            BlockPos pos = veinBlockArea.getNext();
+            BlockPos pos = veinBlockArea.next();
 
             this.veinBlockArea.generateAndAdd(pos);
 
             currentPositions.add(pos);
         }
 
-        if(block != this.veinBlockArea.getBlockType() || currentPositions.isEmpty() || !this.veinBlockArea.getStart().equals(position)) {
+        if(block != this.veinBlockArea.getBlockType() || currentPositions.isEmpty() || !this.veinBlockArea.getStartPosition().equals(position)) {
             this.veinBlockArea = new VeinBlockArea(world, position, range);
 
             this.run(spell);

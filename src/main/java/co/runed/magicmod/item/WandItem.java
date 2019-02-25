@@ -40,8 +40,6 @@ public class WandItem extends BaseItem {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) {
-            //MinecraftClient.getInstance().openScreen(new TestSpellScreen());
-
             return ActionResult.PASS;
         }
 
@@ -63,8 +61,13 @@ public class WandItem extends BaseItem {
             SpellManager.addSpell(player, spell);
         }
 
+        if(spell.getCastType() != Spell.CastType.USE_BLOCK) return ActionResult.PASS;
+
         if (!spell.isBuilt() || !spell.getProperty(SpellProperties.START_POSITION).equals(position)) {
-            ArrayList<BlockPos> posArrayList = new ArrayList<BlockPos>() {{add(position);}};
+            ArrayList<BlockPos> posArrayList = new ArrayList<BlockPos>() {{
+                add(position);
+            }};
+
             posArrayList.add(position);
 
             spell
@@ -78,11 +81,10 @@ public class WandItem extends BaseItem {
 
         player.addChatMessage(new StringTextComponent("Cost: " + spell.getManaCost()), true);
 
-        if (spell.getCastType() == Spell.CastType.USE_BLOCK) {
             //player.networkHandler.sendPacket(new SyncSpellS2CPacket(spell));
 
-            spell.run();
-        }
+        spell.run();
+
 
         //TODO: shorten
         /* ExtractionRecipe recipe = null;
@@ -97,11 +99,11 @@ public class WandItem extends BaseItem {
 
         if (recipe == null) return ActionResult.FAILURE; */
 
-        /* BlockPos currentPosition = vein.getNext();
+        /* BlockPos currentPosition = vein.next();
 
-        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStart().equals(position)) {
+        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
             this.vein = new VeinBlockArea(world, position, 3);
-            currentPosition = vein.getNext();
+            currentPosition = vein.next();
         }
 
         Block currentBlock = world.getBlockState(currentPosition).getBlock();

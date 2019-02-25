@@ -11,52 +11,45 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class VeinBlockArea {
+public class VeinBlockArea extends BlockArea {
     private final World world;
     private final BlockPos startPosition;
-    private BlockPos currentPosition;
 
     private final Block blockType;
 
-    private double maxDistance = 16.0D;
+    private double range;
 
-    private final List<BlockPos> blocksToBreak = new ArrayList<>();
+    private final List<BlockPos> blockPositionList = new ArrayList<>();
 
-    private final Random rand;
+    private final Random random;
 
-    public VeinBlockArea(World world, BlockPos startPos) {
-        this(world, startPos, 16.0D);
-    }
-
-    public VeinBlockArea(World world, BlockPos startPos, double maxDistance) {
+    public VeinBlockArea(World world, BlockPos startPos, double range) {
         this.world = world;
         this.startPosition = startPos;
         this.blockType = world.getBlockState(startPos).getBlock();
-        this.maxDistance = maxDistance;
-        this.rand = new Random(startPosition.asLong());
+        this.range = range;
+        this.random = new Random(startPosition.asLong());
 
-        this.generateVeinAndAdd(this.startPosition);
+        this.generateAndAdd(this.startPosition);
     }
 
     public Block getBlockType() {
         return this.blockType;
     }
 
-    public BlockPos getStartPosition() {
+    public BlockPos getStart() {
         return this.startPosition;
     }
 
     public BlockPos getNext() {
-        if(this.blocksToBreak.isEmpty()) {
+        if(this.blockPositionList.isEmpty()) {
             return this.startPosition;
         }
 
-        this.currentPosition = this.blocksToBreak.remove(0);
-
-        return this.currentPosition;
+        return this.blockPositionList.remove(0);
     }
 
-    public List<BlockPos> generateVein(BlockPos blockPos) {
+    public List<BlockPos> generate(BlockPos blockPos) {
         List<BlockPos> blocks = new ArrayList<>();
 
         int[] offsets = {-1, 0, 1};
@@ -71,8 +64,8 @@ public class VeinBlockArea {
 
                         if (!offsetPos.equals(this.startPosition) &&
                                 block.equals(this.blockType) &&
-                                !this.blocksToBreak.contains(offsetPos) &&
-                                MathUtil.maxDistanceAway(this.startPosition, offsetPos) <= this.maxDistance) {
+                                !this.blockPositionList.contains(offsetPos) &&
+                                MathUtil.maxDistanceAway(this.startPosition, offsetPos) <= this.range) {
 
                             blocks.add(offsetPos);
                         }
@@ -81,37 +74,37 @@ public class VeinBlockArea {
             }
         }
 
-        Collections.shuffle(blocks, this.rand);
+        Collections.shuffle(blocks, this.random);
 
         return blocks;
     }
 
-    public List<BlockPos> generateVeinAndAdd(BlockPos pos) {
-        List<BlockPos> vein = this.generateVein(pos);
+    public List<BlockPos> generateAndAdd(BlockPos pos) {
+        List<BlockPos> vein = this.generate(pos);
 
-        this.blocksToBreak.addAll(vein);
+        this.blockPositionList.addAll(vein);
 
         return vein;
     }
 
-    public List<BlockPos> generateFullVein(BlockPos startPos) {
+    public List<BlockPos> generateFull(BlockPos startPos) {
         List<BlockPos> list = new ArrayList<>();
 
         list.add(startPos);
-        list.addAll(this.iterateFullVein(startPos, null));
+        list.addAll(this.iterateFull(startPos, null));
 
         return list;
     }
 
-    private List<BlockPos> iterateFullVein(BlockPos position, @Nullable List<BlockPos> list) {
+    private List<BlockPos> iterateFull(BlockPos position, @Nullable List<BlockPos> list) {
         List<BlockPos> previousPositions = list !=  null ? list : new ArrayList<>();
-        List<BlockPos> generatedPositions = this.generateVein(position);
+        List<BlockPos> generatedPositions = this.generate(position);
 
         for (BlockPos pos : generatedPositions) {
             if(!previousPositions.contains(pos)) {
                 previousPositions.add(pos);
 
-                this.iterateFullVein(pos, previousPositions);
+                this.iterateFull(pos, previousPositions);
             }
         }
 

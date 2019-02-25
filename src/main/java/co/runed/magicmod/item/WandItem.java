@@ -99,7 +99,7 @@ public class WandItem extends BaseItem {
 
         /* BlockPos currentPosition = vein.getNext();
 
-        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
+        if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStart().equals(position)) {
             this.vein = new VeinBlockArea(world, position, 3);
             currentPosition = vein.getNext();
         }
@@ -108,7 +108,7 @@ public class WandItem extends BaseItem {
 
         world.breakBlock(currentPosition, true);
 
-        this.vein.generateVein(currentPosition);
+        this.vein.generate(currentPosition);
 /*
         // vein component (should return blockPos)
         if (block != this.veinBlock || this.startPos == null || !this.startPos.equals(context.getPos())) {
@@ -117,7 +117,7 @@ public class WandItem extends BaseItem {
             this.startPos = context.getPos();
             this.currentBlock = null;
 
-            this.generateVein(world, context.getPos());
+            this.generate(world, context.getPos());
         }
 
         if (this.currentBlock == null) {
@@ -169,7 +169,7 @@ public class WandItem extends BaseItem {
         world.setBlockState(this.currentBlock, blockItem.getBlock().getDefaultState());
 
         if (this.currentBlock.equals(this.startPos)) this.startPos = null;
-        this.generateVein(world, this.currentBlock);
+        this.generate(world, this.currentBlock);
         this.currentBlock = null;
 */
         return ActionResult.SUCCESS;

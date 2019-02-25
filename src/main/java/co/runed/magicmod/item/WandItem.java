@@ -1,6 +1,7 @@
 package co.runed.magicmod.item;
 
-import co.runed.magicmod.api.SpellManager;
+import co.runed.magicmod.api.spell.SpellManager;
+import co.runed.magicmod.api.item.ICaster;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.effect.SpellEffects;
 import co.runed.magicmod.api.spell.property.SpellProperties;
@@ -15,19 +16,11 @@ import net.minecraft.world.World;
 
 import java.util.ArrayList;
 
-public class WandItem extends BaseItem {
+public class WandItem extends BaseItem implements ICaster {
     public WandItem() {
         super(new Item.Settings().stackSize(1));
 
         this.setRegistryName("wand");
-
-        /* spell = new Spell();
-
-        spell
-                .putProperty(SpellProperties.RANGE, 10.0D)
-                .putEffect(new VeinSpellEffect())
-                .putEffect(new BlockDropsToInventoryEffect())
-                .putEffect(new BlockBreakSpellEffect()); */
     }
 
     @Override
@@ -83,7 +76,7 @@ public class WandItem extends BaseItem {
 
             //player.networkHandler.sendPacket(new SyncSpellS2CPacket(spell));
 
-        spell.run();
+        this.cast(spell);
 
 
         //TODO: shorten
@@ -176,12 +169,9 @@ public class WandItem extends BaseItem {
 */
         return ActionResult.SUCCESS;
     }
+
+    @Override
+    public void cast(Spell spell) {
+        spell.run();
+    }
 }
-
-/* if (blockState.getBlock() == this.veinBlock && !this.blocksToBreak.contains(offsetPos)) {
-                            if (!offsetPos.equals(startPos)) this.blocksToBreak.putEffect(offsetPos);
-
-                            Collections.shuffle(this.blocksToBreak);
-
-                            //System.out.println("added " + offsetPos.toString() + " " + blockState.getBlock().getTranslationKey());
-                        } */

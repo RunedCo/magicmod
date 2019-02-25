@@ -1,4 +1,4 @@
-package co.runed.magicmod.api;
+package co.runed.magicmod.api.spell;
 
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.spell.Spell;

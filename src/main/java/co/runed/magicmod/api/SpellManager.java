@@ -2,30 +2,19 @@ package co.runed.magicmod.api;
 
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.spell.Spell;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
 import net.fabricmc.fabric.api.util.NbtType;
-import net.fabricmc.fabric.impl.client.model.ModelLoadingRegistryImpl;
-import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.launch.common.FabricLauncher;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
-import net.minecraft.resource.Resource;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.world.level.storage.LevelStorage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class SpellManager {
     private static Path SPELL_DIRECTORY = Paths.get(MagicMod.CONFIG_DIRECTORY.toString(), "spells");

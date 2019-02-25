@@ -1,11 +1,7 @@
 package co.runed.magicmod.api.spell.property;
 
-import co.runed.brace.INbtSerializable;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 
 public class SpellPropertySerializable<T> extends SpellProperty<T> {
 

@@ -48,15 +48,10 @@ public class WandItem extends BaseItem {
 
             return ActionResult.PASS;
         }
-        //if (this.vein == null) this.vein = new Vein(context.getWorld(), context.getBlockPos(), 3);
-
-        //System.out.println(context.getWorld());
 
         ServerPlayerEntity player = (ServerPlayerEntity) context.getPlayer();
         BlockPos position = context.getBlockPos();
         World world = context.getWorld();
-        BlockState blockState = world.getBlockState(position);
-        Block block = blockState.getBlock();
 
         Spell spell = SpellManager.getActiveSpell(player);
 
@@ -72,16 +67,15 @@ public class WandItem extends BaseItem {
             SpellManager.addSpell(player, spell);
         }
 
-        spell.putProperty(SpellProperties.WORLD, world);
-
         if (!spell.isBuilt() || !spell.getProperty(SpellProperties.START_POSITION).equals(position)) {
-            ArrayList<BlockPos> posArrayList = new ArrayList<>();
+            ArrayList<BlockPos> posArrayList = new ArrayList<BlockPos>() {{add(position);}};
             posArrayList.add(position);
 
             spell
                     .putProperty(SpellProperties.START_POSITION, position)
                     .putProperty(SpellProperties.BLOCK_POSITIONS, posArrayList)
-                    .putProperty(SpellProperties.CASTER, player);
+                    .putProperty(SpellProperties.CASTER, player)
+                    .putProperty(SpellProperties.WORLD, world);
 
             spell.build();
         }
@@ -89,7 +83,7 @@ public class WandItem extends BaseItem {
         player.addChatMessage(new StringTextComponent("Cost: " + spell.getManaCost()), true);
 
         if (spell.getCastType() == Spell.CastType.USE_BLOCK) {
-            player.networkHandler.sendPacket(new SyncSpellS2CPacket(spell));
+            //player.networkHandler.sendPacket(new SyncSpellS2CPacket(spell));
 
             spell.run();
         }

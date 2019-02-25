@@ -32,6 +32,8 @@ public class SyncSpellS2CPacket implements Packet<ClientPlayPacketListener> {
 
     @Override
     public void apply(ClientPlayPacketListener var1) {
+
+        //TODO: add actual handling
         SpellManager.addSpell(MinecraftClient.getInstance().player, this.spell);
     }
 

@@ -36,8 +36,6 @@ public class Spell {
         this.manaCost = 0;
 
         for (SpellEffect effect : effects) {
-            if(this.effects.contains(effect) && !this.built) continue;
-
             boolean success = effect.build(this);
 
             if(!success) return this;
@@ -79,6 +77,8 @@ public class Spell {
     }
 
     public <T> Spell putProperty(SpellProperty<T> property, T value) {
+        if(this.hasProperty(property) && !this.built) return this;
+
         this.properties.put(property, value);
 
         return this;
@@ -126,7 +126,7 @@ public class Spell {
 
                 CompoundTag propertyTag = new CompoundTag();
                 propertyTag.putString("identifier", key.getIdentifier().toString());
-                propertyTag.putString("value", serializable.toJson(value).toString());
+                propertyTag.putString("value", serializable.toJson(value));
 
                 propertiesTag.add(propertyTag);
             }
@@ -168,7 +168,7 @@ public class Spell {
 
                 if(property == null) continue;
 
-                Object value = property.fromJson(JsonHelper.deserialize(propertyCompound.getString("value")));
+                Object value = property.fromJson(propertyCompound.getString("value"));
 
                 spell.putProperty(property, value);
             }

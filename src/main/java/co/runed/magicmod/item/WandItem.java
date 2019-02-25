@@ -5,6 +5,7 @@ import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffects;
 import co.runed.magicmod.api.spell.property.SpellProperties;
 import co.runed.magicmod.client.gui.TestSpellScreen;
+import co.runed.magicmod.network.packet.s2c.SyncSpellS2CPacket;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
@@ -43,7 +44,7 @@ public class WandItem extends BaseItem {
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
         if (context.getWorld().isClient()) {
-            MinecraftClient.getInstance().openScreen(new TestSpellScreen());
+            //MinecraftClient.getInstance().openScreen(new TestSpellScreen());
 
             return ActionResult.PASS;
         }
@@ -63,7 +64,7 @@ public class WandItem extends BaseItem {
             spell = new Spell()
                     .setCastType(Spell.CastType.USE_BLOCK)
                     .putProperty(SpellProperties.RANGE, 10.0D)
-                    .putEffect(SpellEffects.VEIN.create())
+                    .putEffect(SpellEffects.VEIN_AREA.create())
                     .putEffect(SpellEffects.BREAK_BLOCK.create().setTier(3))
                     .putEffect(SpellEffects.ITEM_TO_INVENTORY.create());
 
@@ -87,6 +88,8 @@ public class WandItem extends BaseItem {
         player.addChatMessage(new StringTextComponent("Cost: " + spell.getManaCost()), true);
 
         if (spell.getCastType() == Spell.CastType.USE_BLOCK) {
+            player.networkHandler.sendPacket(new SyncSpellS2CPacket(spell));
+
             spell.run();
         }
 

@@ -10,11 +10,7 @@ import net.minecraft.util.JsonHelper;
 public class SpellPropertySerializable<T> extends SpellProperty<T> {
 
     private Class<T> type;
-
-    public SpellPropertySerializable(Identifier id, Class<T> type) {
-        this(id, null, type);
-    }
-
+    
     public SpellPropertySerializable(Identifier id, T defaultValue, Class<T> type) {
         super(id, defaultValue);
 

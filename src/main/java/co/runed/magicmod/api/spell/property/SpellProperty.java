@@ -6,10 +6,6 @@ public class SpellProperty<T> {
     private Identifier identifier;
     private T defaultValue;
 
-    public SpellProperty(Identifier id) {
-        this(id, null);
-    }
-
     public SpellProperty(Identifier id, T defaultValue) {
         this.identifier = id;
         this.defaultValue = defaultValue;

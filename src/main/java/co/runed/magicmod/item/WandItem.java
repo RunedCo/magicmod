@@ -100,7 +100,7 @@ public class WandItem extends BaseItem {
         /* BlockPos currentPosition = vein.getNext();
 
         if(block != this.vein.getBlockType() || currentPosition == null || !this.vein.getStartPosition().equals(position)) {
-            this.vein = new Vein(world, position, 3);
+            this.vein = new VeinBlockArea(world, position, 3);
             currentPosition = vein.getNext();
         }
 

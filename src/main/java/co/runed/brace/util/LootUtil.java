@@ -1,4 +1,4 @@
-package co.runed.brace;
+package co.runed.brace.util;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;

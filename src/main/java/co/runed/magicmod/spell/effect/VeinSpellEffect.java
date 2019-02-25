@@ -1,7 +1,7 @@
 package co.runed.magicmod.spell.effect;
 
 import co.runed.brace.INbtSerializable;
-import co.runed.brace.Vein;
+import co.runed.brace.world.VeinBlockArea;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.property.SpellProperties;
@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
-    private Vein vein;
+    private VeinBlockArea veinBlockArea;
     private List<BlockPos> currentPositions;
 
     @Override
@@ -25,7 +25,7 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
         Double range = spell.getProperty(SpellProperties.RANGE);
         this.currentPositions = new ArrayList<>();
 
-        this.vein = new Vein(world, startPosition, range);
+        this.veinBlockArea = new VeinBlockArea(world, startPosition, range);
 
         return true;
     }
@@ -48,15 +48,15 @@ public class VeinSpellEffect extends SpellEffect implements INbtSerializable {
         currentPositions.clear();
 
         for (int i = 0; i < concurrentVeins; i++) {
-            BlockPos pos = vein.getNext();
+            BlockPos pos = veinBlockArea.getNext();
 
-            this.vein.generateVeinAndAdd(pos);
+            this.veinBlockArea.generateVeinAndAdd(pos);
 
             currentPositions.add(pos);
         }
 
-        if(block != this.vein.getBlockType() || currentPositions.isEmpty() || !this.vein.getStartPosition().equals(position)) {
-            this.vein = new Vein(world, position, range);
+        if(block != this.veinBlockArea.getBlockType() || currentPositions.isEmpty() || !this.veinBlockArea.getStartPosition().equals(position)) {
+            this.veinBlockArea = new VeinBlockArea(world, position, range);
 
             this.run(spell);
         }

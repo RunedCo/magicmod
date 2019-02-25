@@ -1,4 +1,4 @@
-package co.runed.brace;
+package co.runed.brace.world;
 
 import co.runed.brace.util.MathUtil;
 import com.sun.istack.internal.Nullable;
@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Vein {
+public class VeinBlockArea {
     private final World world;
     private final BlockPos startPosition;
     private BlockPos currentPosition;
@@ -24,11 +24,11 @@ public class Vein {
 
     private final Random rand;
 
-    public Vein(World world, BlockPos startPos) {
+    public VeinBlockArea(World world, BlockPos startPos) {
         this(world, startPos, 16.0D);
     }
 
-    public Vein(World world, BlockPos startPos,  double maxDistance) {
+    public VeinBlockArea(World world, BlockPos startPos, double maxDistance) {
         this.world = world;
         this.startPosition = startPos;
         this.blockType = world.getBlockState(startPos).getBlock();

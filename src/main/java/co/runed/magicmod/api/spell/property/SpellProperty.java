@@ -1,4 +1,4 @@
-package co.runed.magicmod.api.spell;
+package co.runed.magicmod.api.spell.property;
 
 import net.minecraft.util.Identifier;
 

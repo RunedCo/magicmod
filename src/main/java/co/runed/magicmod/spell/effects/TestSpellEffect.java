@@ -3,7 +3,7 @@ package co.runed.magicmod.spell.effects;
 import co.runed.brace.util.BlockUtil;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffect;
-import co.runed.magicmod.api.spell.SpellProperties;
+import co.runed.magicmod.api.spell.property.SpellProperties;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ToolMaterials;

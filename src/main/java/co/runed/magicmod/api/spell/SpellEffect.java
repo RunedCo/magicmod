@@ -1,12 +1,14 @@
 package co.runed.magicmod.api.spell;
 
+import co.runed.brace.INbtSerializable;
+import co.runed.magicmod.api.spell.property.SpellProperty;
 import net.minecraft.util.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class SpellEffect {
+public class SpellEffect implements INbtSerializable {
     private int tier = 1;
 
     public Supplier<? extends SpellEffect> factory;

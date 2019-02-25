@@ -3,7 +3,7 @@ package co.runed.magicmod.item;
 import co.runed.magicmod.api.SpellManager;
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.SpellEffects;
-import co.runed.magicmod.api.spell.SpellProperties;
+import co.runed.magicmod.api.spell.property.SpellProperties;
 import co.runed.magicmod.client.gui.TestSpellScreen;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

@@ -1,16 +1,22 @@
 package co.runed.magicmod.api.spell;
 
+import co.runed.magicmod.api.registry.MagicRegistry;
+import co.runed.magicmod.api.spell.property.SpellProperty;
+import co.runed.magicmod.api.spell.property.SpellPropertySerializable;
+import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.JsonHelper;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Spell {
     private final List<SpellEffect> effects = new ArrayList<>();
     private final Map<SpellProperty, Object> properties = new HashMap<>();
+
+    private String displayName;
 
     private boolean built = false;
     private double manaCost = 0;
@@ -30,6 +36,8 @@ public class Spell {
         this.manaCost = 0;
 
         for (SpellEffect effect : effects) {
+            if(this.effects.contains(effect) && !this.built) continue;
+
             boolean success = effect.build(this);
 
             if(!success) return this;
@@ -94,13 +102,77 @@ public class Spell {
     }
 
     public CompoundTag toTag() {
-        return new CompoundTag();
+        CompoundTag tag = new CompoundTag();
+
+        tag.putString("cast_type", this.castType.name());
+
+        ListTag effectsTag = new ListTag();
+        for (SpellEffect effect : this.effects) {
+            CompoundTag effectTag = effect.toTag();
+            effectTag.putString("identifier", effect.identifier.toString());
+
+            effectsTag.add(effectTag);
+        }
+
+        tag.put("effects", effectsTag);
+
+        ListTag propertiesTag = new ListTag();
+        for (Map.Entry<SpellProperty, Object> entry : this.properties.entrySet()) {
+            SpellProperty key = entry.getKey();
+            Object value = entry.getValue();
+
+            if(key instanceof SpellPropertySerializable) {
+                SpellPropertySerializable serializable = (SpellPropertySerializable)key;
+
+                CompoundTag propertyTag = new CompoundTag();
+                propertyTag.putString("identifier", key.getIdentifier().toString());
+                propertyTag.putString("value", serializable.toJson(value).toString());
+
+                propertiesTag.add(propertyTag);
+            }
+        }
+
+        tag.put("properties", propertiesTag);
+
+        return tag;
     }
 
     public static Spell fromTag(CompoundTag tag) {
         Spell spell = new Spell();
 
-        ListTag effectsTag = tag.getList("effects", 10);
+        if(tag == null) return spell;
+
+        spell.castType = CastType.valueOf(tag.getString("cast_type"));
+
+        ListTag effects = tag.getList("effects", NbtType.COMPOUND);
+        for (Tag effectTag : effects) {
+            if(effectTag instanceof CompoundTag) {
+                CompoundTag effectCompound = (CompoundTag)effectTag;
+                Identifier id = new Identifier(effectCompound.getString("identifier"));
+
+                SpellEffect effect = MagicRegistry.SPELL_EFFECTS.get(id);
+
+                effect.fromTag(effectCompound);
+
+                spell.putEffect(effect);
+            }
+        }
+
+        ListTag properties = tag.getList("properties", NbtType.COMPOUND);
+        for (Tag propertyTag : properties) {
+            if(propertyTag instanceof CompoundTag) {
+                CompoundTag propertyCompound = (CompoundTag)propertyTag;
+                Identifier id = new Identifier(propertyCompound.getString("identifier"));
+
+                SpellPropertySerializable property = (SpellPropertySerializable)MagicRegistry.SPELL_PROPERTIES.get(id);
+
+                if(property == null) continue;
+
+                Object value = property.fromJson(JsonHelper.deserialize(propertyCompound.getString("value")));
+
+                spell.putProperty(property, value);
+            }
+        }
 
         return spell;
     }

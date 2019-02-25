@@ -1,7 +1,7 @@
 package co.runed.magicmod.api.registry;
 
 import co.runed.magicmod.api.spell.SpellEffect;
-import co.runed.magicmod.api.spell.SpellProperty;
+import co.runed.magicmod.api.spell.property.SpellProperty;
 import net.minecraft.util.registry.SimpleRegistry;
 
 public class MagicRegistry {

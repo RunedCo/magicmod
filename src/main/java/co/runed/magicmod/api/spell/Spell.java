@@ -110,6 +110,7 @@ public class Spell {
         for (SpellEffect effect : this.effects) {
             CompoundTag effectTag = effect.toTag();
             effectTag.putString("identifier", effect.identifier.toString());
+            effectTag.putInt("tier", effect.getTier());
 
             effectsTag.add(effectTag);
         }
@@ -153,6 +154,10 @@ public class Spell {
                 SpellEffect effect = MagicRegistry.SPELL_EFFECTS.get(id);
 
                 effect.fromTag(effectCompound);
+
+                int tier = effectCompound.getInt("tier");
+
+                effect.setTier(tier);
 
                 spell.putEffect(effect);
             }

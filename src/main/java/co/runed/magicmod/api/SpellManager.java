@@ -56,7 +56,9 @@ public class SpellManager {
 
                         Spell spell = Spell.fromTag(spellCompound);
 
-                        UUID uuid = UUID.fromString(file.getName());
+                        String a = file.getName();
+
+                        UUID uuid = UUID.fromString(file.getName().substring(0, file.getName().lastIndexOf(".")));
 
                         addSpell(uuid, spell);
                     }
@@ -82,12 +84,14 @@ public class SpellManager {
 
             tag.put("spells", spellListTag);
 
-            Path filePath = Files.createFile(Paths.get(SPELL_DIRECTORY.toString(), uuid.toString() + ".dat"));
+
+            Path filePath = Paths.get(SPELL_DIRECTORY.toString(), uuid.toString() + ".dat");
+
+            if(!filePath.toFile().exists()) {
+                Files.createFile(filePath);
+            }
 
             NbtIo.write(tag, filePath.toFile());
-        }
-
-        if(folder != null && folder.exists() && folder.isDirectory()) {
         }
     }
 
@@ -95,7 +99,7 @@ public class SpellManager {
         if(!spellLibraries.containsKey(uuid)) spellLibraries.put(uuid, new ArrayList<>());
 
         List<Spell> spellLibrary = spellLibraries.get(uuid);
-        spellLibrary.add(spell);
+        if(!spellLibrary.contains(spell)) spellLibrary.add(spell);
 
         try {
             saveLibraries();

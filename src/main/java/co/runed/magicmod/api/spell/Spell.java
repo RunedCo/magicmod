@@ -1,6 +1,7 @@
 package co.runed.magicmod.api.spell;
 
 import co.runed.magicmod.api.registry.MagicRegistry;
+import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.property.SpellProperty;
 import co.runed.magicmod.api.spell.property.SpellPropertySerializable;
 import net.fabricmc.fabric.api.util.NbtType;

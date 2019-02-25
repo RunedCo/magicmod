@@ -3,7 +3,7 @@ package co.runed.magicmod.spell.effects;
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.recipe.MagicRecipeType;
 import co.runed.magicmod.api.spell.Spell;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.property.SpellProperties;
 import co.runed.magicmod.recipe.extraction.ExtractionRecipe;
 import net.minecraft.block.Block;

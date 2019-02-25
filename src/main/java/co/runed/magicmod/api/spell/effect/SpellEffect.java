@@ -1,6 +1,7 @@
-package co.runed.magicmod.api.spell;
+package co.runed.magicmod.api.spell.effect;
 
 import co.runed.brace.INbtSerializable;
+import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.property.SpellProperty;
 import net.minecraft.util.Identifier;
 

@@ -2,7 +2,7 @@ package co.runed.magicmod.spell.effects;
 
 import co.runed.magicmod.api.spell.ItemTarget;
 import co.runed.magicmod.api.spell.Spell;
-import co.runed.magicmod.api.spell.SpellEffect;
+import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.property.SpellProperties;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,37 +1,121 @@
 package co.runed.magicmod.api;
 
+import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.spell.Spell;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
+import net.fabricmc.fabric.api.util.NbtType;
+import net.fabricmc.fabric.impl.client.model.ModelLoadingRegistryImpl;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.launch.common.FabricLauncher;
 import net.minecraft.entity.Entity;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.Tag;
+import net.minecraft.resource.Resource;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.level.storage.LevelStorage;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class SpellManager {
-    private static final Map<Entity, Spell> activeSpells = new HashMap<>();
-    private static Map<Entity, List<Spell>> spellLibraries = new HashMap<>();
+    private static Path SPELL_DIRECTORY = Paths.get(MagicMod.CONFIG_DIRECTORY.toString(), "spells");
 
-    public static void init() {
-        //TODO: LOAD SPELL LIBRARIES
+    private static final Map<UUID, Spell> activeSpells = new HashMap<>();
+    private static Map<UUID, List<Spell>> spellLibraries = new HashMap<>();
 
+    public static void loadLibraries() {
+        File folder = SPELL_DIRECTORY.toFile();
 
+        if(folder != null && folder.exists() && folder.isDirectory()) {
+            for (File file : folder.listFiles()) {
 
+                CompoundTag tag = null;
+                try {
+                    tag = NbtIo.read(file);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if(!tag.containsKey("spells")) continue;
+
+                ListTag spellList = tag.getList("spells", NbtType.COMPOUND);
+
+                for (Tag spellTag : spellList) {
+                    if(spellTag instanceof CompoundTag) {
+                        CompoundTag spellCompound = (CompoundTag)spellTag;
+
+                        Spell spell = Spell.fromTag(spellCompound);
+
+                        UUID uuid = UUID.fromString(file.getName());
+
+                        addSpell(uuid, spell);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void saveLibraries() throws IOException {
+        File folder = SPELL_DIRECTORY.toFile();
+
+        Files.createDirectories(SPELL_DIRECTORY);
+
+        for (Map.Entry<UUID, List<Spell>> entry : spellLibraries.entrySet()) {
+            UUID uuid = entry.getKey();
+
+            CompoundTag tag = new CompoundTag();
+            ListTag spellListTag = new ListTag();
+
+            for (Spell spell : entry.getValue()) {
+                spellListTag.add(spell.toTag());
+            }
+
+            tag.put("spells", spellListTag);
+
+            Path filePath = Files.createFile(Paths.get(SPELL_DIRECTORY.toString(), uuid.toString() + ".dat"));
+
+            NbtIo.write(tag, filePath.toFile());
+        }
+
+        if(folder != null && folder.exists() && folder.isDirectory()) {
+        }
+    }
+
+    public static void addSpell(UUID uuid, Spell spell) {
+        if(!spellLibraries.containsKey(uuid)) spellLibraries.put(uuid, new ArrayList<>());
+
+        List<Spell> spellLibrary = spellLibraries.get(uuid);
+        spellLibrary.add(spell);
+
+        try {
+            saveLibraries();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void addSpell(Entity entity, Spell spell) {
-
+        addSpell(entity.getUuid(), spell);
     }
 
     public static void setActiveSpell(Entity caster, Spell spell) {
-        activeSpells.put(caster, spell);
+        activeSpells.put(caster.getUuid(), spell);
     }
 
     public static Spell getActiveSpell(Entity caster) {
-        if(!activeSpells.containsKey(caster)) return null;
+        if(!activeSpells.containsKey(caster.getUuid())) return null;
 
-        Spell spell = activeSpells.get(caster);
-
-        return spell;
+        return activeSpells.get(caster.getUuid());
     }
 
     public static double getMana(Entity entity) {

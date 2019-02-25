@@ -11,7 +11,6 @@ import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
 import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
 import co.runed.magicmod.spell.effects.ExtractSpellEffect;
 import co.runed.magicmod.spell.effects.VeinSpellEffect;
-import com.sun.istack.internal.Nullable;
 import net.fabricmc.fabric.api.event.server.ServerStartCallback;
 import net.minecraft.util.Identifier;
 
@@ -23,7 +22,7 @@ public class MagicSetup {
         MagicSetup.setupSpellProperties();
         MagicSetup.setupSpellEffects();
 
-        ServerStartCallback.EVENT.register(server -> SpellManager.init());
+        ServerStartCallback.EVENT.register(server -> SpellManager.loadLibraries());
     }
 
     public static void setupSpellEffects() {

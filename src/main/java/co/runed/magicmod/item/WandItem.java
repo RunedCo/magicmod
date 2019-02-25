@@ -69,6 +69,7 @@ public class WandItem extends BaseItem {
                     .putEffect(SpellEffects.ITEM_TO_INVENTORY.create());
 
             SpellManager.setActiveSpell(player, spell);
+            SpellManager.addSpell(player, spell);
         }
 
         spell.putProperty(SpellProperties.WORLD, world);

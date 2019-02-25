@@ -1,14 +1,19 @@
-package co.runed.magicmod.spell.effects;
+package co.runed.magicmod.spell.effect;
 
 import co.runed.magicmod.api.spell.Spell;
 import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.property.SpellProperties;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.FireBlock;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ExplodeSpellEffect extends SpellEffect {
+//TODO: fix glitchy fire
+public class FireSpellEffect extends SpellEffect {
     @Override
     public boolean build(Spell spell) {
         return true;
@@ -18,10 +23,15 @@ public class ExplodeSpellEffect extends SpellEffect {
     public boolean run(Spell spell) {
         World world = spell.getProperty(SpellProperties.WORLD);
         List<BlockPos> positions = spell.getProperty(SpellProperties.BLOCK_POSITIONS);
-        float explosionStrength = spell.getProperty(SpellProperties.EXPLOSION_STRENGTH);
 
         for (BlockPos pos : positions) {
-            world.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), explosionStrength, true);
+            BlockPos aboveBlock = pos.offset(Direction.UP).add(0, 1, 0);
+
+            BlockState fireState = ((FireBlock) Blocks.FIRE).getStateForPosition(world, aboveBlock);
+
+            if(fireState.canPlaceAt(world, aboveBlock)) {
+                world.setBlockState(aboveBlock, fireState, 11);
+            }
         }
 
         return true;

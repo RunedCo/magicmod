@@ -1,4 +1,4 @@
-package co.runed.magicmod.spell.effects;
+package co.runed.magicmod.spell.effect;
 
 import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.api.recipe.MagicRecipeType;

@@ -1,4 +1,4 @@
-package co.runed.magicmod.spell.effects;
+package co.runed.magicmod.spell.effect;
 
 import co.runed.brace.INbtSerializable;
 import co.runed.brace.Vein;

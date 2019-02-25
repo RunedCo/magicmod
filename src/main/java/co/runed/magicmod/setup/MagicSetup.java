@@ -9,10 +9,10 @@ import co.runed.magicmod.api.spell.effect.SpellEffects;
 import co.runed.magicmod.api.spell.property.SpellProperties;
 import co.runed.magicmod.api.spell.property.SpellProperty;
 import co.runed.magicmod.api.spell.property.SpellPropertySerializable;
-import co.runed.magicmod.spell.effects.BlockBreakSpellEffect;
-import co.runed.magicmod.spell.effects.BlockDropsToInventoryEffect;
-import co.runed.magicmod.spell.effects.ExtractSpellEffect;
-import co.runed.magicmod.spell.effects.VeinSpellEffect;
+import co.runed.magicmod.spell.effect.BlockBreakSpellEffect;
+import co.runed.magicmod.spell.effect.BlockDropsToInventoryEffect;
+import co.runed.magicmod.spell.effect.ExtractSpellEffect;
+import co.runed.magicmod.spell.effect.VeinSpellEffect;
 import net.fabricmc.fabric.api.event.server.ServerStartCallback;
 import net.minecraft.util.Identifier;
 

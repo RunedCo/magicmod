@@ -1,7 +1,7 @@
 package co.runed.magicmod.network.packet.s2c;
 
-import co.runed.magicmod.api.spell.SpellManager;
 import co.runed.magicmod.api.spell.Spell;
+import co.runed.magicmod.api.spell.SpellManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Packet;

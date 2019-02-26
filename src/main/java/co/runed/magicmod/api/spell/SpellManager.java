@@ -1,7 +1,6 @@
 package co.runed.magicmod.api.spell;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.spell.Spell;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.CompoundTag;
@@ -57,8 +56,6 @@ public class SpellManager {
     }
 
     public static void saveLibraries() throws IOException {
-        File folder = SPELL_DIRECTORY.toFile();
-
         Files.createDirectories(SPELL_DIRECTORY);
 
         for (Map.Entry<UUID, List<Spell>> entry : spellLibraries.entrySet()) {

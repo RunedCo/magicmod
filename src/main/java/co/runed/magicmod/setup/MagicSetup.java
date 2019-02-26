@@ -1,9 +1,9 @@
 package co.runed.magicmod.setup;
 
 import co.runed.magicmod.MagicMod;
-import co.runed.magicmod.api.spell.SpellManager;
 import co.runed.magicmod.api.registry.MagicRegistry;
 import co.runed.magicmod.api.spell.ItemTarget;
+import co.runed.magicmod.api.spell.SpellManager;
 import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.effect.SpellEffects;
 import co.runed.magicmod.api.spell.property.SpellProperties;

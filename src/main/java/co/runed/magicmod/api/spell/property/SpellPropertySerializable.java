@@ -1,17 +1,21 @@
 package co.runed.magicmod.api.spell.property;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import net.minecraft.util.Identifier;
 
 public class SpellPropertySerializable<T> extends SpellProperty<T> {
-
-    private Class<T> type;
-
-    public SpellPropertySerializable(Identifier id, T defaultValue, Class<T> type) {
+    public SpellPropertySerializable(Identifier id, T defaultValue) {
         super(id, defaultValue);
+    }
+
+    /* private Class<T> type;
+
+    public SpellPropertySerializable(Identifier id, T initial, Class<T> type) {
+        super(id, initial);
 
         this.type = type;
-    }
+    } */
 
     public String toJson(T value) {
         Gson gson = new Gson();
@@ -22,6 +26,8 @@ public class SpellPropertySerializable<T> extends SpellProperty<T> {
     public T fromJson(String object) {
         Gson gson = new Gson();
 
-        return gson.fromJson(object, type);
+        TypeToken<T> token = new TypeToken<T>(){};
+
+        return (T)gson.fromJson(object, token.getRawType());
     }
 }

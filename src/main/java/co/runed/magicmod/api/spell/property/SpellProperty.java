@@ -28,4 +28,8 @@ public class SpellProperty<T> {
     public T getDefault() {
         return this.defaultValue;
     }
+
+    public class Builder<V> {
+
+    }
 }

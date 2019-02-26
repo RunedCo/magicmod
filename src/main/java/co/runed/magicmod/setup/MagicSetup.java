@@ -8,6 +8,7 @@ import co.runed.magicmod.api.spell.effect.SpellEffect;
 import co.runed.magicmod.api.spell.effect.SpellEffects;
 import co.runed.magicmod.api.spell.property.SpellProperties;
 import co.runed.magicmod.api.spell.property.SpellProperty;
+import co.runed.magicmod.api.spell.property.SpellPropertyBuilder;
 import co.runed.magicmod.api.spell.property.SpellPropertySerializable;
 import co.runed.magicmod.spell.effect.BlockBreakSpellEffect;
 import co.runed.magicmod.spell.effect.BlockDropsToInventoryEffect;
@@ -35,16 +36,16 @@ public class MagicSetup {
     }
 
     public static void setupSpellProperties() {
-        SpellProperties.WORLD = registerSpellProperty("world");
-        SpellProperties.SPEED = registerSerializableSpellProperty("speed", 1.0D, Double.class);
-        SpellProperties.CASTER = registerSpellProperty("entity_caster");
-        SpellProperties.TARGETS = registerSpellProperty("entity_targets", new ArrayList<>()); //TODO: serialize?
-        SpellProperties.RANGE = registerSerializableSpellProperty("range", 4.0D, Double.class);
-        SpellProperties.EXPLOSION_STRENGTH = registerSerializableSpellProperty("explosion_strength", 4.0f, Float.class);
-        SpellProperties.BLOCK_POSITIONS = registerSpellProperty("block_positions", new ArrayList<>());
-        SpellProperties.START_POSITION = registerSpellProperty("initial_block_position");
-        SpellProperties.ITEM_TARGET = registerSerializableSpellProperty("item_target", ItemTarget.NONE, ItemTarget.class);
-        SpellProperties.DROPS = registerSpellProperty("item_drops", new ArrayList<>());
+        SpellProperties.WORLD = SpellPropertyBuilder.identifier("magicmod:world").register();
+        SpellProperties.SPEED = SpellPropertyBuilder.identifier("magicmod:speed").initial(1.0D).serializable().register();
+        SpellProperties.CASTER = SpellPropertyBuilder.identifier("magicmod:entity_caster").register();
+        SpellProperties.TARGETS = SpellPropertyBuilder.identifier("magicmod:entity_targets").initial(new ArrayList<>()).register(); //TODO: serialize?
+        SpellProperties.RANGE = SpellPropertyBuilder.identifier("magicmod:range").initial(4.0D).serializable().register();
+        SpellProperties.EXPLOSION_STRENGTH = SpellPropertyBuilder.identifier("magicmod:explosion_strength").initial(4.0f).serializable().register();
+        SpellProperties.BLOCK_POSITIONS = SpellPropertyBuilder.identifier("magicmod:block_positions").initial(new ArrayList<>()).register();
+        SpellProperties.START_POSITION = SpellPropertyBuilder.identifier("magicmod:initial_block_position").register();
+        SpellProperties.ITEM_TARGET = SpellPropertyBuilder.identifier("magicmod:item_target").initial(ItemTarget.NONE).serializable().register();
+        SpellProperties.DROPS = SpellPropertyBuilder.identifier("magicmod:item_drops").initial(new ArrayList<>()).register();
     }
 
     public static <T> SpellProperty<T> registerSpellProperty(String id) {
@@ -58,7 +59,7 @@ public class MagicSetup {
 
     public static <T> SpellProperty<T> registerSerializableSpellProperty(String id, T defaultValue, Class<T> clazz) {
         Identifier identifier = MagicMod.REGISTRY_UTIL.createId(id);
-        return MagicMod.REGISTRY_UTIL.register(MagicRegistry.SPELL_PROPERTIES, id, new SpellPropertySerializable<>(identifier, defaultValue, clazz));
+        return MagicMod.REGISTRY_UTIL.register(MagicRegistry.SPELL_PROPERTIES, id, new SpellPropertySerializable<>(identifier, defaultValue));
     }
 
     public static <T> SpellEffect registerSpellEffect(String id, Supplier<? extends SpellEffect> supplier) {

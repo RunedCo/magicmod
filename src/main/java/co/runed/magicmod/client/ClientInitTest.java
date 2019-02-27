@@ -10,13 +10,6 @@ public class ClientInitTest implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientSetup.init();
-
-        ClientTickCallback.EVENT.register((client) -> {
-            if(client.world != null && client.player != null && client.player.getActiveItem() != null) {
-                if(client.player.getActiveItem().getItem() == MagicItems.WAND) {
-                    client.openScreen(new TestSpellScreen());
-                }
-            }
-        });
+        
     }
 }

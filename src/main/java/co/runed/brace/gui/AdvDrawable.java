@@ -3,9 +3,10 @@ package co.runed.brace.gui;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.Drawable;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.GuiLighting;
 
-public class AdvDrawable extends Drawable {
+public abstract class AdvDrawable extends DrawableHelper {
     public void drawBox(int x, int y, int width, int height, int backgroundColor, int borderColor) {
         GlStateManager.disableRescaleNormal();
         GuiLighting.disable();

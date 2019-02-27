@@ -1,14 +1,19 @@
 package co.runed.magicmod.client.gui;
 
 import co.runed.magicmod.client.gui.widget.NodeWidget;
+import co.runed.magicmod.container.TestSpellContainer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.client.gui.ContainerScreen;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.TextComponent;
+import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -16,27 +21,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Environment(EnvType.CLIENT)
-public class TestSpellScreen extends Screen {
+public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
+    public static final Identifier BACKGROUND = new Identifier("magicmod:textures/gui/spell_screen.png");
+
     private NodeWidget test;
 
-    List<NodeWidget> nodes;
-
+    private List<NodeWidget> nodes;
 
     private final Color nodeBackgroundColor = new Color(10, 10, 10);
     private final Color nodeBorderColor = new Color(7, 87, 45);
     //borders: blue: (7, 71, 87) red: (87, 7, 7) orange: (87, 37, 7) purple(47, 7, 87)
 
-    public TestSpellScreen() {
+    public TestSpellScreen(TestSpellContainer container_1, PlayerInventory playerInventory_1, TextComponent textComponent_1) {
+        super(container_1, playerInventory_1, textComponent_1);
+
         this.nodes = new ArrayList<>();
 
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
         this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
-
-        //int a = 0x07572D;
     }
 
     @Override
-    public void method_18326(int mouseX, int mouseY, float float_1) {
+    public void draw(int mouseX, int mouseY, float float_1) {
         for (int i = 0; i < this.nodes.size(); i++) {
             NodeWidget node = this.nodes.get(i);
 
@@ -74,5 +80,17 @@ public class TestSpellScreen extends Screen {
         GlStateManager.disableBlend();
         GlStateManager.enableAlphaTest();
         GlStateManager.enableTexture();
+    }
+
+    @Override
+    protected void drawBackground(float v, int i, int i1) {
+        GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+
+        this.client.getTextureManager().bindTexture(BACKGROUND);
+
+        int x = (this.width - 238) / 2;
+        int y = (this.height - 256) / 2;
+
+        this.drawTexturedRect(x, y, 0, 0, 238, 256);
     }
 }

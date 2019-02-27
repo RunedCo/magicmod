@@ -1,8 +1,10 @@
 package co.runed.magicmod.item;
 
+import co.runed.magicmod.client.gui.TestSpellScreen;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LecternBlock;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemUsageContext;
@@ -20,13 +22,10 @@ public class SpellbookItem extends BaseItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        World world_1 = context.getWorld();
-        BlockPos blockPos_1 = context.getBlockPos();
-        BlockState blockState_1 = world_1.getBlockState(blockPos_1);
-        if (blockState_1.getBlock() == Blocks.LECTERN) {
-            return LecternBlock.putBookIfAbsent(world_1, blockPos_1, blockState_1, context.getItemStack()) ? ActionResult.SUCCESS : ActionResult.PASS;
-        } else {
-            return ActionResult.PASS;
-        }
+        if(!context.getWorld().isClient) return ActionResult.PASS;
+
+        //MinecraftClient.getInstance().openScreen(new TestSpellScreen());
+
+        return ActionResult.PASS;
     }
 }

@@ -24,7 +24,7 @@ public class SpawnEntitySpellEffect extends SpellEffect {
 
         //TestEntity entity = new TestEntity(world);
 
-        Vec3d vec = new Vec3d(player.x, player.y, player.z).add(0, player.getEyeHeight(), 0);
+        Vec3d vec = new Vec3d(player.x, player.y, player.z).add(0, player.getEyeHeight(player.getPose()), 0);
         Vec3d look = this.getVectorForRotation(player.pitch, player.yaw);
         Vec3d end = vec.add(look.normalize().multiply(range));
 

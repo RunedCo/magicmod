@@ -1,6 +1,8 @@
 package co.runed.magicmod.item;
 
+import co.runed.magicmod.MagicMod;
 import co.runed.magicmod.client.gui.TestSpellScreen;
+import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LecternBlock;
@@ -22,10 +24,10 @@ public class SpellbookItem extends BaseItem {
 
     @Override
     public ActionResult useOnBlock(ItemUsageContext context) {
-        if(!context.getWorld().isClient) return ActionResult.PASS;
+        if(context.getWorld().isClient) return ActionResult.PASS;
 
-        //MinecraftClient.getInstance().openScreen(new TestSpellScreen());
+        ContainerProviderRegistry.INSTANCE.openContainer(MagicMod.SPELL_CONTAINER, context.getPlayer(), (buf) -> {});
 
-        return ActionResult.PASS;
+        return ActionResult.SUCCESS;
     }
 }

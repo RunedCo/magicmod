@@ -11,7 +11,9 @@ import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.Tessellator;
 import net.minecraft.client.render.VertexFormats;
 import net.minecraft.client.util.math.Vector3f;
+import net.minecraft.container.Slot;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.text.StringTextComponent;
 import net.minecraft.text.TextComponent;
 import net.minecraft.util.Identifier;
 import org.lwjgl.opengl.GL11;
@@ -32,8 +34,8 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
     private final Color nodeBorderColor = new Color(7, 87, 45);
     //borders: blue: (7, 71, 87) red: (87, 7, 7) orange: (87, 37, 7) purple(47, 7, 87)
 
-    public TestSpellScreen(TestSpellContainer container_1, PlayerInventory playerInventory_1, TextComponent textComponent_1) {
-        super(container_1, playerInventory_1, textComponent_1);
+    public TestSpellScreen(TestSpellContainer container_1) {
+        super(container_1, container_1.playerInventory, new StringTextComponent("Test"));
 
         this.nodes = new ArrayList<>();
 
@@ -43,10 +45,12 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
 
     @Override
     public void draw(int mouseX, int mouseY, float float_1) {
+        super.draw(mouseX, mouseY, float_1);
+
         for (int i = 0; i < this.nodes.size(); i++) {
             NodeWidget node = this.nodes.get(i);
 
-            node.setPosition(50 + (10 * i), (i + 1) * 60);
+            node.setPosition(310 + (10 * i), (i + 1) * 60);
 
             node.render();
 
@@ -88,8 +92,8 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
 
         this.client.getTextureManager().bindTexture(BACKGROUND);
 
-        int x = (this.width - 238) / 2;
-        int y = (this.height - 256) / 2;
+        int x = (this.screenWidth - 238) / 2;
+        int y = (this.screenHeight - 256) / 2;
 
         this.drawTexturedRect(x, y, 0, 0, 238, 256);
     }

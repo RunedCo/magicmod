@@ -1,22 +1,14 @@
 package co.runed.magicmod.client.gui;
 
+import co.runed.brace.gui.Widget;
 import co.runed.magicmod.client.gui.widget.NodeWidget;
 import co.runed.magicmod.container.TestSpellContainer;
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.ContainerScreen;
-import net.minecraft.client.gui.Screen;
-import net.minecraft.client.render.BufferBuilder;
-import net.minecraft.client.render.Tessellator;
-import net.minecraft.client.render.VertexFormats;
-import net.minecraft.client.util.math.Vector3f;
-import net.minecraft.container.Slot;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.text.StringTextComponent;
-import net.minecraft.text.TextComponent;
 import net.minecraft.util.Identifier;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,9 +18,7 @@ import java.util.List;
 public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
     public static final Identifier BACKGROUND = new Identifier("magicmod:textures/gui/spell_screen.png");
 
-    private NodeWidget test;
-
-    private List<NodeWidget> nodes;
+    private List<Widget> widgets = new ArrayList<>();
 
     private final Color nodeBackgroundColor = new Color(10, 10, 10);
     private final Color nodeBorderColor = new Color(7, 87, 45);
@@ -37,53 +27,31 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
     public TestSpellScreen(TestSpellContainer container_1) {
         super(container_1, container_1.playerInventory, new StringTextComponent("Test"));
 
-        this.nodes = new ArrayList<>();
-
-        this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
-        this.nodes.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB()));
+        this.widgets.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB(), Color.RED.getRGB(), nodeBorderColor.getRGB()));
+        this.widgets.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB(), Color.RED.getRGB(), nodeBorderColor.getRGB()));
     }
 
     @Override
     public void draw(int mouseX, int mouseY, float float_1) {
         super.draw(mouseX, mouseY, float_1);
 
-        for (int i = 0; i < this.nodes.size(); i++) {
-            NodeWidget node = this.nodes.get(i);
+        for (int i = 0; i < this.widgets.size(); i++) {
+            Widget widget = this.widgets.get(i);
 
-            node.setPosition(310 + (10 * i), (i + 1) * 60);
+            if(widget instanceof NodeWidget) {
+                NodeWidget node = (NodeWidget) widget;
+                node.setPosition(310 + (10 * i), (i + 1) * 60);
 
-            node.render();
+                node.update(mouseX, mouseY, float_1);
+                node.render(mouseX, mouseY, float_1);
 
-            if(i == this.nodes.size() - 1) {
-                this.drawLine(this.nodes.get(i - 1).getBottomConnection(), node.getTopConnection(), 5, -1);
+                if(i == this.widgets.size() - 1) {
+                    NodeWidget next = (NodeWidget)this.widgets.get(i - 1);
+
+                    Widget.drawLine(next.getBottomConnection(), node.getTopConnection(), 5, -1);
+                }
             }
         }
-    }
-
-    public void drawLine(Vector3f startPos, Vector3f endPos, int lineWidth, int color) {
-        this.drawLine(startPos, endPos, lineWidth, color, color);
-    }
-
-    public void drawLine(Vector3f startPos, Vector3f endPos, int lineWidth, int color1, int color2) {
-        Color color_1 = new Color(color1);
-        Color color_2 = new Color(color2);
-
-        GlStateManager.disableTexture();
-        GlStateManager.enableBlend();
-        GlStateManager.disableAlphaTest();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.shadeModel(7425);
-        GlStateManager.lineWidth(lineWidth);
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferBuilder = tessellator.getBufferBuilder();
-        bufferBuilder.begin(GL11.GL_LINES, VertexFormats.POSITION_COLOR);
-        bufferBuilder.vertex(startPos.x(), startPos.y(), (double)this.zOffset).color(color_1.getRed(), color_1.getGreen(), color_1.getBlue(), color_1.getAlpha()).next();
-        bufferBuilder.vertex(endPos.x(), endPos.y(), (double)this.zOffset).color(color_2.getRed(), color_2.getGreen(), color_2.getBlue(), color_2.getAlpha()).next();
-        tessellator.draw();
-        GlStateManager.shadeModel(7424);
-        GlStateManager.disableBlend();
-        GlStateManager.enableAlphaTest();
-        GlStateManager.enableTexture();
     }
 
     @Override

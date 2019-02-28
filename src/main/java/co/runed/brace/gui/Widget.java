@@ -14,20 +14,25 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class Widget extends DrawableHelper implements InputListener {
+public class Widget extends DrawableHelper implements Drawable, InputListener {
     public int x;
     public int y;
 
     public int width;
     public int height;
 
+    public boolean hovering = false;
+
     public void update(int mouseX, int mouseY, float float_1) {
         if(this.isMouseOver(mouseX, mouseY)) {
+            this.hovering = true;
             this.onMouseOver(mouseX, mouseY);
+        } else {
+            this.hovering = false;
         }
     }
 
-    public void render(int mouseX, int mouseY, float float_1) {
+    public void draw(int mouseX, int mouseY, float float_1) {
 
     }
 

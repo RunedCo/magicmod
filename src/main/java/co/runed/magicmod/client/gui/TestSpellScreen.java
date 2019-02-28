@@ -7,6 +7,7 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.ContainerScreen;
+import net.minecraft.client.gui.InputListener;
 import net.minecraft.text.StringTextComponent;
 import net.minecraft.util.Identifier;
 
@@ -20,15 +21,22 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
 
     private List<Widget> widgets = new ArrayList<>();
 
-    private final Color nodeBackgroundColor = new Color(10, 10, 10);
+    private final Color nodeBackgroundColor = new Color(28, 28, 28);//new Color(10, 10, 10);
     private final Color nodeBorderColor = new Color(7, 87, 45);
     //borders: blue: (7, 71, 87) red: (87, 7, 7) orange: (87, 37, 7) purple(47, 7, 87)
 
-    public TestSpellScreen(TestSpellContainer container_1) {
-        super(container_1, container_1.playerInventory, new StringTextComponent("Test"));
+    public TestSpellScreen(TestSpellContainer spellContainer) {
+        super(spellContainer, spellContainer.playerInventory, new StringTextComponent("Test"));
 
         this.widgets.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB(), Color.RED.getRGB(), nodeBorderColor.getRGB()));
         this.widgets.add(new NodeWidget(nodeBackgroundColor.getRGB(), nodeBorderColor.getRGB(), Color.RED.getRGB(), nodeBorderColor.getRGB()));
+    }
+
+    @Override
+    public void onInitialized() {
+        super.onInitialized();
+
+        this.listeners.addAll(this.widgets);
     }
 
     @Override
@@ -43,7 +51,7 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
                 node.setPosition(310 + (10 * i), (i + 1) * 60);
 
                 node.update(mouseX, mouseY, float_1);
-                node.render(mouseX, mouseY, float_1);
+                node.draw(mouseX, mouseY, float_1);
 
                 if(i == this.widgets.size() - 1) {
                     NodeWidget next = (NodeWidget)this.widgets.get(i - 1);
@@ -52,6 +60,15 @@ public class TestSpellScreen extends ContainerScreen<TestSpellContainer> {
                 }
             }
         }
+
+        this.drawMouseoverTooltip(mouseX, mouseY);
+        GlStateManager.disableLighting();
+        GlStateManager.disableBlend();
+    }
+
+    @Override
+    public void drawForeground(int mouseX, int mouseY) {
+
     }
 
     @Override
